@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LogoLight from "../icons/LogoLight";
 import { FooterProps } from "@/lib/contentful/types/fields";
-import { preloadedLayoutData } from "@/lib/preload/layout-data";
+import { getPreloadedLayoutForLocale } from "@/lib/preload/layout-data";
 import SocialShare, { CTAEntry } from "../components/SocialShare";
 import LocaleSelector from "../components/LocaleSelector";
 import { getLocale } from "@/lib/locale";
@@ -19,16 +19,21 @@ async function fetchSVGContent(url: string): Promise<string | null> {
   return null;
 }
 
-export default async function Footer({
-  logo = preloadedLayoutData.footer?.fields?.logo,
-  slogan = preloadedLayoutData.footer?.fields?.slogan,
-  links = preloadedLayoutData.footer?.fields?.links || [],
-  copyrightPhrase = preloadedLayoutData.footer?.fields?.copyrightPhrase,
-  copyrightLinks = preloadedLayoutData.footer?.fields?.copyrightLinks || [],
-  socialShare = preloadedLayoutData.footer?.fields?.socialShare,
-}: FooterProps) {
-  // Get current locale for the selector
+export default async function Footer(props: FooterProps) {
+  // Get current locale and fetch appropriate preloaded data
   const currentLocale = await getLocale();
+  const localizedLayout = getPreloadedLayoutForLocale(currentLocale);
+  const footerDefaults = localizedLayout?.footer?.fields || {};
+  
+  // Use provided props or fall back to locale-specific preloaded data
+  const {
+    logo = footerDefaults?.logo,
+    slogan = footerDefaults?.slogan,
+    links = footerDefaults?.links || [],
+    copyrightPhrase = footerDefaults?.copyrightPhrase,
+    copyrightLinks = footerDefaults?.copyrightLinks || [],
+    socialShare = footerDefaults?.socialShare,
+  } = props;
   const logoUrl = logo?.fields?.file?.url
     ? `https:${logo.fields.file.url}`
     : null;

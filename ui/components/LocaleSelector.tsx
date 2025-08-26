@@ -28,8 +28,8 @@ export default function LocaleSelector({
     const formData = new FormData(formRef.current!);
     await updateLocale(formData);
     
-    // Force a page refresh to ensure all content updates
-    window.location.reload();
+    // The revalidatePath in the server action will refresh the page with new locale
+    // No need for a hard reload since we have locale-specific preloaded data now
   };
 
   const baseStyles = variant === 'footer' 

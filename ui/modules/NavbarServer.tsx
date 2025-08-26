@@ -1,6 +1,7 @@
 import NavbarClient from "./NavbarClient";
 import { NavbarProps } from "@/lib/contentful/types/fields";
-import { preloadedLayoutData } from "@/lib/preload/layout-data";
+import { getPreloadedLayoutForLocale } from "@/lib/preload/layout-data";
+import { getLocale } from "@/lib/locale";
 
 async function fetchSVGContent(url: string): Promise<string | null> {
   try {
@@ -14,12 +15,19 @@ async function fetchSVGContent(url: string): Promise<string | null> {
   return null;
 }
 
-export default async function NavbarServer({
-  logo = preloadedLayoutData.navbar?.fields?.logo,
-  navigationLinks = preloadedLayoutData.navbar?.fields?.navigationLinks || [],
-  cta = preloadedLayoutData.navbar?.fields?.cta,
-  backgroundColor = preloadedLayoutData.navbar?.fields?.backgroundColor
-}: NavbarProps) {
+export default async function NavbarServer(props: NavbarProps) {
+  // Get current locale and fetch appropriate preloaded data
+  const locale = await getLocale();
+  const localizedLayout = getPreloadedLayoutForLocale(locale);
+  const navbarDefaults = localizedLayout?.navbar?.fields || {};
+  
+  // Use provided props or fall back to locale-specific preloaded data
+  const {
+    logo = navbarDefaults?.logo,
+    navigationLinks = navbarDefaults?.navigationLinks || [],
+    cta = navbarDefaults?.cta,
+    backgroundColor = navbarDefaults?.backgroundColor
+  } = props;
   // Pre-process data server-side
   const menuItems = navigationLinks
     ?.filter((link): link is NonNullable<typeof link> => Boolean(link?.fields))
