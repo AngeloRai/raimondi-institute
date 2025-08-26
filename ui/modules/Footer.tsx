@@ -6,6 +6,9 @@ import { getPreloadedLayoutForLocale } from "@/lib/preload/layout-data";
 import SocialShare, { CTAEntry } from "../components/SocialShare";
 import LocaleSelector from "../components/LocaleSelector";
 import { getLocale } from "@/lib/locale";
+import type { TypeComponentLinks, TypeLinkSkeleton, TypeCtaSkeleton } from "@/lib/contentful/types/generated";
+import type { DefaultChainModifiers, SupportedLocales } from "@/lib/contentful/types/fields";
+import type { Entry } from "contentful";
 
 async function fetchSVGContent(url: string): Promise<string | null> {
   try {
@@ -108,7 +111,7 @@ export default async function Footer(props: FooterProps) {
           </div>
 
           {/* Footer Links Sections */}
-          {links?.map((section, index) => {
+          {links?.map((section: TypeComponentLinks<DefaultChainModifiers, SupportedLocales> | undefined, index: number) => {
             if (!section?.fields) return null;
 
             return (
@@ -119,7 +122,7 @@ export default async function Footer(props: FooterProps) {
                   </h3>
                 )}
                 <ul className="space-y-2">
-                  {section.fields.links?.map((link, linkIndex) => {
+                  {section.fields.links?.map((link: Entry<TypeCtaSkeleton | TypeLinkSkeleton, DefaultChainModifiers, SupportedLocales> | undefined, linkIndex: number) => {
                     if (!link?.fields) return null;
 
                     return (
@@ -152,7 +155,7 @@ export default async function Footer(props: FooterProps) {
               
               {/* Copyright Links */}
               <div className="flex space-x-6">
-                {copyrightLinks?.map((link, index) => {
+                {copyrightLinks?.map((link: Entry<TypeLinkSkeleton, DefaultChainModifiers, SupportedLocales> | undefined, index: number) => {
                   if (!link?.fields) return null;
 
                   return (

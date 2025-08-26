@@ -2,6 +2,9 @@ import NavbarClient from "./NavbarClient";
 import { NavbarProps } from "@/lib/contentful/types/fields";
 import { getPreloadedLayoutForLocale } from "@/lib/preload/layout-data";
 import { getLocale } from "@/lib/locale";
+import type { TypeLinkSkeleton } from "@/lib/contentful/types/generated";
+import type { DefaultChainModifiers, SupportedLocales } from "@/lib/contentful/types/fields";
+import type { Entry } from "contentful";
 
 async function fetchSVGContent(url: string): Promise<string | null> {
   try {
@@ -30,8 +33,8 @@ export default async function NavbarServer(props: NavbarProps) {
   } = props;
   // Pre-process data server-side
   const menuItems = navigationLinks
-    ?.filter((link): link is NonNullable<typeof link> => Boolean(link?.fields))
-    ?.map((link) => ({
+    ?.filter((link: Entry<TypeLinkSkeleton, DefaultChainModifiers, SupportedLocales> | undefined): link is NonNullable<typeof link> => Boolean(link?.fields))
+    ?.map((link: Entry<TypeLinkSkeleton, DefaultChainModifiers, SupportedLocales>) => ({
       label: link.fields?.label || "",
       href: link.fields?.url || "#",
     })) || [];
