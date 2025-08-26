@@ -45,3 +45,19 @@ export async function getAllPages(
     { preview: options.preview, include: options.include ?? 2, locale }
   );
 }
+
+// Fetch all page slugs for static generation
+export async function getAllPageSlugs(
+  locale: SupportedLocale = "en-US"
+): Promise<string[]> {
+  const pages = await fetchEntries<TypePageCmsSkeleton>(
+    "pageCms",
+    {},
+    { preview: false, include: 0, locale }
+  );
+  
+  return pages
+    .map(page => page.fields.slug)
+    .filter(Boolean) // Remove any undefined slugs
+    .map(slug => String(slug)); // Ensure they're strings
+}

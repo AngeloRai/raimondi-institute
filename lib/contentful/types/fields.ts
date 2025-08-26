@@ -1,5 +1,6 @@
 import type {
   TypeComponentCard,
+  TypeComponentImageCard,
   TypeComponentLinks,
   TypeComponentSeo,
   TypeComponentTestimonial,
@@ -14,7 +15,8 @@ import type {
   TypeNavbar,
   TypePageCms,
   TypeRichTextBlock,
-  TypeComponentVideoAsset
+  TypeComponentVideoAsset,
+  TypeModuleContactForm
 } from "./generated";
 
 // Locale configuration
@@ -34,6 +36,9 @@ export type OmitInternalName<T> = Omit<T, "internalName">;
 // Component prop types - single locale since we fetch with specific locale
 export type CardProps = OmitInternalName<
   ExtractFields<TypeComponentCard<DefaultChainModifiers, SupportedLocales>>
+>;
+export type ImageCardProps = OmitInternalName<
+  ExtractFields<TypeComponentImageCard<DefaultChainModifiers, SupportedLocales>>
 >;
 export type CTAProps = OmitInternalName<
   ExtractFields<TypeCta<DefaultChainModifiers, SupportedLocales>>
@@ -79,4 +84,7 @@ export type RichTextBlockProps = OmitInternalName<
 >;
 export type VideoAssetProps = OmitInternalName<
   ExtractFields<TypeComponentVideoAsset<DefaultChainModifiers, SupportedLocales>>
+>;
+export type ContactFormProps = OmitInternalName<
+  ExtractFields<TypeModuleContactForm<DefaultChainModifiers, SupportedLocales>>
 >;

@@ -1,5 +1,7 @@
 export { isTypeComponentCard } from "./TypeComponentCard";
 export type { TypeComponentCard, TypeComponentCardFields, TypeComponentCardSkeleton } from "./TypeComponentCard";
+export { isTypeComponentImageCard } from "./TypeComponentImageCard";
+export type { TypeComponentImageCard, TypeComponentImageCardFields, TypeComponentImageCardSkeleton } from "./TypeComponentImageCard";
 export { isTypeComponentLinks } from "./TypeComponentLinks";
 export type { TypeComponentLinks, TypeComponentLinksFields, TypeComponentLinksSkeleton } from "./TypeComponentLinks";
 export { isTypeComponentSeo } from "./TypeComponentSeo";
@@ -16,6 +18,8 @@ export { isTypeLayout } from "./TypeLayout";
 export type { TypeLayout, TypeLayoutFields, TypeLayoutSkeleton } from "./TypeLayout";
 export { isTypeLink } from "./TypeLink";
 export type { TypeLink, TypeLinkFields, TypeLinkSkeleton } from "./TypeLink";
+export { isTypeModuleContactForm } from "./TypeModuleContactForm";
+export type { TypeModuleContactForm, TypeModuleContactFormFields, TypeModuleContactFormSkeleton } from "./TypeModuleContactForm";
 export { isTypeModuleGrid } from "./TypeModuleGrid";
 export type { TypeModuleGrid, TypeModuleGridFields, TypeModuleGridSkeleton } from "./TypeModuleGrid";
 export { isTypeModuleHero } from "./TypeModuleHero";
