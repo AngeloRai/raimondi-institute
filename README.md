@@ -16,6 +16,24 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Contentful: Run CTA Migration
+
+Set these environment variables (for zsh/bash):
+
+```
+export CONTENTFUL_SPACE_ID=your_space_id
+export CONTENTFUL_ENVIRONMENT_ID=master
+export CONTENTFUL_MANAGEMENT_TOKEN=your_cma_token
+```
+
+Run the migration:
+
+```
+yarn migrate
+```
+
+This creates/updates the content type named "[Component] CTA" with fields: internalName, label, url, variant, size, external, disabled.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
