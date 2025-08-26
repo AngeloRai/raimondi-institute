@@ -18,6 +18,7 @@ export default async function NavbarServer({
   logo = preloadedLayoutData.navbar?.fields?.logo,
   navigationLinks = preloadedLayoutData.navbar?.fields?.navigationLinks || [],
   cta = preloadedLayoutData.navbar?.fields?.cta,
+  backgroundColor = preloadedLayoutData.navbar?.fields?.backgroundColor
 }: NavbarProps) {
   // Pre-process data server-side
   const menuItems = navigationLinks
@@ -47,6 +48,7 @@ export default async function NavbarServer({
       isLogoSvg={isLogoSvg}
       menuItems={menuItems}
       cta={cta}
+      backgroundColor={backgroundColor}
     />
   );
 }

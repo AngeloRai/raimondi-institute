@@ -1,9 +1,10 @@
 'use client'
 
 import Card from '../components/Card'
+import ImageCard from '../components/ImageCard'
 import Testimonial from '../components/Testimonial'
 import type { GridProps } from '@/lib/contentful/types/fields'
-import { isTypeComponentCard, isTypeComponentTestimonial } from '@/lib/contentful/types/generated'
+import { isTypeComponentCard, isTypeComponentImageCard, isTypeComponentTestimonial } from '@/lib/contentful/types/generated'
 import type { IconName } from '../icons/IconRenderer'
 
 interface ComponentGridProps extends GridProps {
@@ -48,27 +49,55 @@ export default function Grid({
     }
   }
 
-  // Separate cards and testimonials
-  const cards = items?.filter(item => item && isTypeComponentCard(item)) || []
-  const testimonials = items?.filter(item => item && isTypeComponentTestimonial(item)) || []
+  // Use all items together instead of separating by type
+  const validItems = items?.filter(item => item && (
+    isTypeComponentCard(item) || 
+    isTypeComponentImageCard(item) || 
+    isTypeComponentTestimonial(item)
+  )) || []
   
-  // Determine if we're showing cards or testimonials based on what's in the items array
-  const hasTestimonials = testimonials.length > 0
-  const currentItems = hasTestimonials ? testimonials : cards
-  const isTestimonialGrid = hasTestimonials
+  // Check if we have mixed types to determine grid behavior
+  const hasTestimonials = validItems.some(item => item && isTypeComponentTestimonial(item))
+  const hasImageCards = validItems.some(item => item && isTypeComponentImageCard(item))
+  const hasCards = validItems.some(item => item && isTypeComponentCard(item))
   
-  // Determine grid layout based on number of items
-  const getGridCols = (itemCount: number, isTestimonial: boolean = false) => {
+  // If we have mixed types, use a flexible grid layout
+  const isMixedGrid = (hasTestimonials ? 1 : 0) + (hasImageCards ? 1 : 0) + (hasCards ? 1 : 0) > 1
+  const isTestimonialGrid = hasTestimonials && !isMixedGrid
+  const isImageCardGrid = hasImageCards && !isMixedGrid
+  
+  // Determine grid layout based on number of items and type
+  const getGridCols = (itemCount: number, isTestimonial: boolean = false, isImageCard: boolean = false, isMixed: boolean = false) => {
+    // For mixed grids, use flexible layout that works for all card types
+    if (isMixed) {
+      if (itemCount === 1) return 'grid-cols-1 justify-items-center max-w-lg mx-auto';
+      if (itemCount === 2) return 'grid-cols-1 md:grid-cols-2';
+      if (itemCount === 3) return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+      // Mixed grids: max 4 per row, flexible for all card types
+      return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
+    }
+    
     if (isTestimonial) {
       if (itemCount === 1) return 'grid-cols-1 justify-items-center max-w-2xl mx-auto';
       if (itemCount === 2) return 'grid-cols-1 lg:grid-cols-2';
+      // For testimonials, max 3 per row for better readability
       return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
     }
     
+    if (isImageCard) {
+      if (itemCount === 1) return 'grid-cols-1 justify-items-center max-w-sm mx-auto';
+      if (itemCount === 2) return 'grid-cols-1 md:grid-cols-2';
+      if (itemCount === 3) return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+      // Image cards: max 4 per row, auto-wraps to next row
+      return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
+    }
+    
+    // Regular cards: max 4 per row for all cases
     if (itemCount === 1) return 'grid-cols-1 justify-items-center max-w-md mx-auto';
     if (itemCount === 2) return 'grid-cols-1 md:grid-cols-2';
     if (itemCount === 3) return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
-    return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4';
+    // 4 or more items: max 4 per row, wraps automatically
+    return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
   };
 
   return (
@@ -95,8 +124,8 @@ export default function Grid({
           </div>
         )}
 
-        <div className={`grid gap-6 lg:gap-8 ${getGridCols(currentItems.length, isTestimonialGrid)}`}>
-          {currentItems.map((item) => {
+        <div className={`grid gap-6 lg:gap-8 ${getGridCols(validItems.length, isTestimonialGrid, isImageCardGrid, isMixedGrid)}`}>
+          {validItems.map((item) => {
             if (!item) return null;
             
             if (isTypeComponentCard(item)) {
@@ -115,6 +144,25 @@ export default function Grid({
                   key={item.sys.id}
                   id={item.sys.id}
                   {...cardProps}
+                />
+              )
+            }
+            
+            if (isTypeComponentImageCard(item)) {
+              // Extract the fields, handling both localized and non-localized formats
+              const fields = item.fields
+              const imageCardProps = {
+                heading: extractFieldValue(fields.heading) || '',
+                description: extractFieldValue(fields.description) || '',
+                image: fields.image,
+                cta: fields.cta,
+                backgroundColor: extractFieldValue(fields.backgroundColor) || 'white'
+              }
+              
+              return (
+                <ImageCard
+                  key={item.sys.id}
+                  {...imageCardProps}
                 />
               )
             }

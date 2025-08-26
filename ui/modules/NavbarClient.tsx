@@ -15,6 +15,7 @@ interface NavbarClientProps {
   isLogoSvg: boolean;
   menuItems: Array<{ label: string; href: string }>;
   cta: any;
+  backgroundColor: string;
 }
 
 export default function NavbarClient({
