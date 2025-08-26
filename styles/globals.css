@@ -1,4 +1,3 @@
-@import "tailwindcss";
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -41,24 +40,18 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  /* Custom Brand Design Tokens - Semantic Names */
-  --color-dark-forest-green: #09351E;
-  --color-medium-forest-green: #3A5D4B;
-  --color-light-forest-green: #6B8678;
-  --color-charcoal-gray: #1A1A1A;
-  --color-warm-cream: #FAECE3;
-  --color-pure-white: #FFFFFF;
+  /* Custom Brand Design Tokens */
+  --color-brand-primary: #09351E;
+  --color-brand-primary-light: #3A5D4B;
+  --color-brand-primary-lighter: #6B8678;
+  --color-brand-dark: #1A1A1A;
+  --color-brand-light: #FAECE3;
   
   /* Semantic Colors */
   --color-text-primary: #1A1A1A;
   --color-text-inverse: #FFFFFF;
-  
-  /* Font Family Tokens */
-  --font-display: var(--font-caliburn-bold);
-  --font-serif: var(--font-freight-neo);
-  --font-sans-bold: var(--font-visby-bold);
-  --font-sans: var(--font-visby-medium);
-  --font-sans-light: var(--font-visby-light);
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #FAECE3;
   
   /* Spacing Tokens */
   --spacing-xs: 4px;
@@ -174,19 +167,15 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* Custom Brand Colors for Tailwind */
-  --color-dark-forest-green: var(--color-dark-forest-green);
-  --color-medium-forest-green: var(--color-medium-forest-green);
-  --color-light-forest-green: var(--color-light-forest-green);
-  --color-charcoal-gray: var(--color-charcoal-gray);
-  --color-warm-cream: var(--color-warm-cream);
-  --color-pure-white: var(--color-pure-white);
+  --color-brand-primary: var(--color-brand-primary);
+  --color-brand-primary-light: var(--color-brand-primary-light);
+  --color-brand-primary-lighter: var(--color-brand-primary-lighter);
+  --color-brand-dark: var(--color-brand-dark);
+  --color-brand-light: var(--color-brand-light);
   --color-text-primary: var(--color-text-primary);
   --color-text-inverse: var(--color-text-inverse);
-  --font-display: var(--font-caliburn-bold);
-  --font-serif: var(--font-freight-neo);
-  --font-sans-bold: var(--font-visby-bold);
-  --font-sans: var(--font-visby-medium);
-  --font-sans-light: var(--font-visby-light);
+  --color-bg-primary: var(--color-bg-primary);
+  --color-bg-secondary: var(--color-bg-secondary);
 }
 
 @layer base {
@@ -195,7 +184,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground;
   }
 }
 
