@@ -1,15 +1,14 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
 import type { TypeComponentCardSkeleton } from "./TypeComponentCard";
+import type { TypeComponentImageCardSkeleton } from "./TypeComponentImageCard";
 import type { TypeComponentTestimonialSkeleton } from "./TypeComponentTestimonial";
-import type { TypeCtaSkeleton } from "./TypeCta";
 
 export interface TypeModuleGridFields {
     internalName: EntryFieldTypes.Symbol;
     heading?: EntryFieldTypes.Symbol;
     subheading?: EntryFieldTypes.Text;
-    items?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeComponentCardSkeleton | TypeComponentTestimonialSkeleton>>;
+    items?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeComponentCardSkeleton | TypeComponentImageCardSkeleton | TypeComponentTestimonialSkeleton>>;
     backgroundColor?: EntryFieldTypes.Symbol<"dark" | "light" | "white">;
-    cta?: EntryFieldTypes.EntryLink<TypeCtaSkeleton>;
 }
 
 export type TypeModuleGridSkeleton = EntrySkeletonType<TypeModuleGridFields, "moduleGrid">;
