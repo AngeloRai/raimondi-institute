@@ -1,27 +1,42 @@
 {
-  "name": "apple-hero-app",
+  "name": "raimondi-institute",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "npm run preload && next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "preload": "dotenv -e .env -- node scripts/preload-layout-data.js",
+    "contentful:types": "node scripts/generate-types.js",
+    "migrate": "dotenv -e .env -- node scripts/run-migration.js"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^16.1.0",
+    "@contentful/rich-text-types": "^17.1.0",
+    "contentful": "^11.7.15",
+    "next": "15.5.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "next": "15.5.0"
+    "react-svg": "^16.3.0",
+    "swiper": "^11.2.10"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@types/react-svg": "^3.0.0",
+    "cf-content-types-generator": "^2.16.0",
+    "contentful-management": "^11.54.4",
+    "contentful-migration": "^4.21.1",
+    "dotenv": "^17.2.1",
+    "dotenv-cli": "^7.4.2",
     "eslint": "^9",
     "eslint-config-next": "15.5.0",
-    "@eslint/eslintrc": "^3"
+    "prettier": "^3.6.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
