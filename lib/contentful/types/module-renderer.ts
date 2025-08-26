@@ -6,4 +6,5 @@ import type { DefaultChainModifiers, SupportedLocales } from './fields'
 export type ContentfulModule = Entry<EntrySkeletonType, DefaultChainModifiers, SupportedLocales>
 
 // Registry mapping content type IDs to React components
-export type ModuleRegistry = Record<string, ComponentType<Record<string, unknown>>>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ModuleRegistry = Record<string, ComponentType<any>>

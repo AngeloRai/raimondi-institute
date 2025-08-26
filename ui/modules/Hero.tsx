@@ -1,6 +1,7 @@
 import Image from "next/image";
 import CTA from "../components/CTA";
 import { RichText } from "../components/RichText";
+import SocialShare from "../components/SocialShare";
 import type { HeroProps } from "@/lib/contentful/types/fields";
 import type { Document } from "@contentful/rich-text-types";
 
@@ -104,6 +105,18 @@ function Hero({
                 <RichText content={copy} className="[&_p]:text-white/80" />
               </div>
             )}
+
+            {/* Social Share Links */}
+            {socialShare && (
+              <div className="mt-8">
+                <SocialShare 
+                  links={socialShare.fields?.links as any}
+                  variant="dark"
+                  size="medium"
+                  className="justify-center"
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -116,6 +129,12 @@ function Hero({
       ? brandColorClasses[bgColor as keyof typeof brandColorClasses]
       : "bg-warm-cream"; // Default fallback
 
+  // Determine text colors based on background
+  const isDarkBackground = bgColor === 'dark-forest-green' || bgColor === 'medium-forest-green' || bgColor === 'charcoal-gray'
+  const headingTextClass = isDarkBackground ? 'text-white' : 'text-charcoal-gray'
+  const subheadingTextClass = isDarkBackground ? 'text-white/90' : 'text-gray-600'
+  const copyTextClass = isDarkBackground ? 'text-white/80' : 'text-gray-600'
+
   return (
     <section
       id="hero"
@@ -126,19 +145,19 @@ function Hero({
           {/* Header Content */}
           <div className="space-y-6 max-w-5xl">
             {heading && (
-              <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.05] text-charcoal-gray font-bold">
+              <h1 className={`font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.05] ${headingTextClass} font-bold`}>
                 {heading}
               </h1>
             )}
 
             {subheading && (
-              <div className="text-xl sm:text-2xl lg:text-2xl max-w-4xl mx-auto leading-relaxed text-gray-600">
+              <div className={`text-xl sm:text-2xl lg:text-2xl max-w-4xl mx-auto leading-relaxed ${subheadingTextClass}`}>
                 {typeof subheading === "string" ? (
                   <p>{subheading}</p>
                 ) : (
                   <RichText
                     content={subheading as Document}
-                    className="[&_p]:text-gray-600"
+                    className={`[&_p]:${subheadingTextClass}`}
                   />
                 )}
               </div>
@@ -170,8 +189,20 @@ function Hero({
           )}
 
           {copy && (
-            <div className="mt-4 text-gray-600">
-              <RichText content={copy} />
+            <div className={`mt-4 italic ${copyTextClass}`}>
+              <RichText content={copy} className={`[&_p]:${copyTextClass}`} />
+            </div>
+          )}
+
+          {/* Social Share Links */}
+          {socialShare && (
+            <div className="mt-8">
+              <SocialShare 
+                links={socialShare.fields?.links as any}
+                variant={isDarkBackground ? 'dark' : 'light'}
+                size="medium"
+                className="justify-center"
+              />
             </div>
           )}
         </div>

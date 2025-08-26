@@ -5,14 +5,15 @@ import Instagram from "../icons/Instagram";
 import Facebook from "../icons/Facebook";
 import YouTube from "../icons/YouTube";
 import Twitter from "../icons/Twitter";
-import type { TypeCtaSkeleton } from "@/lib/contentful/types/generated";
+import type { TypeCtaSkeleton, TypeLinkSkeleton } from "@/lib/contentful/types/generated";
 import type { Entry, ChainModifiers, LocaleCode } from "contentful";
 
-// Type for CTA entries
+// Type for CTA entries (only CTAs have icon fields needed for social links)
 export type CTAEntry = Entry<TypeCtaSkeleton, ChainModifiers, LocaleCode>;
+export type LinkEntry = Entry<TypeLinkSkeleton, ChainModifiers, LocaleCode>;
 
 interface SocialShareProps {
-  links?: (CTAEntry | undefined)[] | null;
+  links?: (CTAEntry | LinkEntry | undefined)[] | null;
   variant?: 'light' | 'dark';
   size?: 'small' | 'medium' | 'large';
   className?: string;
@@ -67,19 +68,22 @@ export default function SocialShare({
     .filter((link): link is CTAEntry => {
       if (!link?.fields) return false;
       
-      // Get the icon and url values
-      const iconValue = getFieldValue(link.fields.icon);
+      // Only process entries that have icon field (CTAs only)
+      const hasIcon = 'icon' in link.fields;
+      if (!hasIcon) return false;
+      
+      // Get the icon and url values - cast to any since we checked for icon presence above
+      const iconValue = getFieldValue((link.fields as any).icon);
       const urlValue = getFieldValue(link.fields.url);
             
       return !!iconValue && !!urlValue && Object.keys(socialIcons).includes(iconValue);
     })
     .map(link => {
-      const { icon, url, label } = link.fields;
-      
-      // Extract string values from fields
-      const iconValue = getFieldValue(icon) || '';
-      const urlValue = getFieldValue(url) || '';
-      const labelValue = getFieldValue(label);
+      // Extract string values from fields - cast to any since we filtered for entries with icon field above
+      const fields = link.fields as any;
+      const iconValue = getFieldValue(fields.icon) || '';
+      const urlValue = getFieldValue(fields.url) || '';
+      const labelValue = getFieldValue(fields.label);
       
       return {
         platform: iconValue as 'instagram' | 'facebook' | 'youtube' | 'twitter',
@@ -87,8 +91,6 @@ export default function SocialShare({
         label: labelValue || `Visit our ${iconValue}`
       };
     });
-
-  console.log('Filtered social links:', socialLinks);
   
   if (socialLinks.length === 0) {
     console.log('No valid social links found');
