@@ -8,6 +8,10 @@ import {
 import { getLocale } from "@/lib/locale";
 import { SUPPORTED_LOCALES } from "@/lib/locale-types";
 
+export const dynamicParams = true;
+
+export const revalidate = 1800; // revalidate path every 30min
+
 export async function generateStaticParams() {
   const allSlugs: { slug: string[] }[] = [];
 
