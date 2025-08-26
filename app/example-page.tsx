@@ -9,7 +9,7 @@ interface PageProps {
   searchParams: { locale?: string }
 }
 
-export default async function DynamicPage({ params, searchParams }: PageProps) {
+export default async function DynamicPage({ params }: PageProps) {
   // Build slug from array (e.g., ['about', 'team'] -> 'about/team')
   const slug = params.slug || 'home'
   
