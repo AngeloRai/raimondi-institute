@@ -53,22 +53,34 @@ async function handleRevalidation(request: NextRequest) {
             )
         }
 
-        // Extract path to revalidate
+        // Extract path to revalidate from the URL
         const url = new URL(request.url)
         let pathToRevalidate = url.pathname.replace('/api/revalidate', '') || '/'
         
-        // Clean up the path
-        if (pathToRevalidate === '') {
-            pathToRevalidate = '/'
+        // Handle the catch-all route structure
+        if (pathToRevalidate === '' || pathToRevalidate === '/') {
+            pathToRevalidate = '/' // This will revalidate the home page
+        } else {
+            // Normalize path (remove double slashes, ensure it starts with /)
+            pathToRevalidate = pathToRevalidate.replace(/\/+/g, '/')
+            if (!pathToRevalidate.startsWith('/')) {
+                pathToRevalidate = '/' + pathToRevalidate
+            }
         }
-        
-        // Normalize path (remove double slashes, etc.)
-        pathToRevalidate = pathToRevalidate.replace(/\/+/g, '/')
 
         console.log('Revalidating path:', pathToRevalidate)
         
-        // Revalidate the path
-        revalidatePath(pathToRevalidate, 'layout') // Use 'layout' to revalidate nested routes too
+        // Handle special cases for home page revalidation
+        if (pathToRevalidate === '/' || pathToRevalidate === '/home') {
+            console.log('Revalidating home page and layout')
+            // Revalidate both the root path and ensure layout updates
+            revalidatePath('/', 'layout')
+            // Force revalidation of the entire app since home page is the entry point
+            revalidatePath('/', 'page')
+        } else {
+            // Revalidate the specific path
+            revalidatePath(pathToRevalidate, 'layout')
+        }
 
         return NextResponse.json(
             {
