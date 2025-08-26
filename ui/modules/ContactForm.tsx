@@ -1,7 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useForm, ValidationError } from '@formspree/react'
 import CTA from '../components/CTA'
+import type { ContactFormProps } from '@/lib/contentful/types/fields'
+import { generateGoogleMapsLink } from '@/lib/utils/maps'
+import { getTranslation, type SupportedLocale } from '@/lib/translations/contact-form'
 
 // Styled UI components
 function Input({ className = '', ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
@@ -45,30 +50,108 @@ function Select({ children, className = '', ...props }: React.SelectHTMLAttribut
   )
 }
 
-interface ContactFormProps {
+interface ComponentContactFormProps extends ContactFormProps {
   id?: string;
-  title?: string;
-  subtitle?: string;
-  backgroundColor?: 'white' | 'light' | 'dark';
+  formspreeId?: string;
+}
+
+// Helper to extract value from potentially localized field
+function extractFieldValue<T>(field: T | { [locale: string]: T } | undefined, defaultValue?: T): T | undefined {
+  if (field === undefined || field === null) return defaultValue;
+  if (typeof field === 'object' && field !== null && !Array.isArray(field)) {
+    // Check if it's a localized object
+    const localized = field as { [locale: string]: T };
+    if ('en-US' in localized) {
+      return localized['en-US'];
+    }
+  }
+  return field as T;
 }
 
 export default function ContactForm({
   id = 'contactform',
-  title = "Get in Touch",
-  subtitle = "Ready to find your perfect piano? We'd love to hear from you.",
+  heading,
+  subheading,
+  messagePlaceholder,
+  subjects,
+  buttonText,
+  businessInfoHeading,
+  addresses,
+  phones,
+  schedule,
+  copy,
+  redirectUrl,
+  formspreeId,
   backgroundColor = 'white'
-}: ContactFormProps) {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+}: ComponentContactFormProps) {
+  const router = useRouter();
+  
+  // Extract localized values first
+  const successRedirectUrl = extractFieldValue(redirectUrl, "");
+  
+  // Extract formspree ID
+  const formspreeFormId = extractFieldValue(formspreeId, 'xandypqa') || 'xandypqa';
+  const [state, formspreeHandleSubmit] = useForm(formspreeFormId);
+  
+  // Custom submit handler to ensure validation runs
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const form = e.currentTarget;
+    
+    // Check if form is valid using HTML5 validation
+    if (!form.checkValidity()) {
+      // Prevent default and let browser show validation
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Find first invalid field and focus it
+      const firstInvalid = form.querySelector(':invalid') as HTMLElement;
+      if (firstInvalid) {
+        firstInvalid.focus();
+        // Trigger validation display
+        form.reportValidity();
+      }
+      return;
+    }
+    
+    // If valid, proceed with Formspree submission
+    formspreeHandleSubmit(e);
+  };
+  
+  
+  // Handle redirect after successful submission
+  useEffect(() => {
+    if (state.succeeded && successRedirectUrl) {
+      router.push(successRedirectUrl);
+    }
+  }, [state.succeeded, successRedirectUrl, router]);
+  
+  // Translation helper - get locale immediately from cookie
+  const getCurrentLocale = (): SupportedLocale => {
+    if (typeof document === 'undefined') return 'en-US';
+    const cookies = document.cookie.split(';');
+    const localeCookie = cookies.find(cookie => cookie.trim().startsWith('locale='));
+    if (localeCookie) {
+      const locale = localeCookie.split('=')[1].trim() as SupportedLocale;
+      if (locale === 'pt-BR' || locale === 'en-US') {
+        return locale;
+      }
+    }
+    return 'en-US';
+  };
+  
+  const t = (key: Parameters<typeof getTranslation>[0]) => getTranslation(key, getCurrentLocale());
+  
+  // Extract remaining localized values
+  const title = extractFieldValue(heading, "Get in Touch");
+  const subtitle = extractFieldValue(subheading, "Ready to find your perfect piano? We'd love to hear from you.");
+  const messageText = extractFieldValue(messagePlaceholder, "Tell us about your piano needs, preferences, or any questions you have...");
+  const submitButtonText = extractFieldValue(buttonText, "Send Message");
+  const businessHeading = extractFieldValue(businessInfoHeading, "Visit Our Showroom");
+  const formSubjects = extractFieldValue(subjects, []);
+  const businessAddresses = extractFieldValue(addresses, []);
+  const businessPhones = extractFieldValue(phones, []);
+  const businessSchedule = extractFieldValue(schedule, "");
+  const additionalCopy = extractFieldValue(copy, "");
 
   const getBackgroundClass = () => {
     switch (backgroundColor) {
@@ -115,34 +198,8 @@ export default function ContactForm({
     }
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSelectChange = (value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      subject: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setIsSubmitting(false);
-  };
-
-  if (submitted) {
+  // Check if form succeeded and no redirect URL (show success message)
+  if (state.succeeded && !successRedirectUrl) {
     return (
       <section 
         id={`${id}-success`}
@@ -158,29 +215,21 @@ export default function ContactForm({
           </div>
           
           <h2 className={`text-3xl sm:text-4xl tracking-tight mb-4 font-semibold ${getTextClass()}`}>
-            Thank You!
+            {t('Thank You!')}
           </h2>
           
           <p className={`text-lg leading-relaxed mb-8 ${getSubtextClass()}`}>
-            We&apos;ve received your message and will get back to you within 24 hours. 
-            Our team is excited to help you find the perfect piano.
+            {t('We\'ve received your message and will get back to you within 24 hours. Our team is excited to help you find the perfect piano.')}
           </p>
           
           <CTA
             onClick={() => {
-              setSubmitted(false);
-              setFormData({
-                firstName: '',
-                lastName: '',
-                email: '',
-                phone: '',
-                subject: '',
-                message: ''
-              });
+              // Reset Formspree form state
+              window.location.reload();
             }}
-            variant="outline"
+            variant="primary"
           >
-            Send Another Message
+            {t('Send Another Message')}
           </CTA>
         </div>
       </section>
@@ -214,15 +263,24 @@ export default function ContactForm({
                   htmlFor="firstName"
                   className={getTextClass()}
                 >
-                  First Name *
+                  {t('First Name *')}
                 </Label>
                 <Input
                   id="firstName"
                   name="firstName"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
                   required
                   className={getFormFieldClass()}
+                  onInvalid={(e) => {
+                    (e.target as HTMLInputElement).setCustomValidity(t('First name is required'));
+                  }}
+                  onChange={(e) => {
+                    (e.target as HTMLInputElement).setCustomValidity('');
+                  }}
+                />
+                <ValidationError 
+                  prefix="First Name" 
+                  field="firstName"
+                  errors={state.errors}
                 />
               </div>
               <div className="space-y-2">
@@ -230,15 +288,24 @@ export default function ContactForm({
                   htmlFor="lastName"
                   className={getTextClass()}
                 >
-                  Last Name *
+                  {t('Last Name *')}
                 </Label>
                 <Input
                   id="lastName"
                   name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
                   required
                   className={getFormFieldClass()}
+                  onInvalid={(e) => {
+                    (e.target as HTMLInputElement).setCustomValidity(t('Last name is required'));
+                  }}
+                  onChange={(e) => {
+                    (e.target as HTMLInputElement).setCustomValidity('');
+                  }}
+                />
+                <ValidationError 
+                  prefix="Last Name" 
+                  field="lastName"
+                  errors={state.errors}
                 />
               </div>
             </div>
@@ -249,16 +316,32 @@ export default function ContactForm({
                 htmlFor="email"
                 className={getTextClass()}
               >
-                Email Address *
+                {t('Email Address *')}
               </Label>
               <Input
                 id="email"
                 name="email"
                 type="email"
-                value={formData.email}
-                onChange={handleInputChange}
                 required
                 className={getFormFieldClass()}
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                title={t('Please enter a valid email address')}
+                onInvalid={(e) => {
+                  const input = e.target as HTMLInputElement;
+                  if (input.validity.valueMissing) {
+                    input.setCustomValidity(t('Email is required'));
+                  } else if (input.validity.patternMismatch || input.validity.typeMismatch) {
+                    input.setCustomValidity(t('Please enter a valid email address'));
+                  }
+                }}
+                onChange={(e) => {
+                  (e.target as HTMLInputElement).setCustomValidity('');
+                }}
+              />
+              <ValidationError 
+                prefix="Email" 
+                field="email"
+                errors={state.errors}
               />
             </div>
 
@@ -268,15 +351,19 @@ export default function ContactForm({
                 htmlFor="phone"
                 className={getTextClass()}
               >
-                Phone Number
+                {t('Phone Number')}
               </Label>
               <Input
                 id="phone"
                 name="phone"
                 type="tel"
-                value={formData.phone}
-                onChange={handleInputChange}
                 className={getFormFieldClass()}
+                minLength={8}
+              />
+              <ValidationError 
+                prefix="Phone" 
+                field="phone"
+                errors={state.errors}
               />
             </div>
 
@@ -286,24 +373,32 @@ export default function ContactForm({
                 htmlFor="subject"
                 className={getTextClass()}
               >
-                Subject *
+                {t('Subject *')}
               </Label>
               <Select
                 id="subject"
                 name="subject"
-                value={formData.subject}
-                onChange={(e) => handleSelectChange(e.target.value)}
                 required
                 className={getFormFieldClass()}
+                onInvalid={(e) => {
+                  (e.target as HTMLSelectElement).setCustomValidity(t('Subject is required'));
+                }}
+                onChange={(e) => {
+                  (e.target as HTMLSelectElement).setCustomValidity('');
+                }}
               >
-                <option value="">Please select a subject</option>
-                <option value="piano-inquiry">Piano Inquiry</option>
-                <option value="pricing">Pricing Information</option>
-                <option value="showroom-visit">Showroom Visit</option>
-                <option value="maintenance">Maintenance & Tuning</option>
-                <option value="financing">Financing Options</option>
-                <option value="other">Other</option>
+                <option value="">{t('Please select a subject')}</option>
+                {formSubjects?.map((subject, index) => (
+                  <option key={index} value={subject.toLowerCase().replace(/\s+/g, '-')}>
+                    {subject}
+                  </option>
+                ))}
               </Select>
+              <ValidationError 
+                prefix="Subject" 
+                field="subject"
+                errors={state.errors}
+              />
             </div>
 
             {/* Message */}
@@ -312,28 +407,37 @@ export default function ContactForm({
                 htmlFor="message"
                 className={getTextClass()}
               >
-                Message *
+                {t('Message *')}
               </Label>
               <Textarea
                 id="message"
                 name="message"
-                value={formData.message}
-                onChange={handleInputChange}
                 required
                 rows={5}
-                placeholder="Tell us about your piano needs, preferences, or any questions you have..."
+                placeholder={messageText}
                 className={getFormFieldClass()}
+                onInvalid={(e) => {
+                  (e.target as HTMLTextAreaElement).setCustomValidity(t('Message is required'));
+                }}
+                onChange={(e) => {
+                  (e.target as HTMLTextAreaElement).setCustomValidity('');
+                }}
+              />
+              <ValidationError 
+                prefix="Message" 
+                field="message"
+                errors={state.errors}
               />
             </div>
 
             {/* Submit Button */}
             <CTA
               type="submit"
-              disabled={isSubmitting}
+              disabled={state.submitting}
               variant="primary"
               className="w-full sm:w-auto"
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              {state.submitting ? t('Sending...') : submitButtonText}
             </CTA>
           </form>
 
@@ -341,70 +445,93 @@ export default function ContactForm({
           <div className="space-y-8">
             <div>
               <h3 className={`text-2xl tracking-tight mb-6 font-semibold ${getTextClass()}`}>
-                Visit Our Showroom
+                {businessHeading}
               </h3>
               
               <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <div 
-                    className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green"
-                  >
-                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
+                {/* Addresses */}
+                {businessAddresses?.map((address, index) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <div 
+                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green"
+                    >
+                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <a
+                        href={generateGoogleMapsLink(address)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${getTextClass()} hover:underline transition-colors cursor-pointer`}
+                      >
+                        {address}
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <p className={getTextClass()}>
-                      123 Harmony Avenue<br />
-                      Music District, NY 10001
-                    </p>
-                  </div>
-                </div>
+                ))}
 
-                <div className="flex items-start space-x-3">
-                  <div 
-                    className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green"
-                  >
-                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
+                {/* Phone Numbers */}
+                {businessPhones && businessPhones.length > 0 && (
+                  <div className="flex items-start space-x-3">
+                    <div 
+                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green"
+                    >
+                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className={getTextClass()}>
+                        {businessPhones.map((phone, index) => (
+                          <div key={index}>
+                            <a 
+                              href={`tel:${phone.replace(/\D/g, '')}`}
+                              className="hover:underline transition-colors"
+                            >
+                              {phone}
+                            </a>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className={getTextClass()}>
-                      (555) 123-PIANO<br />
-                      (555) 123-7426
-                    </p>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex items-start space-x-3">
-                  <div 
-                    className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green"
-                  >
-                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                {/* Business Schedule */}
+                {businessSchedule && (
+                  <div className="flex items-start space-x-3">
+                    <div 
+                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green"
+                    >
+                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className={getTextClass()}>
+                        {businessSchedule.split('\n').map((line, index) => (
+                          <span key={index}>
+                            {line}
+                            {index < businessSchedule.split('\n').length - 1 && <br />}
+                          </span>
+                        ))}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className={getTextClass()}>
-                      Monday - Friday: 9AM - 7PM<br />
-                      Saturday: 10AM - 6PM<br />
-                      Sunday: 12PM - 5PM
-                    </p>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
 
-            <div className={`p-6 rounded-2xl ${getCardBackgroundClass()}`}>
-              <h4 className={`tracking-tight mb-3 font-semibold ${getTextClass()}`}>
-                Schedule a Private Consultation
-              </h4>
-              <p className={`text-sm leading-relaxed ${getSubtextClass()}`}>
-                Book a one-on-one session with our piano specialists to explore our collection and find the perfect instrument for your needs.
-              </p>
-            </div>
+            {additionalCopy && (
+              <div className={`p-6 rounded-2xl ${getCardBackgroundClass()}`}>
+                <p className={`text-sm leading-relaxed ${getSubtextClass()}`}>
+                  {additionalCopy}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

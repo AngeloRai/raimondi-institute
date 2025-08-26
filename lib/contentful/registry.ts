@@ -6,6 +6,7 @@ import ImageText from '@/ui/modules/ImageText'
 import Grid from '@/ui/modules/Grid'
 import ImageCarousel from '@/ui/modules/ImageCarousel'
 import RichTextBlock from '@/ui/modules/RichTextBlock'
+import ContactForm from '@/ui/modules/ContactForm'
 // Add more imports here as you create modules
 
 /**
@@ -25,6 +26,7 @@ export const contentfulModuleRegistry: ModuleRegistry = {
   moduleImageText: ImageText,
   moduleGrid: Grid,
   moduleImageCarousel: ImageCarousel,
+  moduleContactForm: ContactForm,
   richTextBlock: RichTextBlock,
 
   // Note: CTA is a child component used within other modules, not a standalone module
