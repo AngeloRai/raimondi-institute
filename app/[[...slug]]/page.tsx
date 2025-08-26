@@ -37,7 +37,6 @@ export default async function Page({
   params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
-  console.log("🚀 ~ Page ~ slug:", slug);
   
   const locale = await getLocale();
   
