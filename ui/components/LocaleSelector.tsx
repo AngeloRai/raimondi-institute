@@ -23,9 +23,13 @@ export default function LocaleSelector({
 }: LocaleSelectorProps) {
   const formRef = useRef<HTMLFormElement>(null);
 
-  const handleLocaleChange = () => {
+  const handleLocaleChange = async () => {
     // Submit the form when select changes
-    formRef.current?.requestSubmit();
+    const formData = new FormData(formRef.current!);
+    await updateLocale(formData);
+    
+    // Force a page refresh to ensure all content updates
+    window.location.reload();
   };
 
   const baseStyles = variant === 'footer' 
@@ -33,7 +37,7 @@ export default function LocaleSelector({
     : "bg-white text-dark-forest-green border border-dark-forest-green/20";
 
   return (
-    <form ref={formRef} action={updateLocale} className={`inline-block ${className}`}>
+    <form ref={formRef} className={`inline-block ${className}`}>
       <label htmlFor="locale-select" className="sr-only">
         Select Language
       </label>
