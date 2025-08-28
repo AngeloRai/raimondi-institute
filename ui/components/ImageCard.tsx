@@ -2,6 +2,11 @@ import Image from "next/image";
 import CTA from "./CTA";
 import { toAbsoluteCtfUrl } from "@/lib/contentful/utils/image";
 import { ImageCardProps } from "@/lib/contentful/types/fields";
+import {
+  getBrandBgClass,
+  getContrastTextClass,
+  getCTAVariantAndClasses,
+} from "@/lib/utils/brandColors";
 
 type ComponentImageCardProps = ImageCardProps & {
   className?: string;
@@ -11,7 +16,7 @@ export default function ImageCard({
   image,
   heading,
   cta,
-  backgroundColor,
+  backgroundColor = "pure-white",
   description,
   className = "",
 }: ComponentImageCardProps) {
@@ -19,54 +24,13 @@ export default function ImageCard({
   const imageUrl = toAbsoluteCtfUrl(image?.fields?.file?.url);
   const imageAlt = image?.fields?.title || heading;
 
-  const getBackgroundClass = () => {
-    switch (backgroundColor) {
-      case 'white': return 'bg-pure-white'
-      case 'light': return 'bg-warm-cream'
-      case 'dark': return 'bg-charcoal-gray'
-      default: return 'bg-pure-white'
-    }
-  }
-
-  const getTextClass = () => {
-    switch (backgroundColor) {
-      case 'white': return 'text-dark-forest-green'
-      case 'light': return 'text-dark-forest-green'
-      case 'dark': return 'text-white'
-      default: return 'text-dark-forest-green'
-    }
-  }
-
-  const getCTAVariantAndClasses = () => {
-    switch (backgroundColor) {
-      case 'white': 
-        return { 
-          variant: 'outline' as const, 
-          className: 'w-full !border-dark-forest-green !text-dark-forest-green hover:!bg-dark-forest-green hover:!text-white' 
-        }
-      case 'light': 
-        return { 
-          variant: 'primary' as const, 
-          className: 'w-full' 
-        }
-      case 'dark': 
-        return { 
-          variant: 'secondary' as const, 
-          className: 'w-full' 
-        }
-      default: 
-        return { 
-          variant: 'outline' as const, 
-          className: 'w-full !border-dark-forest-green !text-dark-forest-green hover:!bg-dark-forest-green hover:!text-white' 
-        }
-    }
-  }
+  const ctaVariantAndClasses = getCTAVariantAndClasses(cta, backgroundColor, "outline");
 
   return (
     <div
       className={`group relative overflow-hidden rounded-xl shadow-sm 
                   transition-all duration-300 hover:shadow-xl hover:-translate-y-1 
-                  ${getBackgroundClass()} ${className}`}
+                  ${getBrandBgClass(backgroundColor, "bg-pure-white")} ${className}`}
     >
       {/* Image Container */}
       <div className="relative aspect-[4/3] overflow-hidden bg-warm-cream/20">
@@ -85,13 +49,13 @@ export default function ImageCard({
               alt={heading}
               className="w-32 h-32 transition-transform duration-500 group-hover:scale-105 opacity-60"
             /> */}
-             <Image
-           src="/logo-110.svg"
+            <Image
+              src="/logo-110.svg"
               alt={heading}
-            width={120} // Optional: specify width
-            height={120} // Optional: specify height
-            unoptimized // Optional: if you don't need Next.js image optimization for this SVG
-          />
+              width={120} // Optional: specify width
+              height={120} // Optional: specify height
+              unoptimized // Optional: if you don't need Next.js image optimization for this SVG
+            />
           </div>
         )}
 
@@ -111,8 +75,12 @@ export default function ImageCard({
       </div>
 
       {/* Content */}
-      <div className={`p-6 space-y-4 ${getBackgroundClass()}`}>
-        <h3 className={`font-bold text-xl leading-tight ${getTextClass()}`}>
+      <div
+        className={`p-6 space-y-4 ${getBrandBgClass(backgroundColor, "bg-pure-white")}`}
+      >
+        <h3
+          className={`font-bold text-xl leading-tight ${getContrastTextClass(backgroundColor)}`}
+        >
           {heading}
         </h3>
 
@@ -120,8 +88,8 @@ export default function ImageCard({
           <div className="transition-transform duration-200 group-hover:scale-105">
             <CTA
               {...cta.fields}
-              variant={getCTAVariantAndClasses().variant}
-              className={getCTAVariantAndClasses().className}
+              variant={ctaVariantAndClasses.variant}
+              className={ctaVariantAndClasses.className}
             />
           </div>
         )}

@@ -35,6 +35,7 @@ export default function CTA({
     primary: "bg-dark-forest-green text-white hover:bg-medium-forest-green focus:ring-dark-forest-green/50 shadow-sm",
     secondary: "bg-white text-charcoal-gray hover:bg-white/90 focus:ring-white/50 shadow-sm border-2 border-white",
     outline: "bg-transparent text-white border-2 border-white hover:bg-white hover:text-charcoal-gray focus:ring-white/50",
+    "outline-dark": "bg-transparent text-dark-forest-green border-2 border-dark-forest-green hover:bg-light-forest-green/30 hover:text-charcoal-gray focus:ring-white/50",
     ghost: "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 focus:ring-white/50",
     "ghost-dark": "bg-charcoal-gray/10 text-charcoal-gray hover:bg-charcoal-gray/20 focus:ring-charcoal-gray/50",
     icon: "bg-transparent text-dark-forest-green hover:bg-dark-forest-green/10 focus:ring-dark-forest-green/50 p-3",

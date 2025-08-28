@@ -1,5 +1,6 @@
 import React from 'react'
 import type { TestimonialProps } from '@/lib/contentful/types/fields'
+import { getBrandBgClass, getContrastTextClass, getContrastSubtextClass, isDarkBackground } from '@/lib/utils/brandColors'
 
 interface ComponentTestimonialProps extends TestimonialProps {
   id?: string;
@@ -10,25 +11,9 @@ export default function Testimonial({
   role,
   testimonial,
   showRating,
-  backgroundColor = 'white'
+  backgroundColor = 'pure-white'
 }: ComponentTestimonialProps) {
-  const getCardBackgroundClass = () => {
-    switch (backgroundColor) {
-      case 'white': return 'bg-pure-white'
-      case 'light': return 'bg-warm-cream'
-      case 'dark': return 'bg-charcoal-gray'
-      default: return 'bg-pure-white'
-    }
-  }
 
-  const getTextClass = () => {
-    switch (backgroundColor) {
-      case 'white': return 'text-charcoal-gray'
-      case 'light': return 'text-charcoal-gray'
-      case 'dark': return 'text-white'
-      default: return 'text-charcoal-gray'
-    }
-  }
 
   const renderStars = (rating: number) => {
     return (
@@ -38,8 +23,8 @@ export default function Testimonial({
             key={star}
             className={`w-5 h-5 ${
               star <= rating 
-                ? backgroundColor === 'dark' ? 'text-yellow-400' : 'text-yellow-500'
-                : backgroundColor === 'dark' ? 'text-white/20' : 'text-gray-300'
+                ? isDarkBackground(backgroundColor) ? 'text-yellow-400' : 'text-yellow-500'
+                : isDarkBackground(backgroundColor) ? 'text-white/20' : 'text-gray-300'
             }`}
             fill="currentColor"
             viewBox="0 0 20 20"
@@ -53,8 +38,8 @@ export default function Testimonial({
 
   return (
     <div
-      className={`group p-6 sm:p-8 rounded-2xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl ${getCardBackgroundClass()} ${
-        backgroundColor === 'dark' 
+      className={`group p-6 sm:p-8 rounded-2xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl ${getBrandBgClass(backgroundColor, 'bg-pure-white')} ${
+        isDarkBackground(backgroundColor) 
           ? 'border-white/10 shadow-lg' 
           : 'border-dark-forest-green/10 shadow-md hover:border-dark-forest-green/20'
       }`}
@@ -69,7 +54,7 @@ export default function Testimonial({
       {/* Testimonial Content */}
       <div className="space-y-6">
         <blockquote>
-          <p className={`font-serif text-lg leading-relaxed italic ${getTextClass()}`}>
+          <p className={`font-serif text-lg leading-relaxed italic ${getContrastTextClass(backgroundColor)}`}>
             <q>{testimonial}</q>
           </p>
         </blockquote>
@@ -89,16 +74,12 @@ export default function Testimonial({
 
           {/* Name and Role */}
           <div>
-            <h4 className={`tracking-tight font-semibold ${getTextClass()}`}>
-              {name}
+            <h4 className={`tracking-tight font-semibold ${getContrastTextClass(backgroundColor)}`}>
+              {name}  
             </h4>
             {(role) && (
               <p 
-                className={`text-sm ${
-                  backgroundColor === 'dark' 
-                    ? 'text-white/70' 
-                    : 'text-light-forest-green'
-                }`}
+                className={`text-sm ${getContrastSubtextClass(backgroundColor)}`}
               >
                 {role}
               </p>
