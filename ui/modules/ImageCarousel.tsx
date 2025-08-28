@@ -7,6 +7,7 @@ import { Navigation, Keyboard, A11y, Autoplay } from 'swiper/modules'
 import type { SwiperRef } from 'swiper/react'
 import { ImageCarouselProps } from '@/lib/contentful/types/fields'
 import CTA from '../components/CTA'
+import { getCTAVariantAndClasses } from '@/lib/utils/brandColors'
 import ChevronLeft from '../icons/ChevronLeft'
 import ChevronRight from '../icons/ChevronRight'
 import Play from '../icons/Play'
@@ -242,7 +243,10 @@ export default function ImageCarousel({
           {/* CTA Button */}
           {cta && (
             <div className="flex justify-center mt-8">
-              <CTA {...cta.fields}/>
+              <CTA 
+                {...cta.fields}
+                variant={getCTAVariantAndClasses(cta, backgroundColor, "primary").variant}
+              />
             </div>
           )}
         </div>

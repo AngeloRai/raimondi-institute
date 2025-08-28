@@ -1,23 +1,11 @@
 import { RichText } from "../components/RichText";
 import type { RichTextBlockProps } from "@/lib/contentful/types/fields";
+import { getBrandBgClass } from "@/lib/utils/brandColors";
 
 function RichTextBlock({ copy, backgroundColor }: RichTextBlockProps) {
   if (!copy) return null;
 
-  const brandColorClasses = {
-    "dark-forest-green": "bg-dark-forest-green",
-    "medium-forest-green": "bg-medium-forest-green",
-    "light-forest-green": "bg-light-forest-green",
-    "charcoal-gray": "bg-charcoal-gray",
-    "warm-cream": "bg-warm-cream",
-    "pure-white": "bg-pure-white",
-  };
-
-  const bgColorClass =
-    backgroundColor &&
-    brandColorClasses[backgroundColor as keyof typeof brandColorClasses]
-      ? brandColorClasses[backgroundColor as keyof typeof brandColorClasses]
-      : "bg-warm-cream";
+  const bgColorClass = getBrandBgClass(backgroundColor, "bg-warm-cream");
 
   return (
     <section className={`w-full py-12 lg:py-16 ${bgColorClass}`}>

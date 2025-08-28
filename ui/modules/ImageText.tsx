@@ -2,6 +2,7 @@ import Image from "next/image";
 import CTA from "../components/CTA";
 import { ImageTextProps } from "@/lib/contentful/types/fields";
 import { RichText } from "../components/RichText";
+import { getBrandBgClass, getCTAVariantAndClasses, getContrastTextClass, isDarkBackground } from "@/lib/utils/brandColors";
 
 type ComponentImageTextProps = ImageTextProps & {
   id?: string;
@@ -17,37 +18,14 @@ export default function ImageText({
   primaryCta,
   secondaryCta,
 }: ComponentImageTextProps) {
-  const getBackgroundClass = () => {
-    switch (bgColor as string) {
-      case "white":
-        return "bg-pure-white";
-      case "light":
-        return "bg-warm-cream";
-      case "dark":
-        return "bg-charcoal-gray";
-      default:
-        return "bg-pure-white";
-    }
-  };
+  const bgClass = getBrandBgClass(bgColor, "bg-pure-white");
 
-  const getTextClass = () => {
-    switch (bgColor) {
-      case "white":
-        return "text-text-primary";
-      case "light":
-        return "text-text-primary";
-      case "dark":
-        return "text-white";
-      default:
-        return "text-text-primary";
-    }
-  };
 
   if (imagePosition === "overlay") {
     return (
       <section
         id={id}
-        className={`w-full relative overflow-hidden ${getBackgroundClass()}`}
+        className={`w-full relative overflow-hidden ${bgClass}`}
       >
         {/* Background Image for overlay */}
         {image?.fields?.file?.url && (
@@ -82,13 +60,15 @@ export default function ImageText({
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 {primaryCta && (
                   <CTA 
-                    {...primaryCta.fields} 
+                    {...primaryCta.fields}
+                    variant={getCTAVariantAndClasses(primaryCta, bgColor, "primary").variant}
                     className="!bg-white !text-charcoal-gray !border-white hover:!bg-white/90"
                   />
                 )}
                 {secondaryCta && (
                   <CTA 
-                    {...secondaryCta.fields} 
+                    {...secondaryCta.fields}
+                    variant={getCTAVariantAndClasses(secondaryCta, bgColor, "outline").variant}
                     className="!bg-dark-forest-green !text-white !border-dark-forest-green hover:!bg-dark-forest-green/90"
                   />
                 )}
@@ -103,7 +83,7 @@ export default function ImageText({
   return (
     <section
       id={id}
-      className={`w-full py-20 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 ${getBackgroundClass()}`}
+      className={`w-full py-20 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 ${bgClass}`}
     >
       <div className="max-w-7xl mx-auto">
         <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center`}>
@@ -114,7 +94,7 @@ export default function ImageText({
             }`}
           >
             <h2
-              className={`font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight font-bold leading-[1.1] ${getTextClass()}`}
+              className={`font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight font-bold leading-[1.1] ${getContrastTextClass(bgColor)}`}
             >
               {heading}
             </h2>
@@ -124,7 +104,7 @@ export default function ImageText({
                 <RichText
                   content={subheading}
                   className={
-                    bgColor === "dark" 
+                    isDarkBackground(bgColor) 
                       ? "[&_p]:text-white/90 [&_h1]:text-white [&_h2]:text-white [&_h3]:text-white [&_h4]:text-white [&_h5]:text-white [&_h6]:text-white [&_li]:text-white/90 [&_blockquote]:text-white/80 [&_a]:text-white" 
                       : "[&_p]:text-gray-600 [&_li]:text-gray-600 [&_blockquote]:text-gray-700"
                   } 
@@ -135,9 +115,10 @@ export default function ImageText({
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               {primaryCta && (
                 <CTA 
-                  {...primaryCta.fields} 
+                  {...primaryCta.fields}
+                  variant={getCTAVariantAndClasses(primaryCta, bgColor, "primary").variant}
                   className={
-                    bgColor === "dark" 
+                    isDarkBackground(bgColor) 
                       ? "!bg-white !text-charcoal-gray !border-white hover:!bg-white/90"
                       : ""
                   }
@@ -145,9 +126,10 @@ export default function ImageText({
               )}
               {secondaryCta && (
                 <CTA 
-                  {...secondaryCta.fields} 
+                  {...secondaryCta.fields}
+                  variant={getCTAVariantAndClasses(secondaryCta, bgColor, "outline").variant}
                   className={
-                    bgColor === "dark" 
+                    isDarkBackground(bgColor) 
                       ? "!bg-dark-forest-green !text-white !border-dark-forest-green hover:!bg-dark-forest-green/90"
                       : ""
                   }

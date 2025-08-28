@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CTA from "../components/CTA";
+import { getCTAVariantAndClasses } from '@/lib/utils/brandColors';
 import LogoLight from "../icons/LogoLight";
 import Menu from "../icons/Menu";
 import X from "../icons/X";
@@ -25,6 +26,7 @@ export default function NavbarClient({
   isLogoSvg,
   menuItems,
   cta,
+  backgroundColor
 }: NavbarClientProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -138,7 +140,10 @@ export default function NavbarClient({
         <div className="hidden sm:flex items-center justify-end">
           {cta && (
             <div className="transform transition-transform duration-200 hover:scale-105">
-              <CTA {...cta.fields} />
+              <CTA 
+                {...cta.fields}
+                variant={getCTAVariantAndClasses(cta, backgroundColor, "primary").variant}
+              />
             </div>
           )}
         </div>
@@ -188,6 +193,7 @@ export default function NavbarClient({
                 <div className="pt-4 border-t border-dark-forest-green/10 mt-4">
                   <CTA
                     {...cta.fields}
+                    variant={getCTAVariantAndClasses(cta, backgroundColor, "primary").variant}
                     className="w-full transform transition-transform duration-200 hover:scale-105"
                     onClick={closeMobileMenu}
                   />

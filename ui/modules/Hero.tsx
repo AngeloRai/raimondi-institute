@@ -4,6 +4,7 @@ import { RichText } from "../components/RichText";
 import SocialShare from "../components/SocialShare";
 import type { HeroProps } from "@/lib/contentful/types/fields";
 import type { Document } from "@contentful/rich-text-types";
+import { getBrandBgClass, getCTAVariantAndClasses } from "@/lib/utils/brandColors";
 
 function Hero({
   heading,
@@ -24,17 +25,10 @@ function Hero({
     "full screen": "min-h-screen",
   };
 
-  const brandColorClasses = {
-    "dark-forest-green": "bg-dark-forest-green",
-    "medium-forest-green": "bg-medium-forest-green",
-    "light-forest-green": "bg-light-forest-green",
-    "charcoal-gray": "bg-charcoal-gray",
-    "warm-cream": "bg-warm-cream",
-    "pure-white": "bg-pure-white",
-  };
 
   const imageUrl = image?.fields?.file?.url;
   const imageAlt = image?.fields?.title || heading || "Hero image";
+  const links = socialShare?.fields?.links;
 
   // Overlay variation - full background image
   if (imagePosition === "overlay" && imageUrl) {
@@ -79,22 +73,16 @@ function Hero({
               <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center [&_button]:!bg-white [&_button]:!text-charcoal-gray [&_button]:!border-white [&_button:hover]:!bg-white/90 [&_a]:!bg-white [&_a]:!text-charcoal-gray [&_a]:!border-white [&_a:hover]:!bg-white/90">
                 {primaryCta && (
                   <CTA
-                    label={primaryCta.fields?.label}
-                    url={primaryCta.fields?.url}
-                    variant={primaryCta.fields?.variant || "primary"}
+                    {...primaryCta.fields}
+                    variant={getCTAVariantAndClasses(primaryCta, bgColor, "primary").variant}
                     size={primaryCta.fields?.size || "large"}
-                    external={primaryCta.fields?.external}
-                    disabled={primaryCta.fields?.disabled}
                   />
                 )}
                 {secondaryCta && (
                   <CTA
-                    label={secondaryCta.fields?.label}
-                    url={secondaryCta.fields?.url}
-                    variant={secondaryCta.fields?.variant || "outline"}
+                    {...secondaryCta.fields}
+                    variant={getCTAVariantAndClasses(secondaryCta, bgColor, "outline").variant}
                     size={secondaryCta.fields?.size || "large"}
-                    external={secondaryCta.fields?.external}
-                    disabled={secondaryCta.fields?.disabled}
                   />
                 )}
               </div>
@@ -110,7 +98,7 @@ function Hero({
             {socialShare && (
               <div className="mt-8">
                 <SocialShare 
-                  links={socialShare.fields?.links as any}
+                  links={links}
                   variant="dark"
                   size="medium"
                   className="justify-center"
@@ -124,10 +112,7 @@ function Hero({
   }
 
   // Default center variation - improved design
-  const bgColorClass =
-    bgColor && brandColorClasses[bgColor as keyof typeof brandColorClasses]
-      ? brandColorClasses[bgColor as keyof typeof brandColorClasses]
-      : "bg-warm-cream"; // Default fallback
+  const bgColorClass = getBrandBgClass(bgColor, "bg-warm-cream");
 
   // Determine text colors based on background
   const isDarkBackground = bgColor === 'dark-forest-green' || bgColor === 'medium-forest-green' || bgColor === 'charcoal-gray'
@@ -183,8 +168,18 @@ function Hero({
           {/* CTA Buttons */}
           {(primaryCta || secondaryCta) && (
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {primaryCta && <CTA {...primaryCta.fields} />}
-              {secondaryCta && <CTA {...secondaryCta.fields} />}
+              {primaryCta && (
+                <CTA 
+                  {...primaryCta.fields} 
+                  variant={getCTAVariantAndClasses(primaryCta, bgColor, "primary").variant}
+                />
+              )}
+              {secondaryCta && (
+                <CTA 
+                  {...secondaryCta.fields}
+                  variant={getCTAVariantAndClasses(secondaryCta, bgColor, "outline").variant}
+                />
+              )}
             </div>
           )}
 
@@ -198,7 +193,7 @@ function Hero({
           {socialShare && (
             <div className="mt-8">
               <SocialShare 
-                links={socialShare.fields?.links as any}
+                links={socialShare.fields?.links}
                 variant={isDarkBackground ? 'dark' : 'light'}
                 size="medium"
                 className="justify-center"
