@@ -5,10 +5,10 @@ import type { TypeComponentTestimonialSkeleton } from "./TypeComponentTestimonia
 
 export interface TypeModuleGridFields {
     internalName: EntryFieldTypes.Symbol;
+    backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
     heading?: EntryFieldTypes.Symbol;
     subheading?: EntryFieldTypes.Text;
     items?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeComponentCardSkeleton | TypeComponentImageCardSkeleton | TypeComponentTestimonialSkeleton>>;
-    backgroundColor?: EntryFieldTypes.Symbol<"dark" | "light" | "white">;
 }
 
 export type TypeModuleGridSkeleton = EntrySkeletonType<TypeModuleGridFields, "moduleGrid">;

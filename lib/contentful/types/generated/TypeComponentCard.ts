@@ -6,7 +6,7 @@ export interface TypeComponentCardFields {
     heading: EntryFieldTypes.Symbol;
     subheading: EntryFieldTypes.Text;
     icon: EntryFieldTypes.Symbol<"chevronLeft" | "chevronRight" | "craftsman" | "facebook" | "grandPiano" | "heart" | "instagram" | "menu" | "music" | "piano" | "playingPiano" | "service" | "twitter" | "x" | "youtube">;
-    backgroundColor?: EntryFieldTypes.Symbol<"dark" | "light" | "white">;
+    backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
     cta?: EntryFieldTypes.EntryLink<TypeCtaSkeleton>;
 }
 

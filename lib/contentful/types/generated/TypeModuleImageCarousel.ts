@@ -6,7 +6,7 @@ export interface TypeModuleImageCarouselFields {
     heading?: EntryFieldTypes.Symbol;
     subheading?: EntryFieldTypes.Text;
     images?: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
-    backgroundColor?: EntryFieldTypes.Symbol;
+    backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
     autoplay?: EntryFieldTypes.Boolean;
     autoplayInterval?: EntryFieldTypes.Integer;
     cta?: EntryFieldTypes.EntryLink<TypeCtaSkeleton>;

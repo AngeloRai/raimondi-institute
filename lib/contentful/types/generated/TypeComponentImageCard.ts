@@ -7,7 +7,7 @@ export interface TypeComponentImageCardFields {
     description: EntryFieldTypes.Text;
     image?: EntryFieldTypes.AssetLink;
     cta?: EntryFieldTypes.EntryLink<TypeCtaSkeleton>;
-    backgroundColor?: EntryFieldTypes.Symbol<"dark" | "light" | "white">;
+    backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
 }
 
 export type TypeComponentImageCardSkeleton = EntrySkeletonType<TypeComponentImageCardFields, "componentImageCard">;

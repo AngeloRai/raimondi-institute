@@ -4,7 +4,7 @@ export interface TypeCtaFields {
     internalName: EntryFieldTypes.Symbol;
     label?: EntryFieldTypes.Symbol;
     url?: EntryFieldTypes.Symbol;
-    variant?: EntryFieldTypes.Symbol<"ghost" | "ghost-dark" | "icon rounded" | "icon" | "outline" | "primary" | "secondary">;
+    variant?: EntryFieldTypes.Symbol<"ghost" | "ghost-dark" | "icon rounded" | "icon" | "outline" | "outline-dark" | "primary" | "secondary">;
     icon?: EntryFieldTypes.Symbol<"craftsman" | "facebook" | "grandPiano" | "heart" | "instagram" | "music" | "piano" | "playingPiano" | "service" | "twitter" | "youtube">;
     size?: EntryFieldTypes.Symbol<"large" | "medium" | "small">;
     external?: EntryFieldTypes.Boolean;
