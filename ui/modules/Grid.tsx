@@ -6,48 +6,22 @@ import Testimonial from '../components/Testimonial'
 import type { GridProps } from '@/lib/contentful/types/fields'
 import { isTypeComponentCard, isTypeComponentImageCard, isTypeComponentTestimonial } from '@/lib/contentful/types/generated'
 import type { IconName } from '../icons/IconRenderer'
+import { getBrandBgClass, getContrastTextClass, getContrastSubtextClass } from '@/lib/utils/brandColors'
 
 interface ComponentGridProps extends GridProps {
   id?: string;
 }
 
-// Helper to extract value from potentially localized field
-function extractFieldValue<T>(field: T | { [locale: string]: T } | undefined, defaultValue?: T): T | undefined {
-  if (field === undefined || field === null) return defaultValue;
-  if (typeof field === 'object' && field !== null && !Array.isArray(field)) {
-    // Check if it's a localized object
-    const localized = field as { [locale: string]: T };
-    if ('en-US' in localized) {
-      return localized['en-US'];
-    }
-  }
-  return field as T;
-}
 
 export default function Grid({
   id = 'grid',
   heading,
   subheading,
   items = [],
-  backgroundColor = 'white',
+  backgroundColor = 'pure-white',
 }: ComponentGridProps) {
-  const getBackgroundClass = () => {
-    switch (backgroundColor) {
-      case 'white': return 'bg-pure-white'
-      case 'light': return 'bg-warm-cream'
-      case 'dark': return 'bg-charcoal-gray'
-      default: return 'bg-pure-white'
-    }
-  }
+  const bgClass = getBrandBgClass(backgroundColor, 'bg-pure-white')
 
-  const getTextClass = () => {
-    switch (backgroundColor) {
-      case 'white': return 'text-text-primary'
-      case 'light': return 'text-text-primary'
-      case 'dark': return 'text-text-inverse'
-      default: return 'text-text-primary'
-    }
-  }
 
   // Use all items together instead of separating by type
   const validItems = items?.filter(item => item && (
@@ -101,22 +75,18 @@ export default function Grid({
   };
 
   return (
-    <section id={`${id}-${heading ? '-heading' : ''}`} className={`w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 ${getBackgroundClass()}`}>
+    <section id={`${id}-${heading ? '-heading' : ''}`} className={`w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 ${bgClass}`}>
       <div className="max-w-7xl mx-auto">
         {(heading || subheading) && (
           <div className="text-center mb-12">
             {heading && (
-              <h2 className={`font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 font-bold ${getTextClass()}`}>
+              <h2 className={`font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 font-bold ${getContrastTextClass(backgroundColor)}`}>
                 {heading}
               </h2>
             )}
             {subheading && (
               <p 
-                className={`text-lg sm:text-xl max-w-2xl mx-auto ${
-                  backgroundColor === 'dark' 
-                    ? 'text-white/70' 
-                    : 'text-light-forest-green'
-                }`}
+                className={`text-lg sm:text-xl max-w-2xl mx-auto ${getContrastSubtextClass(backgroundColor)}`}
               >
                 {subheading}
               </p>
@@ -129,14 +99,13 @@ export default function Grid({
             if (!item) return null;
             
             if (isTypeComponentCard(item)) {
-              // Extract the fields, handling both localized and non-localized formats
               const fields = item.fields
               const cardProps = {
-                heading: extractFieldValue((fields as any).heading)  || '',
-                subheading: extractFieldValue((fields as any).subheading) || '',
-                icon: (extractFieldValue(fields.icon) || 'music') as IconName,
+                heading: fields.heading || '',
+                subheading: fields.subheading || '',
+                icon: (fields.icon || 'music') as IconName,
                 cta: fields.cta,
-                backgroundColor: extractFieldValue(fields.backgroundColor) || 'white'
+                backgroundColor: fields.backgroundColor || 'pure-white'
               }
               
               return (
@@ -149,14 +118,13 @@ export default function Grid({
             }
             
             if (isTypeComponentImageCard(item)) {
-              // Extract the fields, handling both localized and non-localized formats
               const fields = item.fields
               const imageCardProps = {
-                heading: extractFieldValue(fields.heading) || '',
-                description: extractFieldValue(fields.description) || '',
+                heading: fields.heading || '',
+                description: fields.description || '',
                 image: fields.image,
                 cta: fields.cta,
-                backgroundColor: extractFieldValue(fields.backgroundColor) || 'white'
+                backgroundColor: fields.backgroundColor || 'pure-white'
               }
               
               return (
@@ -168,14 +136,13 @@ export default function Grid({
             }
             
             if (isTypeComponentTestimonial(item)) {
-              // Extract the fields, handling both localized and non-localized formats
               const fields = item.fields
               const testimonialProps = {
-                name: extractFieldValue(fields.name) || '',
-                role: extractFieldValue(fields.role),
-                testimonial: extractFieldValue(fields.testimonial) || '',
-                showRating: extractFieldValue(fields.showRating),
-                backgroundColor: extractFieldValue(fields.backgroundColor) || 'white'
+                name: fields.name || '',
+                role: fields.role,
+                testimonial: fields.testimonial || '',
+                showRating: fields.showRating,
+                backgroundColor: fields.backgroundColor || 'pure-white'
               }
               
               return (

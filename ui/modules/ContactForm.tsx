@@ -7,6 +7,7 @@ import CTA from '../components/CTA'
 import type { ContactFormProps } from '@/lib/contentful/types/fields'
 import { generateGoogleMapsLink } from '@/lib/utils/maps'
 import { getTranslation, type SupportedLocale } from '@/lib/translations/contact-form'
+import { getBrandBgClass, getContrastTextClass, getContrastSubtextClass, getContrastFormFieldClass, isDarkBackground } from '@/lib/utils/brandColors'
 
 // Styled UI components
 function Input({ className = '', ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
@@ -55,18 +56,6 @@ interface ComponentContactFormProps extends ContactFormProps {
   formspreeId?: string;
 }
 
-// Helper to extract value from potentially localized field
-function extractFieldValue<T>(field: T | { [locale: string]: T } | undefined, defaultValue?: T): T | undefined {
-  if (field === undefined || field === null) return defaultValue;
-  if (typeof field === 'object' && field !== null && !Array.isArray(field)) {
-    // Check if it's a localized object
-    const localized = field as { [locale: string]: T };
-    if ('en-US' in localized) {
-      return localized['en-US'];
-    }
-  }
-  return field as T;
-}
 
 export default function ContactForm({
   id = 'contactform',
@@ -82,15 +71,12 @@ export default function ContactForm({
   copy,
   redirectUrl,
   formspreeId,
-  backgroundColor = 'white'
+  backgroundColor = 'pure-white'
 }: ComponentContactFormProps) {
   const router = useRouter();
   
-  // Extract localized values first
-  const successRedirectUrl = extractFieldValue(redirectUrl, "");
-  
-  // Extract formspree ID
-  const formspreeFormId = extractFieldValue(formspreeId, 'xandypqa') || 'xandypqa';
+  const successRedirectUrl = redirectUrl || "";
+  const formspreeFormId = formspreeId || '';
   const [state, formspreeHandleSubmit] = useForm(formspreeFormId);
   
   // Custom submit handler to ensure validation runs
@@ -141,69 +127,25 @@ export default function ContactForm({
   
   const t = (key: Parameters<typeof getTranslation>[0]) => getTranslation(key, getCurrentLocale());
   
-  // Extract remaining localized values
-  const title = extractFieldValue(heading, "Get in Touch");
-  const subtitle = extractFieldValue(subheading, "Ready to find your perfect piano? We'd love to hear from you.");
-  const messageText = extractFieldValue(messagePlaceholder, "Tell us about your piano needs, preferences, or any questions you have...");
-  const submitButtonText = extractFieldValue(buttonText, "Send Message");
-  const businessHeading = extractFieldValue(businessInfoHeading, "Visit Our Showroom");
-  const formSubjects = extractFieldValue(subjects, []);
-  const businessAddresses = extractFieldValue(addresses, []);
-  const businessPhones = extractFieldValue(phones, []);
-  const businessSchedule = extractFieldValue(schedule, "");
-  const additionalCopy = extractFieldValue(copy, "");
+  const title = heading || "Get in Touch";
+  const subtitle = subheading || "Ready to find your perfect piano? We'd love to hear from you.";
+  const messageText = messagePlaceholder || "Tell us about your piano needs, preferences, or any questions you have...";
+  const submitButtonText = buttonText || "Send Message";
+  const businessHeading = businessInfoHeading || "Visit Our Showroom";
+  const formSubjects = subjects || [];
+  const businessAddresses = addresses || [];
+  const businessPhones = phones || [];
+  const businessSchedule = schedule || "";
+  const additionalCopy = copy || "";
 
-  const getBackgroundClass = () => {
-    switch (backgroundColor) {
-      case 'white': return 'bg-pure-white'
-      case 'light': return 'bg-warm-cream'
-      case 'dark': return 'bg-charcoal-gray'
-      default: return 'bg-pure-white'
-    }
-  }
 
-  const getTextClass = () => {
-    switch (backgroundColor) {
-      case 'white': return 'text-text-primary'
-      case 'light': return 'text-text-primary'
-      case 'dark': return 'text-white'
-      default: return 'text-text-primary'
-    }
-  }
-
-  const getSubtextClass = () => {
-    switch (backgroundColor) {
-      case 'white': return 'text-light-forest-green'
-      case 'light': return 'text-light-forest-green'
-      case 'dark': return 'text-white/80'
-      default: return 'text-light-forest-green'
-    }
-  }
-
-  const getFormFieldClass = () => {
-    switch (backgroundColor) {
-      case 'white': return 'bg-pure-white border-text-primary/20'
-      case 'light': return 'bg-pure-white border-text-primary/20'
-      case 'dark': return 'bg-white/10 border-white/20 text-white placeholder:text-white/60'
-      default: return 'bg-pure-white border-text-primary/20'
-    }
-  }
-
-  const getCardBackgroundClass = () => {
-    switch (backgroundColor) {
-      case 'white': return 'bg-warm-cream'
-      case 'light': return 'bg-warm-cream'
-      case 'dark': return 'bg-white/5'
-      default: return 'bg-warm-cream'
-    }
-  }
 
   // Check if form succeeded and no redirect URL (show success message)
   if (state.succeeded && !successRedirectUrl) {
     return (
       <section 
         id={`${id}-success`}
-        className={`w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 ${getBackgroundClass()}`}
+        className={`w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 ${getBrandBgClass(backgroundColor, 'bg-pure-white')}`}
       >
         <div className="max-w-2xl mx-auto text-center">
           <div 
@@ -213,12 +155,12 @@ export default function ContactForm({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          
-          <h2 className={`text-3xl sm:text-4xl tracking-tight mb-4 font-semibold ${getTextClass()}`}>
+
+          <h2 className={`text-3xl sm:text-4xl tracking-tight mb-4 font-semibold ${getContrastTextClass(backgroundColor)}`}>
             {t('Thank You!')}
           </h2>
           
-          <p className={`text-lg leading-relaxed mb-8 ${getSubtextClass()}`}>
+          <p className={`text-lg leading-relaxed mb-8 ${getContrastSubtextClass(backgroundColor)}`}>
             {t('We\'ve received your message and will get back to you within 24 hours. Our team is excited to help you find the perfect piano.')}
           </p>
           
@@ -239,15 +181,15 @@ export default function ContactForm({
   return (
     <section 
       id={id}
-      className={`w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 ${getBackgroundClass()}`}
+      className={`w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 ${getBrandBgClass(backgroundColor, 'bg-pure-white')}`}
     >
       <div className="max-w-4xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className={`text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 font-semibold ${getTextClass()}`}>
+          <h2 className={`text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 font-semibold ${getContrastTextClass(backgroundColor)}`}>
             {title}
           </h2>
-          <p className={`text-lg sm:text-xl max-w-2xl mx-auto ${getSubtextClass()}`}>
+          <p className={`text-lg sm:text-xl max-w-2xl mx-auto ${getContrastSubtextClass(backgroundColor)}`}>
             {subtitle}
           </p>
         </div>
@@ -261,7 +203,7 @@ export default function ContactForm({
               <div className="space-y-2">
                 <Label 
                   htmlFor="firstName"
-                  className={getTextClass()}
+                  className={getContrastTextClass(backgroundColor)}
                 >
                   {t('First Name *')}
                 </Label>
@@ -269,7 +211,7 @@ export default function ContactForm({
                   id="firstName"
                   name="firstName"
                   required
-                  className={getFormFieldClass()}
+                  className={getContrastFormFieldClass(backgroundColor)}
                   onInvalid={(e) => {
                     (e.target as HTMLInputElement).setCustomValidity(t('First name is required'));
                   }}
@@ -286,7 +228,7 @@ export default function ContactForm({
               <div className="space-y-2">
                 <Label 
                   htmlFor="lastName"
-                  className={getTextClass()}
+                  className={getContrastTextClass(backgroundColor)}
                 >
                   {t('Last Name *')}
                 </Label>
@@ -294,7 +236,7 @@ export default function ContactForm({
                   id="lastName"
                   name="lastName"
                   required
-                  className={getFormFieldClass()}
+                  className={getContrastFormFieldClass(backgroundColor)}
                   onInvalid={(e) => {
                     (e.target as HTMLInputElement).setCustomValidity(t('Last name is required'));
                   }}
@@ -314,7 +256,7 @@ export default function ContactForm({
             <div className="space-y-2">
               <Label 
                 htmlFor="email"
-                className={getTextClass()}
+                className={getContrastTextClass(backgroundColor)}
               >
                 {t('Email Address *')}
               </Label>
@@ -323,7 +265,7 @@ export default function ContactForm({
                 name="email"
                 type="email"
                 required
-                className={getFormFieldClass()}
+                className={getContrastFormFieldClass(backgroundColor)}
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                 title={t('Please enter a valid email address')}
                 onInvalid={(e) => {
@@ -349,7 +291,7 @@ export default function ContactForm({
             <div className="space-y-2">
               <Label 
                 htmlFor="phone"
-                className={getTextClass()}
+                className={getContrastTextClass(backgroundColor)}
               >
                 {t('Phone Number')}
               </Label>
@@ -357,7 +299,7 @@ export default function ContactForm({
                 id="phone"
                 name="phone"
                 type="tel"
-                className={getFormFieldClass()}
+                className={getContrastFormFieldClass(backgroundColor)}
                 minLength={8}
               />
               <ValidationError 
@@ -371,7 +313,7 @@ export default function ContactForm({
             <div className="space-y-2">
               <Label 
                 htmlFor="subject"
-                className={getTextClass()}
+                className={getContrastTextClass(backgroundColor)}
               >
                 {t('Subject *')}
               </Label>
@@ -379,7 +321,7 @@ export default function ContactForm({
                 id="subject"
                 name="subject"
                 required
-                className={getFormFieldClass()}
+                className={getContrastFormFieldClass(backgroundColor)}
                 onInvalid={(e) => {
                   (e.target as HTMLSelectElement).setCustomValidity(t('Subject is required'));
                 }}
@@ -405,7 +347,7 @@ export default function ContactForm({
             <div className="space-y-2">
               <Label 
                 htmlFor="message"
-                className={getTextClass()}
+                className={getContrastTextClass(backgroundColor)}
               >
                 {t('Message *')}
               </Label>
@@ -415,7 +357,7 @@ export default function ContactForm({
                 required
                 rows={5}
                 placeholder={messageText}
-                className={getFormFieldClass()}
+                className={getContrastFormFieldClass(backgroundColor)}
                 onInvalid={(e) => {
                   (e.target as HTMLTextAreaElement).setCustomValidity(t('Message is required'));
                 }}
@@ -444,7 +386,7 @@ export default function ContactForm({
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h3 className={`text-2xl tracking-tight mb-6 font-semibold ${getTextClass()}`}>
+              <h3 className={`text-2xl tracking-tight mb-6 font-semibold ${getContrastTextClass(backgroundColor)}`}>
                 {businessHeading}
               </h3>
               
@@ -465,7 +407,7 @@ export default function ContactForm({
                         href={generateGoogleMapsLink(address)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`${getTextClass()} hover:underline transition-colors cursor-pointer`}
+                        className={`${getContrastTextClass(backgroundColor)} hover:underline transition-colors cursor-pointer`}
                       >
                         {address}
                       </a>
@@ -484,7 +426,7 @@ export default function ContactForm({
                       </svg>
                     </div>
                     <div>
-                      <div className={getTextClass()}>
+                      <div className={getContrastTextClass(backgroundColor)}>
                         {businessPhones.map((phone, index) => (
                           <div key={index}>
                             <a 
@@ -511,7 +453,7 @@ export default function ContactForm({
                       </svg>
                     </div>
                     <div>
-                      <p className={getTextClass()}>
+                      <p className={getContrastTextClass(backgroundColor)}>
                         {businessSchedule.split('\n').map((line, index) => (
                           <span key={index}>
                             {line}
@@ -526,8 +468,8 @@ export default function ContactForm({
             </div>
 
             {additionalCopy && (
-              <div className={`p-6 rounded-2xl ${getCardBackgroundClass()}`}>
-                <p className={`text-sm leading-relaxed ${getSubtextClass()}`}>
+              <div className={`p-6 rounded-2xl ${isDarkBackground(backgroundColor) ? 'bg-white/5' : 'bg-warm-cream'}`}>
+                <p className={`text-sm leading-relaxed ${getContrastSubtextClass(backgroundColor)}`}>
                   {additionalCopy}
                 </p>
               </div>

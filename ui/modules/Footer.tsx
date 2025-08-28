@@ -3,7 +3,7 @@ import Link from "next/link";
 import LogoLight from "../icons/LogoLight";
 import { FooterProps } from "@/lib/contentful/types/fields";
 import { getPreloadedLayoutForLocale } from "@/lib/preload/layout-data";
-import SocialShare, { CTAEntry } from "../components/SocialShare";
+import SocialShare from "../components/SocialShare";
 import LocaleSelector from "../components/LocaleSelector";
 import { getLocale } from "@/lib/locale";
 import type { TypeComponentLinks, TypeLinkSkeleton, TypeCtaSkeleton } from "@/lib/contentful/types/generated";
@@ -102,7 +102,7 @@ export default async function Footer(props: FooterProps) {
             {/* Social Links */}
             {socialShare?.fields?.links && (
               <SocialShare
-                links={socialShare.fields.links as CTAEntry[]}
+                links={socialShare.fields.links}
                 variant="dark"
                 size="medium"
                 className="pt-2"
