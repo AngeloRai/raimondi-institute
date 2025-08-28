@@ -5,15 +5,15 @@ import Instagram from "../icons/Instagram";
 import Facebook from "../icons/Facebook";
 import YouTube from "../icons/YouTube";
 import Twitter from "../icons/Twitter";
-import type { TypeCtaSkeleton, TypeLinkSkeleton } from "@/lib/contentful/types/generated";
-import type { Entry, ChainModifiers, LocaleCode } from "contentful";
+import type { TypeCta, TypeCtaSkeleton, TypeLinkSkeleton } from "@/lib/contentful/types/generated";
+import { isTypeCta } from "@/lib/contentful/types/generated";
+import { SupportedLocales } from "@/lib/contentful/types/fields";
+import type { Entry } from "contentful";
 
-// Type for CTA entries (only CTAs have icon fields needed for social links)
-export type CTAEntry = Entry<TypeCtaSkeleton, ChainModifiers, LocaleCode>;
-export type LinkEntry = Entry<TypeLinkSkeleton, ChainModifiers, LocaleCode>;
+type SocialLinkEntry = Entry<TypeCtaSkeleton | TypeLinkSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", SupportedLocales>;
 
 interface SocialShareProps {
-  links?: (CTAEntry | LinkEntry | undefined)[] | null;
+  links?: (SocialLinkEntry | undefined)[] | null;
   variant?: 'light' | 'dark';
   size?: 'small' | 'medium' | 'large';
   className?: string;
@@ -40,60 +40,40 @@ export default function SocialShare({
   className = '' 
 }: SocialShareProps) {
   const sizeClasses = {
-    small: 'w-8 h-8',
-    medium: 'w-10 h-10', 
-    large: 'w-12 h-12'
+    small: 'w-9 h-9',
+    medium: 'w-11 h-11', 
+    large: 'w-14 h-14'
   };
 
   const iconSizes = {
     small: 'w-4 h-4',
     medium: 'w-5 h-5',
-    large: 'w-6 h-6'
+    large: 'w-7 h-7'
   };
 
   if (!links || links.length === 0) return null;
 
-  // Helper to extract string value from potentially localized fields
-  const getFieldValue = (field: unknown): string | undefined => {
-    if (typeof field === 'string') return field;
-    if (typeof field === 'object' && field && !Array.isArray(field)) {
-      const fieldObj = field as Record<string, unknown>;
-      const values = Object.values(fieldObj);
-      return typeof values[0] === 'string' ? values[0] : undefined;
-    }
-    return undefined;
-  };
-
   const socialLinks = links
-    .filter((link): link is CTAEntry => {
+    ?.filter((link): link is TypeCta<"WITHOUT_UNRESOLVABLE_LINKS", SupportedLocales> => {
       if (!link?.fields) return false;
       
-      // Only process entries that have icon field (CTAs only)
-      const hasIcon = 'icon' in link.fields;
-      if (!hasIcon) return false;
+      if (!isTypeCta(link)) return false;
       
-      // Get the icon and url values - cast to any since we checked for icon presence above
-      const iconValue = getFieldValue((link.fields as any).icon);
-      const urlValue = getFieldValue(link.fields.url);
-            
-      return !!iconValue && !!urlValue && Object.keys(socialIcons).includes(iconValue);
+      return !!link.fields.icon && !!link.fields.url && typeof link.fields.icon === 'string' && Object.keys(socialIcons).includes(link.fields.icon);
     })
     .map(link => {
-      // Extract string values from fields - cast to any since we filtered for entries with icon field above
-      const fields = link.fields as any;
-      const iconValue = getFieldValue(fields.icon) || '';
-      const urlValue = getFieldValue(fields.url) || '';
-      const labelValue = getFieldValue(fields.label);
+      const iconValue = link.fields.icon!;
+      const urlValue = link.fields.url!;
+      const labelValue = link.fields.label;
       
       return {
-        platform: iconValue as 'instagram' | 'facebook' | 'youtube' | 'twitter',
+        platform: iconValue as keyof typeof socialIcons,
         url: urlValue,
         label: labelValue || `Visit our ${iconValue}`
       };
     });
   
   if (socialLinks.length === 0) {
-    console.log('No valid social links found');
     return null;
   }
 
@@ -114,12 +94,12 @@ export default function SocialShare({
             className={`
               ${sizeClasses[size]} 
               inline-flex items-center justify-center 
-              rounded-full transition-all duration-200 
+              rounded-full transition-all duration-300 
               hover:scale-110 active:scale-95
               focus:outline-none focus:ring-2 focus:ring-offset-2
               ${variant === 'light' 
-                ? 'bg-white text-gray-600 hover:text-white shadow-md hover:shadow-lg focus:ring-gray-300' 
-                : 'bg-white/20 text-white hover:bg-white/30 focus:ring-white/50'
+                ? 'bg-white text-gray-700 hover:text-white border border-gray-200 shadow-sm hover:shadow-lg hover:border-transparent focus:ring-gray-300' 
+                : 'bg-white/10 text-white border border-white/20 hover:bg-white/20 hover:border-white/30 focus:ring-white/50'
               }
             `}
             style={{
@@ -129,17 +109,19 @@ export default function SocialShare({
               if (variant === 'light') {
                 e.currentTarget.style.backgroundColor = brandColor;
                 e.currentTarget.style.color = 'white';
+                e.currentTarget.style.borderColor = brandColor;
               }
             }}
             onMouseLeave={(e) => {
               if (variant === 'light') {
                 e.currentTarget.style.backgroundColor = 'white';
-                e.currentTarget.style.color = '#4B5563';
+                e.currentTarget.style.color = 'rgb(55 65 81)';
+                e.currentTarget.style.borderColor = 'rgb(229 231 235)';
               }
             }}
             aria-label={link.label || `Visit our ${link.platform}`}
           >
-            <IconComponent className={iconSizes[size]} />
+            <IconComponent className={`${iconSizes[size]} flex-shrink-0`} />
           </Link>
         );
       })}
