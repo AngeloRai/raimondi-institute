@@ -53,7 +53,6 @@ function Select({ children, className = '', ...props }: React.SelectHTMLAttribut
 
 interface ComponentContactFormProps extends ContactFormProps {
   id?: string;
-  formspreeId?: string;
 }
 
 
@@ -70,13 +69,12 @@ export default function ContactForm({
   schedule,
   copy,
   redirectUrl,
-  formspreeId,
   backgroundColor = 'pure-white'
 }: ComponentContactFormProps) {
   const router = useRouter();
   
   const successRedirectUrl = redirectUrl || "";
-  const formspreeFormId = formspreeId || '';
+  const formspreeFormId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || 'xandypqa';
   const [state, formspreeHandleSubmit] = useForm(formspreeFormId);
   
   // Custom submit handler to ensure validation runs

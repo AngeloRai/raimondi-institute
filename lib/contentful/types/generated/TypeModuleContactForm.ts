@@ -14,7 +14,6 @@ export interface TypeModuleContactFormFields {
     copy?: EntryFieldTypes.Text;
     backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
     redirectUrl?: EntryFieldTypes.Symbol;
-    formspreeFormId?: EntryFieldTypes.Symbol;
 }
 
 export type TypeModuleContactFormSkeleton = EntrySkeletonType<TypeModuleContactFormFields, "moduleContactForm">;
