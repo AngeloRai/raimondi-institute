@@ -22,7 +22,10 @@ export async function generateStaticParams() {
     try {
       const slugs = await getAllPageSlugs(locale);
 
-      slugs.forEach((slugPath: string) => {
+      // Skip 404 page - it's handled by not-found.tsx
+      const filteredSlugs = slugs.filter(slug => slug !== '404');
+
+      filteredSlugs.forEach((slugPath: string) => {
         allSlugs.push({
           slug: slugPath.split("/").filter(Boolean),
         });
@@ -47,7 +50,13 @@ export default async function Page({
   // Default to "home" when no slug is provided
   const pageSlug = !slug || slug.length === 0 ? "home" : slug.join("/");
 
+  // Skip 404 page - it's handled by not-found.tsx
+  if (pageSlug === '404') {
+    notFound();
+  }
+
   const page = await getPageBySlug(pageSlug, locale);
+  
   if (!page) {
     notFound();
   }
