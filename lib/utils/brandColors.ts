@@ -20,6 +20,16 @@ export const brandColorClasses: Record<BrandColor, string> = {
   "pure-white": "bg-pure-white",
 } as const;
 
+// Brand colors array
+export const brandColors = [
+  "dark-forest-green",
+  "medium-forest-green",
+  "light-forest-green",
+  "charcoal-gray",
+  "warm-cream",
+  "pure-white",
+];
+
 // Background color class mappings for theme colors  
 export const themeColorClasses: Record<ThemeColor, string> = {
   "dark": "bg-charcoal-gray",
@@ -260,7 +270,7 @@ export function isDarkBackground(backgroundColor: string | undefined | null): bo
 }
 
 // CTA variant type (matching Contentful CTA types)
-export type CTAVariant = "ghost" | "ghost-dark" | "icon rounded" | "icon" | "outline" | "outline-dark" | "primary" | "secondary";
+export type CTAVariant = "ghost" | "ghost-dark" | "icon-rounded" | "icon" | "outline" | "outline-dark" | "primary" | "secondary";
 
 /**
  * Get CTA variant and styling based on author preference with smart fallbacks

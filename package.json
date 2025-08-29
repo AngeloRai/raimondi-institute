@@ -9,7 +9,10 @@
     "lint": "eslint",
     "preload": "dotenv -e .env -- node scripts/preload-layout-data.js",
     "contentful:types": "node scripts/generate-types.js",
-    "migrate": "dotenv -e .env -- node scripts/run-migration.js"
+    "migrate": "dotenv -e .env -- node scripts/run-migration.js",
+    "migrate:all": "dotenv -e .env -- node scripts/run-all-migrations-complete.js",
+    "migrate:organized": "dotenv -e .env -- node scripts/run-all-migrations-organized.js",
+    "migrate:legacy": "dotenv -e .env -- node scripts/run-all-migrations.js"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^16.1.0",

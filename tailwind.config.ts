@@ -103,7 +103,7 @@ export default {
         medium: "var(--font-weight-medium)",
       },
       fontFamily: {
-        // Display font for headers and titles
+        // Display font for headings and titles
         display: ["var(--font-caliburn-bold)", "ui-serif", "serif"],
         // Serif font for testimonials and elegant content  
         serif: ["var(--font-freight-neo)", "ui-serif", "serif"],
