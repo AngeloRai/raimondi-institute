@@ -8,7 +8,15 @@ import type { Entry } from "contentful";
 
 async function fetchSVGContent(url: string): Promise<string | null> {
   try {
-    const response = await fetch(url);
+    const urlWithTimestamp = `${url}?t=${Date.now()}`;
+    const response = await fetch(urlWithTimestamp, { 
+      cache: 'no-store',
+      next: { revalidate: 0 },
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
+    });
     if (response.ok) {
       return await response.text();
     }
@@ -23,6 +31,7 @@ export default async function NavbarServer(props: NavbarProps) {
   const locale = await getLocale();
   const localizedLayout = getPreloadedLayoutForLocale(locale);
   const navbarDefaults = localizedLayout?.navbar?.fields || {};
+  
   
   // Use provided props or fall back to locale-specific preloaded data
   const {
@@ -45,7 +54,6 @@ export default async function NavbarServer(props: NavbarProps) {
   const logoFileName = logo?.fields?.file?.fileName || "";
   const isLogoSvg = logoFileName.toLowerCase().endsWith(".svg");
   
-  // Fetch SVG content server-side if needed
   let svgContent: string | null = null;
   if (logoUrl && isLogoSvg) {
     svgContent = await fetchSVGContent(logoUrl);

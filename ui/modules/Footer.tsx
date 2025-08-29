@@ -12,7 +12,15 @@ import type { Entry } from "contentful";
 
 async function fetchSVGContent(url: string): Promise<string | null> {
   try {
-    const response = await fetch(url);
+    const urlWithTimestamp = `${url}?t=${Date.now()}`;
+    const response = await fetch(urlWithTimestamp, { 
+      cache: 'no-store',
+      next: { revalidate: 0 },
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
+    });
     if (response.ok) {
       return await response.text();
     }
@@ -28,12 +36,13 @@ export default async function Footer(props: FooterProps) {
   const localizedLayout = getPreloadedLayoutForLocale(currentLocale);
   const footerDefaults = localizedLayout?.footer?.fields || {};
   
+  
   // Use provided props or fall back to locale-specific preloaded data
   const {
     logo = footerDefaults?.logo,
     slogan = footerDefaults?.slogan,
     links = footerDefaults?.links || [],
-    copyrightPhrase = footerDefaults?.copyrightPhrase,
+    copyrightMessage = footerDefaults?.copyrightMessage,
     copyrightLinks = footerDefaults?.copyrightLinks || [],
     socialShare = footerDefaults?.socialShare,
   } = props;
@@ -43,6 +52,7 @@ export default async function Footer(props: FooterProps) {
   const logoTitle = logo?.fields?.title || "Logo";
   const logoFileName = logo?.fields?.file?.fileName || "";
   const isLogoSvg = logoFileName.toLowerCase().endsWith(".svg");
+
 
   let svgContent: string | null = null;
 
@@ -146,7 +156,7 @@ export default async function Footer(props: FooterProps) {
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-white/50">
-              {copyrightPhrase || "© 2025 All rights reserved."}
+              {copyrightMessage || "© 2025 All rights reserved."}
             </p>
 
             <div className="flex items-center space-x-6">
