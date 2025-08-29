@@ -1,181 +1,39 @@
-'use client'
-
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { useForm, ValidationError } from '@formspree/react'
-import CTA from '../components/CTA'
+import ContactFormClient from '../components/ContactFormClient'
 import type { ContactFormProps } from '@/lib/contentful/types/fields'
 import { generateGoogleMapsLink } from '@/lib/utils/maps'
-import { getTranslation } from '@/lib/translations/contact-form'
-import type { SupportedLocale } from '@/lib/locale-types'
 import { getBrandBgClass, getContrastTextClass, getContrastSubtextClass, getContrastFormFieldClass, isDarkBackground } from '@/lib/utils/brandColors'
+import { getLocale } from '@/lib/locale'
 
-// Styled UI components
-function Input({ className = '', ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
-  return (
-    <input
-      className={`w-full px-4 py-3 rounded-lg border border-gray-300 transition-all duration-200 focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none ${className}`}
-      {...props}
-    />
-  )
-}
-
-function Label({ children, htmlFor, className = '', ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
-  return (
-    <label 
-      htmlFor={htmlFor} 
-      className={`block text-sm font-medium mb-1 ${className}`}
-      {...props}
-    >
-      {children}
-    </label>
-  )
-}
-
-function Textarea({ className = '', ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return (
-    <textarea
-      className={`w-full px-4 py-3 rounded-lg border border-gray-300 transition-all duration-200 focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none resize-vertical min-h-[120px] ${className}`}
-      {...props}
-    />
-  )
-}
-
-function Select({ children, className = '', ...props }: React.SelectHTMLAttributes<HTMLSelectElement>) {
-  return (
-    <select
-      className={`w-full px-4 py-3 rounded-lg border border-gray-300 transition-all duration-200 focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none appearance-none bg-white ${className}`}
-      {...props}
-    >
-      {children}
-    </select>
-  )
-}
-
-interface ComponentContactFormProps extends ContactFormProps {
+interface ContactFormModuleProps extends ContactFormProps {
   id?: string;
 }
 
-
-function ContactFormComponent({
-  id = 'contact-form',
+export default async function ContactForm({
+  id = "contact-form",
   heading,
   subheading,
-  messagePlaceholder,
-  subjects,
-  buttonText,
+  backgroundColor,
   businessInfoHeading,
   addresses,
   phones,
   schedule,
   copy,
   redirectUrl,
-  backgroundColor = 'pure-white'
-}: ComponentContactFormProps) {
-  const router = useRouter();
-  const successRedirectUrl = redirectUrl || "";
-  const formspreeFormId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID!;
+}: ContactFormModuleProps) {
+  const formspreeFormId = process.env.FORMSPREE_FORM_ID;
+  const currentLocale = await getLocale();
   
-  const [state, formspreeHandleSubmit] = useForm(formspreeFormId);
-  
-  // Custom submit handler to ensure validation runs
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const form = e.currentTarget;
-    
-    // Check if form is valid using HTML5 validation
-    if (!form.checkValidity()) {
-      // Prevent default and let browser show validation
-      e.preventDefault();
-      e.stopPropagation();
-      
-      // Find first invalid field and focus it
-      const firstInvalid = form.querySelector(':invalid') as HTMLElement;
-      if (firstInvalid) {
-        firstInvalid.focus();
-        // Trigger validation display
-        form.reportValidity();
-      }
-      return;
-    }
-    
-    // If valid, proceed with Formspree submission
-    formspreeHandleSubmit(e);
-  };
-  
-  
-  // Handle redirect after successful submission
-  useEffect(() => {
-    if (state.succeeded && successRedirectUrl) {
-      router.push(successRedirectUrl);
-    }
-  }, [state.succeeded, successRedirectUrl, router]);
-  
-  // Translation helper - get locale immediately from cookie
-  const getCurrentLocale = (): SupportedLocale => {
-    if (typeof document === 'undefined') return 'en-US';
-    const cookies = document.cookie.split(';');
-    const localeCookie = cookies.find(cookie => cookie.trim().startsWith('locale='));
-    if (localeCookie) {
-      const locale = localeCookie.split('=')[1].trim() as SupportedLocale;
-      if (locale === 'pt-BR' || locale === 'en-US') {
-        return locale;
-      }
-    }
-    return 'en-US';
-  };
-  
-  const t = (key: Parameters<typeof getTranslation>[0]) => getTranslation(key, getCurrentLocale());
-  
+  // Prepare styling classes for the client component
+  const formFieldClasses = getContrastFormFieldClass(backgroundColor);
+  const textClasses = getContrastTextClass(backgroundColor);
+
   const title = heading || "Get in Touch";
   const subtitle = subheading || "Ready to find your perfect piano? We'd love to hear from you.";
-  const messageText = messagePlaceholder || "Tell us about your piano needs, preferences, or any questions you have...";
-  const submitButtonText = buttonText || "Send Message";
   const businessHeading = businessInfoHeading || "Visit Our Showroom";
-  const formSubjects = subjects || [];
   const businessAddresses = addresses || [];
   const businessPhones = phones || [];
   const businessSchedule = schedule || "";
   const additionalCopy = copy || "";
-
-
-
-  // Check if form succeeded and no redirect URL (show success message)
-  if (state.succeeded && !successRedirectUrl) {
-    return (
-      <section 
-        id={`${id}-success`}
-        className={`w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 ${getBrandBgClass(backgroundColor, 'bg-pure-white')}`}
-      >
-        <div className="max-w-2xl mx-auto text-center">
-          <div 
-            className="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center bg-dark-forest-green"
-          >
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-
-          <h2 className={`text-3xl sm:text-4xl tracking-tight mb-4 font-semibold ${getContrastTextClass(backgroundColor)}`}>
-            {t('Thank You!')}
-          </h2>
-          
-          <p className={`text-lg leading-relaxed mb-8 ${getContrastSubtextClass(backgroundColor)}`}>
-            {t('We\'ve received your message and will get back to you within 24 hours. Our team is excited to help you find the perfect piano.')}
-          </p>
-          
-          <CTA
-            onClick={() => {
-              // Reset Formspree form state
-              window.location.reload();
-            }}
-            variant="primary"
-          >
-            {t('Send Another Message')}
-          </CTA>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section 
@@ -195,206 +53,29 @@ function ContactFormComponent({
 
         {/* Contact Form */}
         <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name Fields */}
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label 
-                  htmlFor="firstName"
-                  className={getContrastTextClass(backgroundColor)}
-                >
-                  {t('First Name *')}
-                </Label>
-                <Input
-                  id="firstName"
-                  name="firstName"
-                  required
-                  className={getContrastFormFieldClass(backgroundColor)}
-                  onInvalid={(e) => {
-                    (e.target as HTMLInputElement).setCustomValidity(t('First name is required'));
-                  }}
-                  onChange={(e) => {
-                    (e.target as HTMLInputElement).setCustomValidity('');
-                  }}
-                />
-                <ValidationError 
-                  prefix="First Name" 
-                  field="firstName"
-                  errors={state.errors}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label 
-                  htmlFor="lastName"
-                  className={getContrastTextClass(backgroundColor)}
-                >
-                  {t('Last Name *')}
-                </Label>
-                <Input
-                  id="lastName"
-                  name="lastName"
-                  required
-                  className={getContrastFormFieldClass(backgroundColor)}
-                  onInvalid={(e) => {
-                    (e.target as HTMLInputElement).setCustomValidity(t('Last name is required'));
-                  }}
-                  onChange={(e) => {
-                    (e.target as HTMLInputElement).setCustomValidity('');
-                  }}
-                />
-                <ValidationError 
-                  prefix="Last Name" 
-                  field="lastName"
-                  errors={state.errors}
-                />
-              </div>
-            </div>
+          {/* Form - Client Component */}
+          <ContactFormClient
+            formId={formspreeFormId}
+            successRedirectUrl={redirectUrl}
+            formFieldClasses={formFieldClasses}
+            textClasses={textClasses}
+            locale={currentLocale}
+          />
 
-            {/* Email */}
-            <div className="space-y-2">
-              <Label 
-                htmlFor="email"
-                className={getContrastTextClass(backgroundColor)}
-              >
-                {t('Email Address *')}
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className={getContrastFormFieldClass(backgroundColor)}
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                title={t('Please enter a valid email address')}
-                onInvalid={(e) => {
-                  const input = e.target as HTMLInputElement;
-                  if (input.validity.valueMissing) {
-                    input.setCustomValidity(t('Email is required'));
-                  } else if (input.validity.patternMismatch || input.validity.typeMismatch) {
-                    input.setCustomValidity(t('Please enter a valid email address'));
-                  }
-                }}
-                onChange={(e) => {
-                  (e.target as HTMLInputElement).setCustomValidity('');
-                }}
-              />
-              <ValidationError 
-                prefix="Email" 
-                field="email"
-                errors={state.errors}
-              />
-            </div>
-
-            {/* Phone */}
-            <div className="space-y-2">
-              <Label 
-                htmlFor="phone"
-                className={getContrastTextClass(backgroundColor)}
-              >
-                {t('Phone Number')}
-              </Label>
-              <Input
-                id="phone"
-                name="phone"
-                type="tel"
-                className={getContrastFormFieldClass(backgroundColor)}
-                minLength={8}
-              />
-              <ValidationError 
-                prefix="Phone" 
-                field="phone"
-                errors={state.errors}
-              />
-            </div>
-
-            {/* Subject */}
-            <div className="space-y-2">
-              <Label 
-                htmlFor="subject"
-                className={getContrastTextClass(backgroundColor)}
-              >
-                {t('Subject *')}
-              </Label>
-              <Select
-                id="subject"
-                name="subject"
-                required
-                className={getContrastFormFieldClass(backgroundColor)}
-                onInvalid={(e) => {
-                  (e.target as HTMLSelectElement).setCustomValidity(t('Subject is required'));
-                }}
-                onChange={(e) => {
-                  (e.target as HTMLSelectElement).setCustomValidity('');
-                }}
-              >
-                <option value="">{t('Please select a subject')}</option>
-                {formSubjects?.map((subject, index) => (
-                  <option key={index} value={subject.toLowerCase().replace(/\s+/g, '-')}>
-                    {subject}
-                  </option>
-                ))}
-              </Select>
-              <ValidationError 
-                prefix="Subject" 
-                field="subject"
-                errors={state.errors}
-              />
-            </div>
-
-            {/* Message */}
-            <div className="space-y-2">
-              <Label 
-                htmlFor="message"
-                className={getContrastTextClass(backgroundColor)}
-              >
-                {t('Message *')}
-              </Label>
-              <Textarea
-                id="message"
-                name="message"
-                required
-                rows={5}
-                placeholder={messageText}
-                className={getContrastFormFieldClass(backgroundColor)}
-                onInvalid={(e) => {
-                  (e.target as HTMLTextAreaElement).setCustomValidity(t('Message is required'));
-                }}
-                onChange={(e) => {
-                  (e.target as HTMLTextAreaElement).setCustomValidity('');
-                }}
-              />
-              <ValidationError 
-                prefix="Message" 
-                field="message"
-                errors={state.errors}
-              />
-            </div>
-
-            {/* Submit Button */}
-            <CTA
-              type="submit"
-              disabled={state.submitting}
-              variant="primary"
-              className="w-full sm:w-auto"
-            >
-              {state.submitting ? t('Sending...') : submitButtonText}
-            </CTA>
-          </form>
-
-          {/* Contact Information */}
+          {/* Business Information */}
           <div className="space-y-8">
+            {/* Business Info Heading */}
             <div>
-              <h3 className={`text-2xl tracking-tight mb-6 font-semibold ${getContrastTextClass(backgroundColor)}`}>
+              <h3 className={`text-2xl sm:text-3xl mb-6 font-semibold ${getContrastTextClass(backgroundColor)}`}>
                 {businessHeading}
               </h3>
-              
-              <div className="space-y-4">
+
+              <div className="space-y-6">
                 {/* Addresses */}
-                {businessAddresses?.map((address, index) => (
+                {businessAddresses.map((address, index) => (
                   <div key={index} className="flex items-start space-x-3">
                     <div 
-                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green"
+                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green flex-shrink-0"
                     >
                       <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -418,7 +99,7 @@ function ContactFormComponent({
                 {businessPhones && businessPhones.length > 0 && (
                   <div className="flex items-start space-x-3">
                     <div 
-                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green"
+                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green flex-shrink-0"
                     >
                       <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -445,7 +126,7 @@ function ContactFormComponent({
                 {businessSchedule && (
                   <div className="flex items-start space-x-3">
                     <div 
-                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green"
+                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green flex-shrink-0"
                     >
                       <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -480,12 +161,3 @@ function ContactFormComponent({
   );
 }
 
-export default function ContactForm(props: ComponentContactFormProps) {
-  // Return null if no Formspree ID is configured
-  const formspreeFormId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
-  if (!formspreeFormId) {
-    return null;
-  }
-  
-  return <ContactFormComponent {...props} />;
-}
