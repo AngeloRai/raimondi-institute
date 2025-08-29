@@ -1,17 +1,17 @@
 /*
-  Contentful Migration: Create [Module] Image Text content type
+  Contentful Migration: Update [Module] Image Text content type
   ID: moduleImageText
 */
 
 module.exports = function (migration) {
   const moduleImageText = migration
-    .createContentType("moduleImageText")
+    .editContentType("moduleImageText")
     .name("[Module] Image Text")
     .description("")
     .displayField("internalName");
 
   moduleImageText
-    .createField("internalName")
+    .editField("internalName")
     .name("Internal Name")
     .type("Symbol")
     .localized(false)
@@ -21,7 +21,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   moduleImageText
-    .createField("heading")
+    .editField("heading")
     .name("Heading")
     .type("Symbol")
     .localized(true)
@@ -31,7 +31,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   moduleImageText
-    .createField("subheading")
+    .editField("subheading")
     .name("Subheading")
     .type("RichText")
     .localized(true)
@@ -67,7 +67,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   moduleImageText
-    .createField("image")
+    .editField("image")
     .name("Image")
     .type("Link")
     .localized(false)
@@ -78,7 +78,7 @@ module.exports = function (migration) {
     .linkType("Asset");
 
   moduleImageText
-    .createField("imagePosition")
+    .editField("imagePosition")
     .name("Image Position")
     .type("Symbol")
     .localized(false)
@@ -89,7 +89,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   moduleImageText
-    .createField("bgColor")
+    .editField("backgroundColor")
     .name("Background Color")
     .type("Symbol")
     .localized(false)
@@ -99,7 +99,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   moduleImageText
-    .createField("primaryCta")
+    .editField("primaryCta")
     .name("Primary CTA")
     .type("Link")
     .localized(false)
@@ -110,7 +110,7 @@ module.exports = function (migration) {
     .linkType("Entry");
 
   moduleImageText
-    .createField("secondaryCta")
+    .editField("secondaryCta")
     .name("Secondary CTA")
     .type("Link")
     .localized(false)

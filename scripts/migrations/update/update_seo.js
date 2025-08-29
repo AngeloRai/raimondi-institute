@@ -10,7 +10,7 @@ module.exports = function (migration) {
     .description("SEO content type with common seo required fields")
     .displayField("title");
 
-  hero
+  seo
     .createField("internalName")
     .name("Internal Name")
     .type("Symbol")

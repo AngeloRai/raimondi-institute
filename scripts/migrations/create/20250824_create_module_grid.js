@@ -71,8 +71,8 @@ module.exports = function (migration) {
     .type("Symbol")
     .localized(false)
     .required(false)
-    .validations([{ in: ["white", "light", "dark"] }])
-    .defaultValue({ "en-US": "white" })
+    .validations([{ in: ["pure-white", "warm-cream", "light-forest-green", "medium-forest-green", "dark-forest-green", "charcoal-gray"] }])
+    .defaultValue({ "en-US": "pure-white" })
     .disabled(false)
     .omitted(false);
 
@@ -82,7 +82,7 @@ module.exports = function (migration) {
     .type("Link")
     .localized(false)
     .required(false)
-    .validations([{ linkContentType: ["componentCta", "cta"] }])
+    .validations([{ linkContentType: ["cta"] }])
     .disabled(false)
     .omitted(false)
     .linkType("Entry");

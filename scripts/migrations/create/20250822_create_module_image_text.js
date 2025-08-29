@@ -1,17 +1,17 @@
 /*
-  Contentful Migration: Update existing Hero Section content type
-  ID: heroSection
+  Contentful Migration: Create [Module] Image Text content type
+  ID: moduleImageText
 */
 
 module.exports = function (migration) {
-  const hero = migration
-    .editContentType("moduleHero")
-    .name("[Module] Hero")
+  const moduleImageText = migration
+    .createContentType("moduleImageText")
+    .name("[Module] Image Text")
     .description("")
     .displayField("internalName");
 
-  hero
-    .editField("internalName")
+  moduleImageText
+    .createField("internalName")
     .name("Internal Name")
     .type("Symbol")
     .localized(false)
@@ -20,8 +20,8 @@ module.exports = function (migration) {
     .disabled(false)
     .omitted(false);
 
-  hero
-    .editField("heading")
+  moduleImageText
+    .createField("heading")
     .name("Heading")
     .type("Symbol")
     .localized(true)
@@ -30,8 +30,8 @@ module.exports = function (migration) {
     .disabled(false)
     .omitted(false);
 
-  hero
-    .editField("subheading")
+  moduleImageText
+    .createField("subheading")
     .name("Subheading")
     .type("RichText")
     .localized(true)
@@ -57,18 +57,17 @@ module.exports = function (migration) {
           "embedded-entry-inline",
         ],
         message:
-          "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, link to Url, link to entry, link to asset, and inline entry nodes are allowed",
+          "Only heading, lists, hr, quote, block/inline entries, assets and links are allowed",
       },
       {
         enabledMarks: ["bold", "italic", "underline", "code"],
-        message: "Only bold, italic, underline, and code marks are allowed",
       },
     ])
     .disabled(false)
     .omitted(false);
 
-  hero
-    .editField("image")
+  moduleImageText
+    .createField("image")
     .name("Image")
     .type("Link")
     .localized(false)
@@ -78,8 +77,19 @@ module.exports = function (migration) {
     .omitted(false)
     .linkType("Asset");
 
-  hero
-    .editField("bgColor")
+  moduleImageText
+    .createField("imagePosition")
+    .name("Image Position")
+    .type("Symbol")
+    .localized(false)
+    .required(false)
+    .validations([{ in: ["left", "right", "overlay"] }])
+    .defaultValue({ "en-US": "left" })
+    .disabled(false)
+    .omitted(false);
+
+  moduleImageText
+    .createField("backgroundColor")
     .name("Background Color")
     .type("Symbol")
     .localized(false)
@@ -88,8 +98,8 @@ module.exports = function (migration) {
     .disabled(false)
     .omitted(false);
 
-  hero
-    .editField("primaryCta")
+  moduleImageText
+    .createField("primaryCta")
     .name("Primary CTA")
     .type("Link")
     .localized(false)
@@ -99,8 +109,8 @@ module.exports = function (migration) {
     .omitted(false)
     .linkType("Entry");
 
-  hero
-    .editField("secondaryCta")
+  moduleImageText
+    .createField("secondaryCta")
     .name("Secondary CTA")
     .type("Link")
     .localized(false)
@@ -109,15 +119,4 @@ module.exports = function (migration) {
     .disabled(false)
     .omitted(false)
     .linkType("Entry");
-
-  hero
-    .editField("height")
-    .name("Height")
-    .type("Symbol")
-    .localized(false)
-    .required(false)
-    .validations([{ in: ["small", "medium", "large", "full screen"] }])
-    .defaultValue({ "en-US": "medium" })
-    .disabled(false)
-    .omitted(false);
 };

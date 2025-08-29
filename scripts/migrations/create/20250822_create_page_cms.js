@@ -35,10 +35,46 @@ module.exports = function (migration) {
     .createField("contentModules")
     .name("Content Modules")
     .type("Array")
-    .items({ type: "Link", linkType: "Entry", validations: [] })
+    .items({ 
+      type: "Link", 
+      linkType: "Entry", 
+      validations: [
+        {
+          linkContentType: [
+            "moduleContactForm",
+            "moduleGrid", 
+            "moduleHero",
+            "moduleImageCarousel",
+            "moduleImageText",
+            "richTextBlock"
+          ]
+        }
+      ] 
+    })
     .localized(false)
     .required(false)
     .validations([])
     .disabled(false)
     .omitted(false);
+
+  // Single reference to SEO entry
+  page
+    .createField("seo")
+    .name("SEO")
+    .type("Link")
+    .linkType("Entry")
+    .localized(false)
+    .required(false)
+    .validations([
+      {
+        linkContentType: ["componentSeo"],
+      },
+    ])
+    .disabled(false)
+    .omitted(false);
+
+  page.changeFieldControl("contentModules", "builtin", "entryLinksEditor", {
+    helpText:
+      "Select content modules to include on this page (hero, image text, grid, carousel, contact form, rich text, etc.)",
+  });
 };

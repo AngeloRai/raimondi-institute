@@ -1,17 +1,17 @@
 /*
-  Contentful Migration: Create [Module] Contact Form content type
-  Run via contentful-migration CLI.
+  Contentful Migration: Update Module Contact Form content type
+  ID: moduleContactForm
 */
 
 module.exports = function (migration) {
   const contactForm = migration
-    .createContentType("moduleContactForm")
+    .editContentType("moduleContactForm")
     .name("[Module] Contact Form")
     .description("Contact form module with customizable fields and visit showroom section")
     .displayField("internalName");
 
   contactForm
-    .createField("internalName")
+    .editField("internalName")
     .name("Internal Name")
     .type("Symbol")
     .localized(false)
@@ -21,7 +21,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   contactForm
-    .createField("heading")
+    .editField("heading")
     .name("Heading")
     .type("Symbol")
     .localized(true)
@@ -38,7 +38,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   contactForm
-    .createField("subheading")
+    .editField("subheading")
     .name("Subheading")
     .type("Text")
     .localized(true)
@@ -55,24 +55,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   contactForm
-    .createField("messagePlaceholder")
-    .name("Message Placeholder")
-    .type("Text")
-    .localized(true)
-    .required(false)
-    .validations([
-      {
-        size: {
-          max: 200
-        }
-      }
-    ])
-    .defaultValue({ "en-US": "Tell us about your piano needs, preferences, or any questions you have..." })
-    .disabled(false)
-    .omitted(false);
-
-  contactForm
-    .createField("subjects")
+    .editField("subjects")
     .name("Form Subjects")
     .type("Array")
     .localized(true)
@@ -99,7 +82,24 @@ module.exports = function (migration) {
     .omitted(false);
 
   contactForm
-    .createField("buttonText")
+    .editField("messagePlaceholder")
+    .name("Message Placeholder")
+    .type("Text")
+    .localized(true)
+    .required(false)
+    .validations([
+      {
+        size: {
+          max: 200
+        }
+      }
+    ])
+    .defaultValue({ "en-US": "Tell us about your piano needs, preferences, or any questions you have..." })
+    .disabled(false)
+    .omitted(false);
+
+  contactForm
+    .editField("buttonText")
     .name("Button Text")
     .type("Symbol")
     .localized(true)
@@ -116,7 +116,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   contactForm
-    .createField("businessInfoHeading")
+    .editField("businessInfoHeading")
     .name("Business Info Heading")
     .type("Symbol")
     .localized(true)
@@ -133,7 +133,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   contactForm
-    .createField("addresses")
+    .editField("addresses")
     .name("Addresses")
     .type("Array")
     .localized(true)
@@ -160,7 +160,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   contactForm
-    .createField("phones")
+    .editField("phones")
     .name("Phone Numbers")
     .type("Array")
     .localized(true)
@@ -187,7 +187,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   contactForm
-    .createField("schedule")
+    .editField("schedule")
     .name("Business Schedule")
     .type("Text")
     .localized(true)
@@ -203,7 +203,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   contactForm
-    .createField("copy")
+    .editField("copy")
     .name("Additional Info Copy")
     .type("Text")
     .localized(true)
@@ -219,22 +219,22 @@ module.exports = function (migration) {
     .omitted(false);
 
   contactForm
-    .createField("backgroundColor")
+    .editField("backgroundColor")
     .name("Background Color")
     .type("Symbol")
     .localized(false)
     .required(false)
     .validations([
       { 
-        in: ["white", "light", "dark"] 
+        in: ["pure-white", "warm-cream", "light-forest-green", "medium-forest-green", "dark-forest-green", "charcoal-gray"] 
       }
     ])
-    .defaultValue({ "en-US": "white" })
+    .defaultValue({ "en-US": "pure-white" })
     .disabled(false)
     .omitted(false);
 
   contactForm
-    .createField("redirectUrl")
+    .editField("redirectUrl")
     .name("Success Redirect URL")
     .type("Symbol")
     .localized(false)
@@ -249,78 +249,4 @@ module.exports = function (migration) {
     ])
     .disabled(false)
     .omitted(false);
-
-  contactForm
-    .createField("formspreeId")
-    .name("Formspree Form ID")
-    .type("Symbol")
-    .localized(false)
-    .required(true)
-    .validations([
-      {
-        size: {
-          min: 5,
-          max: 20
-        }
-      }
-    ])
-    .disabled(false)
-    .omitted(false);
-
-  // Field controls
-  contactForm.changeFieldControl("internalName", "builtin", "singleLine", {
-    helpText: "Used internally to identify this contact form module"
-  });
-
-  contactForm.changeFieldControl("heading", "builtin", "singleLine", {
-    helpText: "Main heading for the contact form section (max 100 characters)"
-  });
-
-  contactForm.changeFieldControl("subheading", "builtin", "multipleLine", {
-    helpText: "Subheading text below the main heading (max 300 characters)"
-  });
-
-  contactForm.changeFieldControl("messagePlaceholder", "builtin", "multipleLine", {
-    helpText: "Placeholder text for the message textarea field"
-  });
-
-  contactForm.changeFieldControl("subjects", "builtin", "tagEditor", {
-    helpText: "List of subject options for the contact form dropdown (1-10 items)"
-  });
-
-  contactForm.changeFieldControl("buttonText", "builtin", "singleLine", {
-    helpText: "Text for the submit button (max 50 characters)"
-  });
-
-  contactForm.changeFieldControl("businessInfoHeading", "builtin", "singleLine", {
-    helpText: "Heading for the business information section"
-  });
-
-  contactForm.changeFieldControl("addresses", "builtin", "tagEditor", {
-    helpText: "Business addresses (1-5 locations) - each will automatically generate a clickable Google Maps link"
-  });
-
-  contactForm.changeFieldControl("phones", "builtin", "tagEditor", {
-    helpText: "Phone numbers for the business (1-5 numbers)"
-  });
-
-  contactForm.changeFieldControl("schedule", "builtin", "multipleLine", {
-    helpText: "Business hours and schedule information"
-  });
-
-  contactForm.changeFieldControl("copy", "builtin", "multipleLine", {
-    helpText: "Additional information or promotional text (optional)"
-  });
-
-  contactForm.changeFieldControl("backgroundColor", "builtin", "dropdown", {
-    helpText: "Background color for the contact form section"
-  });
-
-  contactForm.changeFieldControl("redirectUrl", "builtin", "singleLine", {
-    helpText: "URL to redirect to after successful form submission (e.g., /message-received). Leave empty to show default success message."
-  });
-
-  contactForm.changeFieldControl("formspreeId", "builtin", "singleLine", {
-    helpText: "Your Formspree form ID from your Formspree dashboard (e.g., xandypqa). Required for form submissions to work."
-  });
 };

@@ -21,8 +21,8 @@ module.exports = function (migration) {
     .omitted(false);
 
   card
-    .createField("header")
-    .name("Header")
+    .createField("heading")
+    .name("Heading")
     .type("Symbol")
     .localized(true)
     .required(true)
@@ -37,8 +37,8 @@ module.exports = function (migration) {
     .omitted(false);
 
   card
-    .createField("subheader")
-    .name("Subheader")
+    .createField("subheading")
+    .name("Subheading")
     .type("Text")
     .localized(true)
     .required(true)
@@ -75,10 +75,10 @@ module.exports = function (migration) {
     .required(false)
     .validations([
       { 
-        in: ["white", "light", "dark"] 
+        in: ["pure-white", "warm-cream", "light-forest-green", "medium-forest-green", "dark-forest-green", "charcoal-gray"] 
       }
     ])
-    .defaultValue({ "en-US": "white" })
+    .defaultValue({ "en-US": "pure-white" })
     .disabled(false)
     .omitted(false);
 
@@ -90,7 +90,7 @@ module.exports = function (migration) {
     .required(false)
     .validations([
       {
-        linkContentType: ["componentCta"]
+        linkContentType: ["cta"]
       }
     ])
     .linkType("Entry")
@@ -101,12 +101,12 @@ module.exports = function (migration) {
     helpText: "Used internally to identify this card"
   });
 
-  card.changeFieldControl("header", "builtin", "singleLine", {
-    helpText: "Card header displayed prominently"
+  card.changeFieldControl("heading", "builtin", "singleLine", {
+    helpText: "Card heading displayed prominently"
   });
 
-  card.changeFieldControl("subheader", "builtin", "multipleLine", {
-    helpText: "Card subheader/description text (max 500 characters)"
+  card.changeFieldControl("subheading", "builtin", "multipleLine", {
+    helpText: "Card subheading/description text (max 500 characters)"
   });
 
   card.changeFieldControl("icon", "builtin", "dropdown", {

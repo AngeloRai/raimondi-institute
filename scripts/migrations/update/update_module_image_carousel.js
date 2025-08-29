@@ -1,17 +1,17 @@
 /*
-  Contentful Migration: Create [Module] Image Carousel content type
+  Contentful Migration: Update [Module] Image Carousel content type
   ID: moduleImageCarousel
 */
 
 module.exports = function (migration) {
   const carousel = migration
-    .createContentType("moduleImageCarousel")
+    .editContentType("moduleImageCarousel")
     .name("[Module] Image Carousel")
     .description("Carousel for a set of images with optional caption and CTA")
     .displayField("internalName");
 
   carousel
-    .createField("internalName")
+    .editField("internalName")
     .name("Internal Name")
     .type("Symbol")
     .localized(false)
@@ -21,7 +21,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   carousel
-    .createField("heading")
+    .editField("heading")
     .name("Heading")
     .type("Symbol")
     .localized(true)
@@ -31,7 +31,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   carousel
-    .createField("subheading")
+    .editField("subheading")
     .name("Subheading")
     .type("Text")
     .localized(true)
@@ -41,7 +41,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   carousel
-    .createField("images")
+    .editField("images")
     .name("Images")
     .type("Array")
     .localized(false)
@@ -52,7 +52,7 @@ module.exports = function (migration) {
     .items({ type: "Link", linkType: "Asset" });
 
   carousel
-    .createField("autoplay")
+    .editField("autoplay")
     .name("Autoplay")
     .type("Boolean")
     .localized(false)
@@ -63,7 +63,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   carousel
-    .createField("autoplayInterval")
+    .editField("autoplayInterval")
     .name("Autoplay Interval (ms)")
     .type("Integer")
     .localized(false)
@@ -74,7 +74,7 @@ module.exports = function (migration) {
     .omitted(false);
 
   carousel
-    .createField("navigation")
+    .editField("navigation")
     .name("Navigation")
     .type("Symbol")
     .localized(false)
@@ -85,12 +85,12 @@ module.exports = function (migration) {
     .omitted(false);
 
   carousel
-    .createField("cta")
+    .editField("cta")
     .name("CTA")
     .type("Link")
     .localized(false)
     .required(false)
-    .validations([{ linkContentType: ["componentCta", "cta"] }])
+    .validations([{ linkContentType: ["cta"] }])
     .disabled(false)
     .omitted(false)
     .linkType("Entry");

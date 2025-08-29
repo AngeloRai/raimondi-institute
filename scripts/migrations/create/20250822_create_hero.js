@@ -79,12 +79,70 @@ module.exports = function (migration) {
     .linkType("Asset");
 
   hero
-    .createField("bgColor")
+    .createField("backgroundColor")
     .name("Background Color")
     .type("Symbol")
     .localized(false)
     .required(false)
-    .validations([])
+    .validations([
+      {
+        in: ["pure-white", "warm-cream", "light-forest-green", "medium-forest-green", "dark-forest-green", "charcoal-gray"]
+      }
+    ])
+    .disabled(false)
+    .omitted(false);
+
+  hero
+    .createField("socialShare")
+    .name("Social Share")
+    .type("Link")
+    .localized(false)
+    .required(false)
+    .validations([{ linkContentType: ["componentLinks"] }])
+    .disabled(false)
+    .omitted(false)
+    .linkType("Entry");
+
+  hero
+    .createField("imagePosition")
+    .name("Image Position")
+    .type("Symbol")
+    .localized(false)
+    .required(false)
+    .validations([{ in: ["center", "overlay"] }])
+    .defaultValue({ "en-US": "center" })
+    .disabled(false)
+    .omitted(false);
+
+  hero
+    .createField("copy")
+    .name("Copy")
+    .type("RichText")
+    .localized(true)
+    .required(false)
+    .validations([
+      {
+        enabledNodeTypes: [
+          "heading-1",
+          "heading-2",
+          "heading-3",
+          "heading-4",
+          "heading-5",
+          "heading-6",
+          "ordered-list",
+          "unordered-list",
+          "hr",
+          "blockquote",
+          "embedded-entry-block",
+          "embedded-asset-block",
+          "hyperlink",
+          "entry-hyperlink",
+          "asset-hyperlink",
+          "embedded-entry-inline",
+        ],
+        message: "Only specific rich text formatting is allowed",
+      },
+    ])
     .disabled(false)
     .omitted(false);
 

@@ -71,23 +71,11 @@ module.exports = function (migration) {
     .type("Symbol")
     .localized(false)
     .required(false)
-    .validations([{ in: ["white", "light", "dark"] }])
-    .defaultValue({ "en-US": "white" })
+    .validations([{ in: ["pure-white", "warm-cream", "light-forest-green", "medium-forest-green", "dark-forest-green", "charcoal-gray"] }])
+    .defaultValue({ "en-US": "pure-white" })
     .disabled(false)
     .omitted(false);
 
-  grid
-    .editField("cta")
-    .name("CTA")
-    .type("Link")
-    .localized(false)
-    .required(false)
-    .validations([{ linkContentType: ["componentCta", "cta"] }])
-    .disabled(false)
-    .omitted(false)
-    .linkType("Entry");
-
-  // single CTA reference only (cta above)
 
   grid.changeFieldControl("internalName", "builtin", "singleLine", {
     helpText: "Used internally to identify this grid",

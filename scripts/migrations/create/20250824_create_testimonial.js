@@ -87,10 +87,10 @@ module.exports = function (migration) {
     .required(false)
     .validations([
       { 
-        in: ["white", "light", "dark"] 
+        in: ["pure-white", "warm-cream", "light-forest-green", "medium-forest-green", "dark-forest-green", "charcoal-gray"] 
       }
     ])
-    .defaultValue({ "en-US": "white" })
+    .defaultValue({ "en-US": "pure-white" })
     .disabled(false)
     .omitted(false);
 

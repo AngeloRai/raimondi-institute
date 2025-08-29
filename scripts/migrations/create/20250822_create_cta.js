@@ -48,7 +48,7 @@ module.exports = function (migration) {
     .required(false)
     .validations([
       {
-        in: ["primary", "secondary", "outline", "ghost", "ghost-dark", "icon"],
+        in: ["primary", "secondary", "outline", "outline-dark", "ghost", "ghost-dark", "icon", "icon-rounded"],
       },
     ])
     .defaultValue({ "en-US": "primary" })
