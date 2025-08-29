@@ -7,10 +7,26 @@ import {
 } from "@/lib/contentful/fetchers/pageCms";
 import { getLocale } from "@/lib/locale";
 import { SUPPORTED_LOCALES } from "@/lib/locale-types";
+import type { Metadata } from "next";
+import { generatePageMetadata } from "@/lib/utils/metadata";
 
 export const dynamicParams = true;
 
 export const revalidate = 1800; // revalidate path every 30min
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const locale = await getLocale();
+  
+  // Default to "home" when no slug is provided
+  const pageSlug = !slug || slug.length === 0 ? "home" : slug.join("/");
+  
+  return generatePageMetadata(pageSlug, locale);
+}
 
 export async function generateStaticParams() {
   const allSlugs: { slug: string[] }[] = [];
