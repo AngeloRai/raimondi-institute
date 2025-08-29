@@ -57,7 +57,7 @@ interface ComponentContactFormProps extends ContactFormProps {
 }
 
 
-export default function ContactForm({
+function ContactFormComponent({
   id = 'contact-form',
   heading,
   subheading,
@@ -73,9 +73,9 @@ export default function ContactForm({
   backgroundColor = 'pure-white'
 }: ComponentContactFormProps) {
   const router = useRouter();
-  
   const successRedirectUrl = redirectUrl || "";
-  const formspreeFormId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || '';
+  const formspreeFormId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID!;
+  
   const [state, formspreeHandleSubmit] = useForm(formspreeFormId);
   
   // Custom submit handler to ensure validation runs
@@ -478,4 +478,14 @@ export default function ContactForm({
       </div>
     </section>
   );
+}
+
+export default function ContactForm(props: ComponentContactFormProps) {
+  // Return null if no Formspree ID is configured
+  const formspreeFormId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
+  if (!formspreeFormId) {
+    return null;
+  }
+  
+  return <ContactFormComponent {...props} />;
 }
