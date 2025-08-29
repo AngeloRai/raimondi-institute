@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import NavbarServer from "@/ui/modules/NavbarServer";
+import Navbar from "@/ui/modules/Navbar";
 import Footer from "@/ui/modules/Footer";
 import { getLayout } from "@/lib/contentful/fetchers/layout";
 import { getLocale } from "@/lib/locale";
@@ -92,7 +92,7 @@ export default async function RootLayout({
       <body
         className={`${caliburnBold.variable} ${freightNeo.variable} ${visbyCFBold.variable} ${visbyCFMedium.variable} ${visbyCFLight.variable} antialiased`}
       >
-        <NavbarServer {...navbarFields} />
+        <Navbar {...navbarFields} />
         <main>{children}</main>
         <Footer {...footerFields} />
       </body>
