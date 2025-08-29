@@ -7,7 +7,7 @@ import { Navigation, Keyboard, A11y, Autoplay } from 'swiper/modules'
 import type { SwiperRef } from 'swiper/react'
 import { ImageCarouselProps } from '@/lib/contentful/types/fields'
 import CTA from '../components/CTA'
-import { getCTAVariantAndClasses } from '@/lib/utils/brandColors'
+import { getCTAVariantAndClasses, getBrandBgClass, getContrastTextClass, getContrastSubtextClass } from '@/lib/utils/brandColors'
 import ChevronLeft from '../icons/ChevronLeft'
 import ChevronRight from '../icons/ChevronRight'
 import Play from '../icons/Play'
@@ -81,33 +81,18 @@ export default function ImageCarousel({
       // Default gradient
       return "bg-gradient-to-br from-charcoal-gray to-dark-forest-green";
     }
-    // For any custom color, don't use Tailwind gradient classes
-    return "";
-  };
-
-  const getSectionStyle = () => {
-    if (!backgroundColor) {
-      return {};
-    }
-    return { backgroundColor };
-  };
-
-  // Determine if text should be dark (for light backgrounds like white and cream)
-  const isLightBackground = () => {
-    if (!backgroundColor) return false;
-    const color = backgroundColor.toLowerCase();
-    return color === "#ffffff" || color === "white" || color === "#faece3" || color === "cream";
+    // Use the brand color system for consistent styling
+    return getBrandBgClass(backgroundColor, "");
   };
 
   const getTextColorClass = () => {
-    return isLightBackground() ? "text-charcoal-gray" : "text-white";
+    return getContrastTextClass(backgroundColor, "text-white");
   };
 
   return (
     <section 
       id={id} 
       className={`w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 ${getBackgroundStyle()}`}
-      style={getSectionStyle()}
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}
@@ -119,7 +104,7 @@ export default function ImageCarousel({
               </h2>
             )}
             {subheading && (
-              <p className={`text-lg sm:text-xl max-w-2xl mx-auto ${isLightBackground() ? "text-charcoal-gray/70" : "text-white/70"}`}>
+              <p className={`text-lg sm:text-xl max-w-2xl mx-auto ${getContrastSubtextClass(backgroundColor, "text-white/70")}`}>
                 {subheading}
               </p>
             )}

@@ -4,7 +4,7 @@ import { RichText } from "../components/RichText";
 import SocialShare from "../components/SocialShare";
 import type { HeroProps } from "@/lib/contentful/types/fields";
 import type { Document } from "@contentful/rich-text-types";
-import { getBrandBgClass, getCTAVariantAndClasses } from "@/lib/utils/brandColors";
+import { getBrandBgClass, getCTAVariantAndClasses, getContrastTextClass, getContrastSubtextClass, isDarkBackground } from "@/lib/utils/brandColors";
 
 function Hero({
   heading,
@@ -114,11 +114,10 @@ function Hero({
   // Default center variation - improved design
   const backgroundColorClass = getBrandBgClass(backgroundColor, "bg-warm-cream");
 
-  // Determine text colors based on background
-  const isDarkBackground = backgroundColor === 'dark-forest-green' || backgroundColor === 'medium-forest-green' || backgroundColor === 'charcoal-gray'
-  const headingTextClass = isDarkBackground ? 'text-white' : 'text-charcoal-gray'
-  const subheadingTextClass = isDarkBackground ? 'text-white/90' : 'text-gray-600'
-  const copyTextClass = isDarkBackground ? 'text-white/80' : 'text-gray-600'
+  // Determine text colors using brand color utilities
+  const headingTextClass = getContrastTextClass(backgroundColor, 'text-charcoal-gray')
+  const subheadingTextClass = getContrastSubtextClass(backgroundColor, 'text-gray-600')
+  const copyTextClass = getContrastSubtextClass(backgroundColor, 'text-gray-600')
 
   return (
     <section
@@ -194,7 +193,7 @@ function Hero({
             <div className="mt-8">
               <SocialShare 
                 links={socialShare.fields?.links}
-                variant={isDarkBackground ? 'dark' : 'light'}
+                variant={isDarkBackground(backgroundColor) ? 'dark' : 'light'}
                 size="medium"
                 className="justify-center"
               />
