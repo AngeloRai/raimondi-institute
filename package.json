@@ -12,7 +12,12 @@
     "migrate": "dotenv -e .env -- node scripts/run-migration.js",
     "migrate:all": "dotenv -e .env -- node scripts/run-all-migrations-complete.js",
     "migrate:organized": "dotenv -e .env -- node scripts/run-all-migrations-organized.js",
-    "migrate:legacy": "dotenv -e .env -- node scripts/run-all-migrations.js"
+    "migrate:legacy": "dotenv -e .env -- node scripts/run-all-migrations.js",
+    "migrate:space:cli": "dotenv -e .env -- ./scripts/migrate-space-cli.sh",
+    "migrate:space:cli:dry-run": "dotenv -e .env -- ./scripts/migrate-space-cli.sh --dry-run",
+    "cleanup:space": "dotenv -e .env -- node scripts/cleanup-space.mjs",
+    "cleanup:entries": "dotenv -e .env -- node scripts/cleanup-space.mjs --entries-only",
+    "cleanup:content-types": "dotenv -e .env -- node scripts/cleanup-space.mjs --content-types-only"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^16.1.0",
