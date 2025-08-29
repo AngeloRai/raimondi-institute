@@ -11,7 +11,7 @@
 
 ## Description
 
-Image + text module with localized header and subheader, image asset, background color, and optional CTAs.
+Image + text module with localized heading and subheading, image asset, background color, and optional CTAs.
 
 ## Fields
 
@@ -22,16 +22,16 @@ Image + text module with localized header and subheader, image asset, background
 - **Required**: Yes
 - **Help Text**: Internal name for content managers; used as the displayField.
 
-### 2. Header
+### 2. Heading
 
-- **Field Name**: `header`
+- **Field Name**: `heading`
 - **Field Type**: Short Text
 - **Required**: No
 - **Localized**: Yes
 
-### 3. Subheader
+### 3. Subheading
 
-- **Field Name**: `subheader`
+- **Field Name**: `subheading`
 - **Field Type**: Rich Text
 - **Required**: No
 - **Localized**: Yes
@@ -54,7 +54,7 @@ Image + text module with localized header and subheader, image asset, background
 
 ### 6. Background Color
 
-- **Field Name**: `bgColor`
+- **Field Name**: `backgroundColor`
 - **Field Type**: Short Text
 - **Required**: No
 
@@ -77,11 +77,11 @@ Image + text module with localized header and subheader, image asset, background
 ```json
 {
   "internalName": "ImageText - Feature",
-  "header": "Craftsmanship Meets Design",
-  "subheader": { "content": [...] },
+  "heading": "Craftsmanship Meets Design",
+  "subheading": { "content": [...] },
   "image": { "sys": { "type": "Link", "linkType": "Asset", "id": "image_asset_id" } },
   "imagePosition": "left",
-  "bgColor": "warm-cream",
+  "backgroundColor": "warm-cream",
   "primaryCta": { "sys": { "type": "Link", "linkType": "Entry", "id": "cta_primary" } }
 }
 ```

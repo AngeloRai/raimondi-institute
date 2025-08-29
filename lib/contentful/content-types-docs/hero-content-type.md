@@ -10,13 +10,13 @@
 
 ## Description
 
-Configurable page-header hero: headline, subheader, image, CTA refs; brand bgColor tokens, height presets; responsive and accessible.
+Configurable page-heading hero: headline, subheading, image, CTA refs; brand backgroundColor tokens, height presets; responsive and accessible.
 
 **Use Cases:**
 
 - Homepage hero sections
 - Product feature announcements
-- Landing page headers
+- Landing page headings
 - Campaign introductions
 - Brand showcases
 
@@ -38,18 +38,18 @@ Configurable page-header hero: headline, subheader, image, CTA refs; brand bgCol
 - **Help Text**: Internal name for this hero section (not displayed on site)
 - **Example**: "Homepage Hero - Harmony Piano"
 
-### 2. Header
+### 2. Heading
 
-- **Field Name**: `header`
+- **Field Name**: `heading`
 - **Field Type**: Short Text
 - **Required**: No
 - **Character Limit**: 100
 - **Help Text**: The main headline displayed prominently at the top
 - **Example**: "Harmony Grand Piano"
 
-### 3. Subheader
+### 3. Subheading
 
-- **Field Name**: `subheader`
+- **Field Name**: `subheading`
 - **Field Type**: Rich Text
 - **Required**: No
 - **Allowed Nodes**: heading-1, heading-2, heading-3, heading-4, heading-5, heading-6, ordered-list, unordered-list, hr, blockquote, embedded-entry-block, embedded-asset-block, hyperlink, entry-hyperlink, asset-hyperlink, embedded-entry-inline
@@ -67,7 +67,7 @@ Configurable page-header hero: headline, subheader, image, CTA refs; brand bgCol
 
 ### 5. Background Color
 
-- **Field Name**: `bgColor`
+- **Field Name**: `backgroundColor`
 - **Field Type**: Short Text
 - **Required**: No
 
@@ -111,14 +111,14 @@ Configurable page-header hero: headline, subheader, image, CTA refs; brand bgCol
 ```json
 {
   "internalName": "Homepage Hero - Harmony Piano",
-  "header": "Harmony Grand Piano",
-  "subheader": "Forest green elegance. Where craftsmanship meets musical excellence.",
+  "heading": "Harmony Grand Piano",
+  "subheading": "Forest green elegance. Where craftsmanship meets musical excellence.",
   "image": {
     "url": "https://images.ctfassets.net/...",
     "title": "Harmony Grand Piano Hero Image",
     "description": "Elegant forest green Harmony grand piano in luxurious setting"
   },
-  "bgColor": "warm-cream",
+  "backgroundColor": "warm-cream",
   "primaryCta": {
     "sys": {
       "type": "Link",
@@ -173,7 +173,7 @@ Configurable page-header hero: headline, subheader, image, CTA refs; brand bgCol
 
 - The `height` field maps to CSS classes in the component
 - CTAs are managed as separate entries for reusability
-- The `bgColor` field uses design system color tokens
+- The `backgroundColor` field uses design system color tokens
 - Image optimization should be handled through Contentful's Image API
 - CTA references will need to be resolved when fetching hero data
 - Consider implementing responsive image sizes for different screen sizes

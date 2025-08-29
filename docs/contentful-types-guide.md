@@ -49,11 +49,11 @@ import type { ComponentFields } from '@/lib/contentful/types/fields'
 
 type HeroProps = ComponentFields<Entry<TypeHeroSectionSkeleton>>
 
-export function Hero({ header, subheader, image, primaryCta }: HeroProps) {
+export function Hero({ heading, subheading, image, primaryCta }: HeroProps) {
   return (
     <div>
-      <h1>{header}</h1>
-      <p>{subheader}</p>
+      <h1>{heading}</h1>
+      <p>{subheading}</p>
       {primaryCta && <CTA {...primaryCta.fields} />}
     </div>
   )

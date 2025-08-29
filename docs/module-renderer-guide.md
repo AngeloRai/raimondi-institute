@@ -147,10 +147,10 @@ The module will automatically:
 // Generated from Contentful (auto-updated)
 export interface TypeHeroSectionFields {
   internalName: string
-  header?: string
-  subheader?: Document
+  heading?: string
+  subheading?: Document
   image?: Asset
-  bgColor?: string
+  backgroundColor?: string
   primaryCta?: Entry<TypeCTASkeleton>
   // ...
 }

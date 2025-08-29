@@ -35,15 +35,15 @@ export const contentfulModuleRegistry = {
 ### 4. **Effortless Module Creation**
 ```tsx
 // ui/modules/Hero.tsx
-function Hero({ header, subheader, image, locale, ...props }) {
+function Hero({ heading, subheading, image, locale, ...props }) {
   // Localize all fields
-  const localizedHeader = getLocalizedContent(header, locale)
-  const localizedSubheader = getLocalizedContent(subheader, locale)
+  const localizedDeading = getLocalizedContent(heading, locale)
+  const localizedSubheading = getLocalizedContent(subheading, locale)
   
   return (
     <section>
-      <h1>{localizedHeader}</h1>
-      <p>{localizedSubheader}</p>
+      <h1>{localizedHeading}</h1>
+      <p>{localizedSubheading}</p>
     </section>
   )
 }
