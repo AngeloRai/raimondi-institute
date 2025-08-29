@@ -39,7 +39,7 @@ export default function CTA({
     ghost: "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 focus:ring-white/50",
     "ghost-dark": "bg-charcoal-gray/10 text-charcoal-gray hover:bg-charcoal-gray/20 focus:ring-charcoal-gray/50",
     icon: "bg-transparent text-dark-forest-green hover:bg-dark-forest-green/10 focus:ring-dark-forest-green/50 p-3",
-    "icon rounded": "bg-white/20 text-white hover:bg-white/30 focus:ring-white/50 p-3 rounded-full",
+    "icon-rounded": "bg-white/20 text-white hover:bg-white/30 focus:ring-white/50 p-3 rounded-full",
   };
 
   const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;

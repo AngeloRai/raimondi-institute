@@ -14,11 +14,11 @@ export default function ImageText({
   subheading,
   image,
   imagePosition,
-  bgColor,
+  backgroundColor,
   primaryCta,
   secondaryCta,
 }: ComponentImageTextProps) {
-  const bgClass = getBrandBgClass(bgColor, "bg-pure-white");
+  const bgClass = getBrandBgClass(backgroundColor, "bg-pure-white");
 
 
   if (imagePosition === "overlay") {
@@ -61,14 +61,14 @@ export default function ImageText({
                 {primaryCta && (
                   <CTA 
                     {...primaryCta.fields}
-                    variant={getCTAVariantAndClasses(primaryCta, bgColor, "primary").variant}
+                    variant={getCTAVariantAndClasses(primaryCta, backgroundColor, "primary").variant}
                     className="!bg-white !text-charcoal-gray !border-white hover:!bg-white/90"
                   />
                 )}
                 {secondaryCta && (
                   <CTA 
                     {...secondaryCta.fields}
-                    variant={getCTAVariantAndClasses(secondaryCta, bgColor, "outline").variant}
+                    variant={getCTAVariantAndClasses(secondaryCta, backgroundColor, "outline").variant}
                     className="!bg-dark-forest-green !text-white !border-dark-forest-green hover:!bg-dark-forest-green/90"
                   />
                 )}
@@ -94,7 +94,7 @@ export default function ImageText({
             }`}
           >
             <h2
-              className={`font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight font-bold leading-[1.1] ${getContrastTextClass(bgColor)}`}
+              className={`font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight font-bold leading-[1.1] ${getContrastTextClass(backgroundColor)}`}
             >
               {heading}
             </h2>
@@ -104,7 +104,7 @@ export default function ImageText({
                 <RichText
                   content={subheading}
                   className={
-                    isDarkBackground(bgColor) 
+                    isDarkBackground(backgroundColor) 
                       ? "[&_p]:text-white/90 [&_h1]:text-white [&_h2]:text-white [&_h3]:text-white [&_h4]:text-white [&_h5]:text-white [&_h6]:text-white [&_li]:text-white/90 [&_blockquote]:text-white/80 [&_a]:text-white" 
                       : "[&_p]:text-gray-600 [&_li]:text-gray-600 [&_blockquote]:text-gray-700"
                   } 
@@ -116,9 +116,9 @@ export default function ImageText({
               {primaryCta && (
                 <CTA 
                   {...primaryCta.fields}
-                  variant={getCTAVariantAndClasses(primaryCta, bgColor, "primary").variant}
+                  variant={getCTAVariantAndClasses(primaryCta, backgroundColor, "primary").variant}
                   className={
-                    isDarkBackground(bgColor) 
+                    isDarkBackground(backgroundColor) 
                       ? "!bg-white !text-charcoal-gray !border-white hover:!bg-white/90"
                       : ""
                   }
@@ -127,9 +127,9 @@ export default function ImageText({
               {secondaryCta && (
                 <CTA 
                   {...secondaryCta.fields}
-                  variant={getCTAVariantAndClasses(secondaryCta, bgColor, "outline").variant}
+                  variant={getCTAVariantAndClasses(secondaryCta, backgroundColor, "outline").variant}
                   className={
-                    isDarkBackground(bgColor) 
+                    isDarkBackground(backgroundColor) 
                       ? "!bg-dark-forest-green !text-white !border-dark-forest-green hover:!bg-dark-forest-green/90"
                       : ""
                   }

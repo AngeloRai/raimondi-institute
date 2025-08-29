@@ -8,6 +8,7 @@ import { getCTAVariantAndClasses } from '@/lib/utils/brandColors';
 import LogoLight from "../icons/LogoLight";
 import Menu from "../icons/Menu";
 import X from "../icons/X";
+import { NavbarProps } from "@/lib/contentful/types/fields";
 
 interface NavbarClientProps {
   logoUrl: string | null;
@@ -15,7 +16,7 @@ interface NavbarClientProps {
   svgContent: string | null;
   isLogoSvg: boolean;
   menuItems: Array<{ label: string; href: string }>;
-  cta: any;
+  cta: NavbarProps['cta'];
   backgroundColor: string;
 }
 

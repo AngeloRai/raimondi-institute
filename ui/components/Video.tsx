@@ -1,10 +1,8 @@
 import React from 'react';
 import { toAbsoluteCtfUrl } from "@/lib/contentful/utils/image";
-import { Asset } from "contentful";
+import { VideoAssetProps } from '@/lib/contentful/types/fields';
 
-interface VideoProps {
-  youTubeUrl?: string;
-  videoAsset?: Asset;
+interface VideoProps extends VideoAssetProps {
   className?: string;
 }
 

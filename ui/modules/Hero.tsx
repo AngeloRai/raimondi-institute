@@ -10,7 +10,7 @@ function Hero({
   heading,
   subheading,
   image,
-  bgColor,
+  backgroundColor,
   primaryCta,
   secondaryCta,
   height,
@@ -74,14 +74,14 @@ function Hero({
                 {primaryCta && (
                   <CTA
                     {...primaryCta.fields}
-                    variant={getCTAVariantAndClasses(primaryCta, bgColor, "primary").variant}
+                    variant={getCTAVariantAndClasses(primaryCta, backgroundColor, "primary").variant}
                     size={primaryCta.fields?.size || "large"}
                   />
                 )}
                 {secondaryCta && (
                   <CTA
                     {...secondaryCta.fields}
-                    variant={getCTAVariantAndClasses(secondaryCta, bgColor, "outline").variant}
+                    variant={getCTAVariantAndClasses(secondaryCta, backgroundColor, "outline").variant}
                     size={secondaryCta.fields?.size || "large"}
                   />
                 )}
@@ -112,10 +112,10 @@ function Hero({
   }
 
   // Default center variation - improved design
-  const bgColorClass = getBrandBgClass(bgColor, "bg-warm-cream");
+  const backgroundColorClass = getBrandBgClass(backgroundColor, "bg-warm-cream");
 
   // Determine text colors based on background
-  const isDarkBackground = bgColor === 'dark-forest-green' || bgColor === 'medium-forest-green' || bgColor === 'charcoal-gray'
+  const isDarkBackground = backgroundColor === 'dark-forest-green' || backgroundColor === 'medium-forest-green' || backgroundColor === 'charcoal-gray'
   const headingTextClass = isDarkBackground ? 'text-white' : 'text-charcoal-gray'
   const subheadingTextClass = isDarkBackground ? 'text-white/90' : 'text-gray-600'
   const copyTextClass = isDarkBackground ? 'text-white/80' : 'text-gray-600'
@@ -123,11 +123,11 @@ function Hero({
   return (
     <section
       id="hero"
-      className={`relative w-full ${heightClasses[height as keyof typeof heightClasses] || "min-h-[700px]"} overflow-hidden ${bgColorClass}`}
+      className={`relative w-full ${heightClasses[height as keyof typeof heightClasses] || "min-h-[700px]"} overflow-hidden ${backgroundColorClass}`}
     >
       <div className="relative z-10 max-w-7xl mx-auto w-full h-full flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="w-full flex flex-col items-center text-center space-y-10">
-          {/* Header Content */}
+          {/* Heading Content */}
           <div className="space-y-6 max-w-5xl">
             {heading && (
               <h1 className={`font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.05] ${headingTextClass} font-bold`}>
@@ -171,13 +171,13 @@ function Hero({
               {primaryCta && (
                 <CTA 
                   {...primaryCta.fields} 
-                  variant={getCTAVariantAndClasses(primaryCta, bgColor, "primary").variant}
+                  variant={getCTAVariantAndClasses(primaryCta, backgroundColor, "primary").variant}
                 />
               )}
               {secondaryCta && (
                 <CTA 
                   {...secondaryCta.fields}
-                  variant={getCTAVariantAndClasses(secondaryCta, bgColor, "outline").variant}
+                  variant={getCTAVariantAndClasses(secondaryCta, backgroundColor, "outline").variant}
                 />
               )}
             </div>

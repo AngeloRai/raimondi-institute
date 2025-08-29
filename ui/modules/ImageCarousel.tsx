@@ -110,7 +110,7 @@ export default function ImageCarousel({
       style={getSectionStyle()}
     >
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
+        {/* Section Heading */}
         {(heading || subheading) && (
           <div className="text-center mb-12">
             {heading && (

@@ -14,6 +14,7 @@ import Image from "next/image";
 import { toAbsoluteCtfUrl } from "@/lib/contentful/utils/image";
 import { Video } from "./Video";
 import { isTypeComponentVideoAsset } from "@/lib/contentful/types/generated/TypeComponentVideoAsset";
+import { VideoAssetProps } from "@/lib/contentful/types/fields";
 
 interface RichTextProps {
   content: Document;
@@ -221,8 +222,8 @@ export function RichText({ content, className = "" }: RichTextProps) {
 
         // Handle Component Video Asset
         if (isTypeComponentVideoAsset(entry)) {
-          const videoAsset = entry.fields.videoAsset as any; // Contentful asset type handling
-          const youTubeUrl = entry.fields.youTubeUrl as string | undefined;
+          const videoAsset = entry.fields.videoAsset as VideoAssetProps['videoAsset']
+          const youTubeUrl = entry.fields.youTubeUrl as VideoAssetProps['youTubeUrl']
           return (
             <div className="my-8">
               <Video
@@ -236,7 +237,7 @@ export function RichText({ content, className = "" }: RichTextProps) {
 
         // Handle direct image assets embedded as entries
         if (entry.sys?.type === "Asset") {
-          const asset = entry as any;
+          const asset = entry
           const { file, title, description } = asset.fields || {};
 
           if (!file?.url) return null;

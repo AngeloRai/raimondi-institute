@@ -1,4 +1,3 @@
-import Link from "next/link";
 import LogoLight from "../icons/LogoLight";
 import { ReactSVG } from "react-svg";
 import Image from "next/image";
