@@ -1,7 +1,8 @@
 import type { SupportedLocales, DefaultLocale } from '@/lib/contentful/types/fields'
+import { SUPPORTED_LOCALES as SUPPORTED_LOCALES_OBJECT, DEFAULT_LOCALE as DEFAULT_LOCALE_CONST } from '@/lib/locale-types'
 
-export const SUPPORTED_LOCALES: SupportedLocales[] = ['en-US', 'pt-BR']
-export const DEFAULT_LOCALE: DefaultLocale = 'en-US'
+export const SUPPORTED_LOCALES: SupportedLocales[] = Object.keys(SUPPORTED_LOCALES_OBJECT) as SupportedLocales[]
+export const DEFAULT_LOCALE: DefaultLocale = DEFAULT_LOCALE_CONST
 
 export function isValidLocale(locale: string): locale is SupportedLocales {
   return SUPPORTED_LOCALES.includes(locale as SupportedLocales)

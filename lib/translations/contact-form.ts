@@ -1,7 +1,7 @@
 // Translation map for ContactForm non-Contentful text
 // Only includes text that doesn't come from Contentful fields
 
-export type SupportedLocale = 'en-US' | 'pt-BR';
+import type { SupportedLocale } from '@/lib/locale-types';
 
 export const contactFormTranslations = {
   // Form labels

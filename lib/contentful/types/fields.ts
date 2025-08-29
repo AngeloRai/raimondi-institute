@@ -5,7 +5,7 @@ import type {
   TypeComponentSeo,
   TypeComponentTestimonial,
   TypeCta,
-  TypeFooterComponent,
+  TypeFooter,
   TypeLayout,
   TypeLink,
   TypeModuleGrid,
@@ -19,9 +19,9 @@ import type {
   TypeModuleContactForm
 } from "./generated";
 
-// Locale configuration
-export type SupportedLocales = "en-US" | "pt-BR";
-export type DefaultLocale = "en-US";
+import type { SupportedLocale } from '@/lib/locale-types';
+export type SupportedLocales = SupportedLocale;
+export type DefaultLocale = SupportedLocale;
 
 // Chain modifiers for fetching
 export type DefaultChainModifiers = "WITHOUT_UNRESOLVABLE_LINKS";
@@ -44,7 +44,7 @@ export type CTAProps = OmitInternalName<
   ExtractFields<TypeCta<DefaultChainModifiers, SupportedLocales>>
 >;
 export type FooterProps = OmitInternalName<
-  ExtractFields<TypeFooterComponent<DefaultChainModifiers, SupportedLocales>>
+  ExtractFields<TypeFooter<DefaultChainModifiers, SupportedLocales>>
 >;
 export type GridProps = OmitInternalName<
   ExtractFields<TypeModuleGrid<DefaultChainModifiers, SupportedLocales>>

@@ -1,7 +1,12 @@
 const fs = require('fs');
 const path = require('path');
-const https = require('https');
 const { createClient } = require('contentful');
+
+// Define supported locales (must match lib/locale-types.ts)
+const SUPPORTED_LOCALES = {
+  'en-US': 'English',
+  'pt-BR': 'Portuguese',
+};
 
 // Initialize Contentful client
 const client = createClient({
@@ -10,20 +15,8 @@ const client = createClient({
   host: process.env.CONTENTFUL_PREVIEW === 'true' ? 'preview.contentful.com' : 'cdn.contentful.com',
 });
 
-// Simple function to fetch SVG content
-function fetchSVG(url) {
-  return new Promise((resolve) => {
-    https.get(url, (res) => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => resolve(data));
-      res.on('error', () => resolve(null));
-    }).on('error', () => resolve(null));
-  });
-}
-
 // Supported locales
-const SUPPORTED_LOCALES = ['en-US', 'pt-BR'];
+const supportedLocales = Object.keys(SUPPORTED_LOCALES);
 
 async function fetchLayoutData() {
   try {
@@ -35,7 +28,7 @@ async function fetchLayoutData() {
     };
 
     // Fetch layout data for each locale
-    for (const locale of SUPPORTED_LOCALES) {
+    for (const locale of supportedLocales) {
       console.log(`📍 Fetching data for locale: ${locale}`);
       
       // Fetch the layout for this locale
@@ -89,7 +82,7 @@ export default preloadedLayoutData;
     
     console.log('✅ Layout data preloaded successfully for all locales');
     console.log(`📅 Last updated: ${preloadData.lastUpdated}`);
-    console.log(`🌐 Locales included: ${SUPPORTED_LOCALES.join(', ')}`);
+    console.log(`🌐 Locales included: ${supportedLocales.join(', ')}`);
     
     return preloadData;
   } catch (error) {

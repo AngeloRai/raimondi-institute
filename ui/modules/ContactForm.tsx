@@ -6,7 +6,8 @@ import { useForm, ValidationError } from '@formspree/react'
 import CTA from '../components/CTA'
 import type { ContactFormProps } from '@/lib/contentful/types/fields'
 import { generateGoogleMapsLink } from '@/lib/utils/maps'
-import { getTranslation, type SupportedLocale } from '@/lib/translations/contact-form'
+import { getTranslation } from '@/lib/translations/contact-form'
+import type { SupportedLocale } from '@/lib/locale-types'
 import { getBrandBgClass, getContrastTextClass, getContrastSubtextClass, getContrastFormFieldClass, isDarkBackground } from '@/lib/utils/brandColors'
 
 // Styled UI components
@@ -57,7 +58,7 @@ interface ComponentContactFormProps extends ContactFormProps {
 
 
 export default function ContactForm({
-  id = 'contactform',
+  id = 'contact-form',
   heading,
   subheading,
   messagePlaceholder,
@@ -74,7 +75,7 @@ export default function ContactForm({
   const router = useRouter();
   
   const successRedirectUrl = redirectUrl || "";
-  const formspreeFormId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || 'xandypqa';
+  const formspreeFormId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || '';
   const [state, formspreeHandleSubmit] = useForm(formspreeFormId);
   
   // Custom submit handler to ensure validation runs
@@ -182,7 +183,7 @@ export default function ContactForm({
       className={`w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 ${getBrandBgClass(backgroundColor, 'bg-pure-white')}`}
     >
       <div className="max-w-4xl mx-auto">
-        {/* Section Header */}
+        {/* Section Heading */}
         <div className="text-center mb-12">
           <h2 className={`text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 font-semibold ${getContrastTextClass(backgroundColor)}`}>
             {title}
