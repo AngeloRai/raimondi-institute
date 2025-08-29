@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import LogoLight from "../icons/LogoLight";
+import SVGRender from "../components/SVGRender";
 import { FooterProps } from "@/lib/contentful/types/fields";
 import { getPreloadedLayoutForLocale } from "@/lib/preload/layout-data";
 import SocialShare from "../components/SocialShare";
@@ -9,26 +10,6 @@ import { getLocale } from "@/lib/locale";
 import type { TypeComponentLinks, TypeLinkSkeleton, TypeCtaSkeleton } from "@/lib/contentful/types/generated";
 import type { DefaultChainModifiers, SupportedLocales } from "@/lib/contentful/types/fields";
 import type { Entry } from "contentful";
-
-async function fetchSVGContent(url: string): Promise<string | null> {
-  try {
-    const urlWithTimestamp = `${url}?t=${Date.now()}`;
-    const response = await fetch(urlWithTimestamp, { 
-      cache: 'no-store',
-      next: { revalidate: 0 },
-      headers: {
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache'
-      }
-    });
-    if (response.ok) {
-      return await response.text();
-    }
-  } catch (error) {
-    console.warn("Failed to fetch SVG:", error);
-  }
-  return null;
-}
 
 export default async function Footer(props: FooterProps) {
   // Get current locale and fetch appropriate preloaded data
@@ -54,28 +35,18 @@ export default async function Footer(props: FooterProps) {
   const isLogoSvg = logoFileName.toLowerCase().endsWith(".svg");
 
 
-  let svgContent: string | null = null;
-
-  if (logoUrl && isLogoSvg) {
-    svgContent = await fetchSVGContent(logoUrl);
-  }
-
   const LogoComponent = () => {
     if (!logoUrl) {
       return <LogoLight className="h-12 w-auto" />;
     }
 
-    if (isLogoSvg && svgContent) {
-      const styledSvg = svgContent.replace(
-        "<svg",
-        '<svg class="h-12 w-auto brightness-0 invert" style="height: 48px; width: auto;"'
-      );
+    if (isLogoSvg && logoUrl) {
       return (
-        <div
-          className="h-12 w-auto [&>svg]:h-12 [&>svg]:w-auto [&>svg]:brightness-0 [&>svg]:invert"
-          dangerouslySetInnerHTML={{ __html: styledSvg }}
-          role="img"
-          aria-label={logoTitle}
+        <SVGRender 
+          src={logoUrl}
+          className="h-12 w-auto [&>svg]:h-12 [&>svg]:w-auto [&>svg]:max-h-12 [&>svg]:brightness-0 [&>svg]:invert"
+          ariaLabel={logoTitle}
+          componentNamespace="footer"
         />
       );
     }
@@ -104,7 +75,7 @@ export default async function Footer(props: FooterProps) {
             <LogoComponent />
 
             {slogan && (
-              <div className="text-sm leading-relaxed max-w-xs text-white/70">
+              <div className="pt-6 text-sm leading-relaxed max-w-xs text-white/70">
                 {slogan}
               </div>
             )}
