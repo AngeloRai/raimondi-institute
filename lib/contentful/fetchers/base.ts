@@ -8,7 +8,8 @@ export interface FetchOptions {
   include?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
   order?: string[],
   limit?: number,
-  locale?: SupportedLocale
+  locale?: SupportedLocale,
+  select?: string[]  // Add select parameter for field selection
 }
 
 export async function fetchEntry<T extends EntrySkeletonType>(
@@ -24,6 +25,7 @@ export async function fetchEntry<T extends EntrySkeletonType>(
       limit: 1,
       include: options.include || 2,
       ...(options.locale && { locale: options.locale }),
+      ...(options.select && { select: `fields.${options.select.join(',fields.')}` }),
       ...query
     })
     
@@ -47,6 +49,7 @@ export async function fetchEntries<T extends EntrySkeletonType>(
       limit: 1000,
       include: options.include || 2,
       ...(options.locale && { locale: options.locale }),
+      ...(options.select && { select: `fields.${options.select.join(',fields.')}` }),
       ...query
     })
     
