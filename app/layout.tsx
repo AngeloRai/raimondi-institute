@@ -45,9 +45,6 @@ const visbyCFLight = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Harmony Grand Piano",
-  description:
-    "Forest green elegance. Where craftsmanship meets musical excellence.",
   icons: {
     icon: "/favicon/favicon.ico",
     shortcut: "/favicon/favicon-16x16.png",
@@ -60,7 +57,11 @@ export const metadata: Metadata = {
       },
     ],
   },
-  manifest: "/favicon/site.webmanifest", // Web app manifest
+  manifest: "/favicon/site.webmanifest",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`) || ""
+  ),
 };
 
 const fetchLayoutData = async () => {
@@ -68,9 +69,9 @@ const fetchLayoutData = async () => {
     const locale = await getLocale();
     const layout = await getLayout(locale);
     const { navbar, footer } = layout?.fields || {};
-    return { 
-      navbar: navbar?.fields || {}, 
-      footer: footer?.fields || {} 
+    return {
+      navbar: navbar?.fields || {},
+      footer: footer?.fields || {},
     };
   } catch (error) {
     console.warn("Failed to fetch layout from Contentful:", error);
@@ -85,7 +86,7 @@ export default async function RootLayout({
 }>) {
   // Attempt to fetch fresh data, but don't block rendering
   const { navbar: navbarFields, footer: footerFields } =
-  await fetchLayoutData();
+    await fetchLayoutData();
 
   return (
     <html lang="en">
