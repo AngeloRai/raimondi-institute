@@ -17,6 +17,10 @@
 /.next/
 /out/
 
+# Claude mcp tools
+/.playwright-mcp/
+CLAUDE.md
+
 # production
 /build
 
