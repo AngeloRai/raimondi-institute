@@ -95,7 +95,7 @@ export default function Grid({
         )}
 
         <div className={`grid gap-6 lg:gap-8 ${getGridCols(validItems.length, isTestimonialGrid, isImageCardGrid, isMixedGrid)}`}>
-          {validItems.map((item) => {
+          {validItems.map((item, index) => {
             if (!item) return null;
             
             if (isTypeComponentCard(item)) {
@@ -129,7 +129,7 @@ export default function Grid({
               
               return (
                 <ImageCard
-                  key={item.sys.id}
+                  key={`${item.sys.id}-${index}`}
                   {...imageCardProps}
                 />
               )
