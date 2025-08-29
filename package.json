@@ -7,6 +7,7 @@
     "build": "npm run preload && next build --turbopack",
     "start": "next start",
     "lint": "eslint",
+    "push": "npm run build && git push",
     "preload": "dotenv -e .env -- node scripts/preload-layout-data.js",
     "contentful:types": "node scripts/generate-types.js",
     "migrate": "dotenv -e .env -- node scripts/run-migration.js",
