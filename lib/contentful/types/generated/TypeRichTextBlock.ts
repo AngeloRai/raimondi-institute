@@ -3,7 +3,7 @@ import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleC
 export interface TypeRichTextBlockFields {
     internalName: EntryFieldTypes.Symbol;
     copy?: EntryFieldTypes.RichText;
-    backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "ight-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
+    backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
 }
 
 export type TypeRichTextBlockSkeleton = EntrySkeletonType<TypeRichTextBlockFields, "richTextBlock">;

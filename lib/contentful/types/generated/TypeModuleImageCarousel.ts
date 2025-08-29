@@ -5,10 +5,11 @@ export interface TypeModuleImageCarouselFields {
     internalName: EntryFieldTypes.Symbol;
     heading?: EntryFieldTypes.Symbol;
     subheading?: EntryFieldTypes.Text;
-    images?: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
+    images: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
     backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
     autoplay?: EntryFieldTypes.Boolean;
     autoplayInterval?: EntryFieldTypes.Integer;
+    navigation?: EntryFieldTypes.Symbol<"arrows" | "both" | "dots" | "none">;
     cta?: EntryFieldTypes.EntryLink<TypeCtaSkeleton>;
 }
 

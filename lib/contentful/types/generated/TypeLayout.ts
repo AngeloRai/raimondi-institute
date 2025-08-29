@@ -1,11 +1,11 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
-import type { TypeFooterComponentSkeleton } from "./TypeFooterComponent";
+import type { TypeFooterSkeleton } from "./TypeFooter";
 import type { TypeNavbarSkeleton } from "./TypeNavbar";
 
 export interface TypeLayoutFields {
-    internalName?: EntryFieldTypes.Text;
+    internalName: EntryFieldTypes.Symbol;
     navbar?: EntryFieldTypes.EntryLink<TypeNavbarSkeleton>;
-    footer?: EntryFieldTypes.EntryLink<TypeFooterComponentSkeleton>;
+    footer?: EntryFieldTypes.EntryLink<TypeFooterSkeleton>;
 }
 
 export type TypeLayoutSkeleton = EntrySkeletonType<TypeLayoutFields, "layout">;

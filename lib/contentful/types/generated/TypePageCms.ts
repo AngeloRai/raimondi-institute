@@ -1,4 +1,5 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
+import type { TypeComponentSeoSkeleton } from "./TypeComponentSeo";
 import type { TypeModuleContactFormSkeleton } from "./TypeModuleContactForm";
 import type { TypeModuleGridSkeleton } from "./TypeModuleGrid";
 import type { TypeModuleHeroSkeleton } from "./TypeModuleHero";
@@ -9,6 +10,7 @@ import type { TypeRichTextBlockSkeleton } from "./TypeRichTextBlock";
 export interface TypePageCmsFields {
     internalName: EntryFieldTypes.Symbol;
     slug: EntryFieldTypes.Symbol;
+    seo?: EntryFieldTypes.EntryLink<TypeComponentSeoSkeleton>;
     contentModules?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeModuleContactFormSkeleton | TypeModuleGridSkeleton | TypeModuleHeroSkeleton | TypeModuleImageCarouselSkeleton | TypeModuleImageTextSkeleton | TypeRichTextBlockSkeleton>>;
 }
 
