@@ -167,7 +167,7 @@ module.exports = function (migration) {
       .type("Symbol")
       .localized(false)
       .required(false)
-      .validations([{ in: ["center", "overlay"] }])
+      .validations([{ in: ["center", "overlay", "split"] }])
       .defaultValue({ "en-US": "center" })
       .disabled(false)
       .omitted(false);
@@ -179,7 +179,7 @@ module.exports = function (migration) {
       .type("Symbol")
       .localized(false)
       .required(false)
-      .validations([{ in: ["center", "overlay"] }])
+      .validations([{ in: ["center", "overlay", "split"] }])
       .defaultValue({ "en-US": "center" })
       .disabled(false)
       .omitted(false);

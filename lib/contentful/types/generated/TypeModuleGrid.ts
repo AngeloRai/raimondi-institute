@@ -1,5 +1,6 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
 import type { TypeComponentCardSkeleton } from "./TypeComponentCard";
+import type { TypeComponentImageCardSkeleton } from "./TypeComponentImageCard";
 import type { TypeComponentTestimonialSkeleton } from "./TypeComponentTestimonial";
 
 export interface TypeModuleGridFields {
@@ -7,7 +8,7 @@ export interface TypeModuleGridFields {
     backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
     heading?: EntryFieldTypes.Symbol;
     subheading?: EntryFieldTypes.Text;
-    items?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeComponentCardSkeleton | TypeComponentTestimonialSkeleton>>;
+    items?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeComponentCardSkeleton | TypeComponentImageCardSkeleton | TypeComponentTestimonialSkeleton>>;
 }
 
 export type TypeModuleGridSkeleton = EntrySkeletonType<TypeModuleGridFields, "moduleGrid">;
