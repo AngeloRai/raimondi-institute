@@ -9,7 +9,7 @@ export interface TypeModuleHeroFields {
     socialShare?: EntryFieldTypes.EntryLink<TypeComponentLinksSkeleton>;
     subheading?: EntryFieldTypes.RichText;
     image?: EntryFieldTypes.AssetLink;
-    imagePosition?: EntryFieldTypes.Symbol<"center" | "overlay">;
+    imagePosition?: EntryFieldTypes.Symbol<"center" | "overlay" | "split">;
     primaryCta?: EntryFieldTypes.EntryLink<TypeCtaSkeleton>;
     secondaryCta?: EntryFieldTypes.EntryLink<TypeCtaSkeleton>;
     copy?: EntryFieldTypes.RichText;
