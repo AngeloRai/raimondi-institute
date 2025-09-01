@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import CTA from "../components/CTA";
-import { getCTAVariantAndClasses } from "@/lib/utils/brandColors";
+import { getCTAVariantAndClasses, getContrastTextClass, isDarkBackground } from "@/lib/utils/brandColors";
 import LogoLight from "../icons/LogoLight";
 import SVGRender from "../components/SVGRender";
 import { NavbarProps } from "@/lib/contentful/types/fields";
@@ -70,10 +70,25 @@ export default async function Navbar(props: NavbarProps) {
     );
   };
 
+  // Get background color class and text colors
+  const isDark = isDarkBackground(backgroundColor);
+  const textColorClass = getContrastTextClass(backgroundColor, "text-dark-forest-green");
+  const hoverTextClass = isDark ? "hover:text-white/80" : "hover:text-medium-forest-green";
+  const borderColor = isDark ? "border-white/20" : "border-dark-forest-green/15";
+  
+  // Add opacity to the background color
+  const navbarBgClass = backgroundColor === "warm-cream" ? "bg-warm-cream/90" :
+                        backgroundColor === "pure-white" ? "bg-pure-white/90" :
+                        backgroundColor === "dark-forest-green" ? "bg-dark-forest-green/90" :
+                        backgroundColor === "medium-forest-green" ? "bg-medium-forest-green/90" :
+                        backgroundColor === "light-forest-green" ? "bg-light-forest-green/90" :
+                        backgroundColor === "charcoal-gray" ? "bg-charcoal-gray/90" :
+                        "bg-warm-cream/90";
+
   return (
     <nav
       id="navbar"
-      className="w-full sticky top-0 z-50 px-6 sm:px-8 lg:px-12 py-5 backdrop-blur-xl bg-warm-cream/85 shadow-sm border-b-2 border-dark-forest-green/15 transition-all duration-300"
+      className={`w-full sticky top-0 z-50 px-6 sm:px-8 lg:px-12 py-5 backdrop-blur-xl shadow-sm border-b-2 transition-all duration-300 ${navbarBgClass} ${borderColor}`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo - Fixed width container to prevent layout shift */}
@@ -93,19 +108,19 @@ export default async function Navbar(props: NavbarProps) {
               <Link
                 key={`nav-${index}`}
                 href={item.href}
-                className="relative py-3 px-4 text-dark-forest-green whitespace-nowrap
+                className={`relative py-3 px-4 whitespace-nowrap
                          transition-all duration-200 ease-out
-                         hover:text-medium-forest-green
-                         group text-lg font-semibold"
+                         ${textColorClass} ${hoverTextClass}
+                         group text-lg font-semibold`}
               >
                 <span className="relative z-10 block">{item.label}</span>
                 {/* Elegant underline */}
                 <span
-                  className="absolute left-0 right-0 bottom-0 h-[2px]
-                           bg-medium-forest-green
+                  className={`absolute left-0 right-0 bottom-0 h-[2px]
+                           ${isDark ? 'bg-white/60' : 'bg-medium-forest-green'}
                            origin-center
                            transition-transform duration-200 ease-out
-                           group-hover:scale-x-100 scale-x-0"
+                           group-hover:scale-x-100 scale-x-0`}
                 ></span>
               </Link>
             ))}
