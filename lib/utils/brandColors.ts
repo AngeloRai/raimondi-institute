@@ -159,7 +159,7 @@ export const contrastSubtextClasses = {
   "charcoal-gray": "text-white/80",
   
   // Light backgrounds
-  "light-forest-green": "text-light-forest-green",
+  "light-forest-green": "text-charcoal-gray/70",
   "warm-cream": "text-light-forest-green", 
   "pure-white": "text-light-forest-green",
   

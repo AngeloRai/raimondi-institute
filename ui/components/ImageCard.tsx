@@ -1,5 +1,6 @@
 import Image from "next/image";
 import CTA from "./CTA";
+import ImageCardOverlay from "./ImageCardOverlay";
 import { toAbsoluteCtfUrl } from "@/lib/contentful/utils/image";
 import { ImageCardProps } from "@/lib/contentful/types/fields";
 import {
@@ -24,7 +25,11 @@ export default function ImageCard({
   const imageUrl = toAbsoluteCtfUrl(image?.fields?.file?.url);
   const imageAlt = image?.fields?.title || heading;
 
-  const ctaVariantAndClasses = getCTAVariantAndClasses(cta, backgroundColor, "outline");
+  const ctaVariantAndClasses = getCTAVariantAndClasses(
+    cta,
+    backgroundColor,
+    "outline"
+  );
 
   return (
     <div
@@ -62,16 +67,8 @@ export default function ImageCard({
         {/* Overlay that appears on hover */}
         <div className="absolute inset-0 bg-dark-forest-green/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-        {/* Description overlay - slides up on hover */}
-        <div
-          className="absolute inset-0 flex items-center justify-center p-6 
-                        opacity-0 translate-y-4 transition-all duration-300 ease-out
-                        group-hover:opacity-100 group-hover:translate-y-0"
-        >
-          <p className="text-white text-center text-sm leading-relaxed font-medium">
-            {description}
-          </p>
-        </div>
+        {/* Interactive overlay component for all devices */}
+        <ImageCardOverlay description={description} />
       </div>
 
       {/* Content */}
