@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CTA from "@/ui/components/CTA";
 import Hero from "@/ui/modules/Hero";
 import Grid from "@/ui/modules/Grid";
