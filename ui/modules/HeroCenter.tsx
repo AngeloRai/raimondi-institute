@@ -38,18 +38,17 @@ export default function HeroCenter({
       id="hero"
       className={`relative w-full ${heightClasses[height as keyof typeof heightClasses] || "min-h-[700px]"} overflow-hidden ${backgroundColorClass}`}
     >
-      <div className="relative z-10 max-w-7xl mx-auto w-full h-full flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div className="w-full flex flex-col items-center text-center space-y-10">
-          {/* Heading Content */}
-          <div className="space-y-6 max-w-5xl">
+      <div className="relative z-10 max-w-7xl mx-auto w-full h-full flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-24">
+        <div className="w-full flex flex-col items-center text-center space-y-4 sm:space-y-6 lg:space-y-10">
+          <div className="space-y-3 sm:space-y-4 lg:space-y-6 max-w-5xl">
             {heading && (
-              <h1 className={`font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.05] ${headingTextClass} font-bold`}>
+              <h1 className={`font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.05] ${headingTextClass} font-bold`}>
                 {heading}
               </h1>
             )}
 
             {subheading && (
-              <div className={`text-xl sm:text-2xl lg:text-2xl max-w-4xl mx-auto leading-relaxed ${subheadingTextClass}`}>
+              <div className={`text-base sm:text-xl lg:text-2xl max-w-4xl mx-auto leading-relaxed ${subheadingTextClass}`}>
                 {typeof subheading === "string" ? (
                   <p>{subheading}</p>
                 ) : (
@@ -63,8 +62,8 @@ export default function HeroCenter({
           </div>
 
           {imageUrl && (
-            <div className="relative w-full max-w-4xl">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-3xl shadow-2xl">
+            <div className="relative w-full max-w-4xl mt-4 sm:mt-6 lg:mt-8">
+              <div className="relative aspect-[16/10] sm:aspect-[16/10] overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-xl lg:shadow-2xl">
                 <Image
                   src={imageUrl}
                   alt={imageAlt}
@@ -77,9 +76,8 @@ export default function HeroCenter({
             </div>
           )}
 
-          {/* CTA Buttons */}
           {(primaryCta || secondaryCta) && (
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               {primaryCta && (
                 <CTA 
                   {...primaryCta.fields} 
@@ -96,14 +94,13 @@ export default function HeroCenter({
           )}
 
           {copy && (
-            <div className={`mt-4 ${copyTextClass}`}>
-              <RichText content={copy} className={`[&_p]:${copyTextClass}`} />
+            <div className={`mt-4`}>
+              <RichText content={copy} className={copyTextClass} />
             </div>
           )}
 
-          {/* Social Share Links */}
           {socialShare && (
-            <div className="mt-8">
+            <div className="mt-4">
               <SocialShare 
                 links={socialShare.fields?.links}
                 variant={isDarkBackground(backgroundColor) ? 'dark' : 'light'}
