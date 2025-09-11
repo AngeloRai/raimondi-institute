@@ -43,7 +43,7 @@ export default async function ContactForm({
       <div className="max-w-4xl mx-auto">
         {/* Section Heading */}
         <div className="text-center mb-12">
-          <h2 className={`font-heading text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 font-body-bold ${getContrastTextClass(backgroundColor)}`}>
+          <h2 className={`font-heading text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 ${getContrastTextClass(backgroundColor)}`}>
             {title}
           </h2>
           <p className={`font-body text-lg sm:text-xl max-w-2xl mx-auto ${getContrastSubtextClass(backgroundColor)}`}>
@@ -66,7 +66,7 @@ export default async function ContactForm({
           <div className="space-y-8">
             {/* Business Info Heading */}
             <div>
-              <h3 className={`font-heading text-2xl sm:text-3xl mb-6 font-body-bold ${getContrastTextClass(backgroundColor)}`}>
+              <h3 className={`font-heading text-2xl sm:text-3xl mb-6 ${getContrastTextClass(backgroundColor)}`}>
                 {businessHeading}
               </h3>
 
