@@ -1,69 +1,69 @@
 // Brand color mappings for Tailwind CSS classes
 export type BrandColor = 
-  | "dark-forest-green"
-  | "medium-forest-green" 
-  | "light-forest-green"
-  | "charcoal-gray"
-  | "warm-cream"
-  | "pure-white";
+  | "brand-primary"
+  | "brand-secondary" 
+  | "brand-accent"
+  | "neutral-dark"
+  | "surface-soft"
+  | "surface-pure";
 
 // Theme color aliases (used by some components)
 export type ThemeColor = "dark" | "light" | "white";
 
 // Background color class mappings for brand colors
 export const brandColorClasses: Record<BrandColor, string> = {
-  "dark-forest-green": "bg-dark-forest-green",
-  "medium-forest-green": "bg-medium-forest-green", 
-  "light-forest-green": "bg-light-forest-green",
-  "charcoal-gray": "bg-charcoal-gray",
-  "warm-cream": "bg-warm-cream",
-  "pure-white": "bg-pure-white",
+  "brand-primary": "bg-brand-primary",
+  "brand-secondary": "bg-brand-secondary", 
+  "brand-accent": "bg-brand-accent",
+  "neutral-dark": "bg-neutral-dark",
+  "surface-soft": "bg-surface-soft",
+  "surface-pure": "bg-surface-pure",
 } as const;
 
 // Brand colors array
 export const brandColors = [
-  "dark-forest-green",
-  "medium-forest-green",
-  "light-forest-green",
-  "charcoal-gray",
-  "warm-cream",
-  "pure-white",
+  "brand-primary",
+  "brand-secondary",
+  "brand-accent",
+  "neutral-dark",
+  "surface-soft",
+  "surface-pure",
 ];
 
 // Background color class mappings for theme colors  
 export const themeColorClasses: Record<ThemeColor, string> = {
-  "dark": "bg-charcoal-gray",
-  "light": "bg-warm-cream",
-  "white": "bg-pure-white",
+  "dark": "bg-neutral-dark",
+  "light": "bg-surface-soft",
+  "white": "bg-surface-pure",
 } as const;
 
 // Text color class mappings
 export const brandTextColorClasses: Record<BrandColor, string> = {
-  "dark-forest-green": "text-dark-forest-green",
-  "medium-forest-green": "text-medium-forest-green",
-  "light-forest-green": "text-light-forest-green", 
-  "charcoal-gray": "text-charcoal-gray",
-  "warm-cream": "text-warm-cream",
-  "pure-white": "text-pure-white",
+  "brand-primary": "text-brand-primary",
+  "brand-secondary": "text-brand-secondary",
+  "brand-accent": "text-brand-accent", 
+  "neutral-dark": "text-neutral-dark",
+  "surface-soft": "text-surface-soft",
+  "surface-pure": "text-surface-pure",
 } as const;
 
 // Border color class mappings
 export const brandBorderColorClasses: Record<BrandColor, string> = {
-  "dark-forest-green": "border-dark-forest-green",
-  "medium-forest-green": "border-medium-forest-green",
-  "light-forest-green": "border-light-forest-green",
-  "charcoal-gray": "border-charcoal-gray", 
-  "warm-cream": "border-warm-cream",
-  "pure-white": "border-pure-white",
+  "brand-primary": "border-brand-primary",
+  "brand-secondary": "border-brand-secondary",
+  "brand-accent": "border-brand-accent",
+  "neutral-dark": "border-neutral-dark", 
+  "surface-soft": "border-surface-soft",
+  "surface-pure": "border-surface-pure",
 } as const;
 
 /**
  * Get the background CSS class for a brand color or theme color
  * @param color - The brand color name or theme color name
- * @param fallback - Fallback class if color is not found (default: "bg-warm-cream")
+ * @param fallback - Fallback class if color is not found (default: "bg-surface-soft")
  * @returns The Tailwind CSS background class
  */
-export function getBrandBgClass(color: string | undefined | null, fallback: string = "bg-warm-cream"): string {
+export function getBrandBgClass(color: string | undefined | null, fallback: string = "bg-surface-soft"): string {
   if (!color) {
     return fallback;
   }
@@ -84,10 +84,10 @@ export function getBrandBgClass(color: string | undefined | null, fallback: stri
 /**
  * Get the text CSS class for a brand color
  * @param color - The brand color name
- * @param fallback - Fallback class if color is not found (default: "text-charcoal-gray")
+ * @param fallback - Fallback class if color is not found (default: "text-neutral-dark")
  * @returns The Tailwind CSS text class
  */
-export function getBrandTextClass(color: string | undefined | null, fallback: string = "text-charcoal-gray"): string {
+export function getBrandTextClass(color: string | undefined | null, fallback: string = "text-neutral-dark"): string {
   if (!color || !isBrandColor(color)) {
     return fallback;
   }
@@ -97,10 +97,10 @@ export function getBrandTextClass(color: string | undefined | null, fallback: st
 /**
  * Get the border CSS class for a brand color
  * @param color - The brand color name  
- * @param fallback - Fallback class if color is not found (default: "border-charcoal-gray")
+ * @param fallback - Fallback class if color is not found (default: "border-neutral-dark")
  * @returns The Tailwind CSS border class
  */
-export function getBrandBorderClass(color: string | undefined | null, fallback: string = "border-charcoal-gray"): string {
+export function getBrandBorderClass(color: string | undefined | null, fallback: string = "border-neutral-dark"): string {
   if (!color || !isBrandColor(color)) {
     return fallback;
   }
@@ -136,82 +136,82 @@ export function getBrandColors(): BrandColor[] {
 // Contrast color mappings for text on different backgrounds
 export const contrastTextClasses = {
   // Dark backgrounds need light text
-  "dark-forest-green": "text-white",
-  "medium-forest-green": "text-white", 
-  "charcoal-gray": "text-white",
+  "brand-primary": "text-white",
+  "brand-secondary": "text-white", 
+  "neutral-dark": "text-white",
   
   // Light backgrounds need dark text
-  "light-forest-green": "text-charcoal-gray",
-  "warm-cream": "text-charcoal-gray",
-  "pure-white": "text-charcoal-gray",
+  "brand-accent": "text-neutral-dark",
+  "surface-soft": "text-neutral-dark",
+  "surface-pure": "text-neutral-dark",
   
   // Theme color aliases
   "dark": "text-white",
-  "light": "text-charcoal-gray", 
-  "white": "text-charcoal-gray",
+  "light": "text-neutral-dark", 
+  "white": "text-neutral-dark",
 } as const;
 
 // Subtext/secondary text color mappings
 export const contrastSubtextClasses = {
   // Dark backgrounds
-  "dark-forest-green": "text-white/80",
-  "medium-forest-green": "text-white/80",
-  "charcoal-gray": "text-white/80",
+  "brand-primary": "text-white/80",
+  "brand-secondary": "text-white/80",
+  "neutral-dark": "text-white/80",
   
   // Light backgrounds
-  "light-forest-green": "text-charcoal-gray/70",
-  "warm-cream": "text-light-forest-green", 
-  "pure-white": "text-light-forest-green",
+  "brand-accent": "text-neutral-dark/70",
+  "surface-soft": "text-brand-accent", 
+  "surface-pure": "text-brand-accent",
   
   // Theme color aliases
   "dark": "text-white/80",
-  "light": "text-light-forest-green",
-  "white": "text-light-forest-green",
+  "light": "text-brand-accent",
+  "white": "text-brand-accent",
 } as const;
 
 // Icon color mappings for different backgrounds
 export const contrastIconClasses = {
   // Dark backgrounds
-  "dark-forest-green": "text-white",
-  "medium-forest-green": "text-white",
-  "charcoal-gray": "text-white",
+  "brand-primary": "text-white",
+  "brand-secondary": "text-white",
+  "neutral-dark": "text-white",
   
   // Light backgrounds  
-  "light-forest-green": "text-dark-forest-green",
-  "warm-cream": "text-dark-forest-green",
-  "pure-white": "text-dark-forest-green",
+  "brand-accent": "text-brand-primary",
+  "surface-soft": "text-brand-primary",
+  "surface-pure": "text-brand-primary",
   
   // Theme color aliases
   "dark": "text-white",
-  "light": "text-dark-forest-green",
-  "white": "text-dark-forest-green",
+  "light": "text-brand-primary",
+  "white": "text-brand-primary",
 } as const;
 
 // Form field styling for different backgrounds
 export const contrastFormFieldClasses = {
   // Dark backgrounds
-  "dark-forest-green": "bg-white/10 border-white/20 text-white placeholder:text-white/60",
-  "medium-forest-green": "bg-white/10 border-white/20 text-white placeholder:text-white/60",
-  "charcoal-gray": "bg-white/10 border-white/20 text-white placeholder:text-white/60",
+  "brand-primary": "bg-white/10 border-white/20 text-white placeholder:text-white/60",
+  "brand-secondary": "bg-white/10 border-white/20 text-white placeholder:text-white/60",
+  "neutral-dark": "bg-white/10 border-white/20 text-white placeholder:text-white/60",
   
   // Light backgrounds
-  "light-forest-green": "bg-pure-white border-charcoal-gray/20 text-charcoal-gray",
-  "warm-cream": "bg-pure-white border-charcoal-gray/20 text-charcoal-gray",
-  "pure-white": "bg-pure-white border-charcoal-gray/20 text-charcoal-gray",
+  "brand-accent": "bg-surface-pure border-neutral-dark/20 text-neutral-dark",
+  "surface-soft": "bg-surface-pure border-neutral-dark/20 text-neutral-dark",
+  "surface-pure": "bg-surface-pure border-neutral-dark/20 text-neutral-dark",
   
   // Theme color aliases
   "dark": "bg-white/10 border-white/20 text-white placeholder:text-white/60",
-  "light": "bg-pure-white border-charcoal-gray/20 text-charcoal-gray",
-  "white": "bg-pure-white border-charcoal-gray/20 text-charcoal-gray",
+  "light": "bg-surface-pure border-neutral-dark/20 text-neutral-dark",
+  "white": "bg-surface-pure border-neutral-dark/20 text-neutral-dark",
 } as const;
 
 /**
  * Get contrast-appropriate text color for a background color
  * @param backgroundColor - The background color
- * @param fallback - Fallback class (default: "text-charcoal-gray")
+ * @param fallback - Fallback class (default: "text-neutral-dark")
  * @returns Tailwind CSS text class
  */
-export function getContrastTextClass(backgroundColor: string | undefined | null, fallback: string = "text-charcoal-gray"): string {
+export function getContrastTextClass(backgroundColor: string | undefined | null, fallback: string = "text-neutral-dark"): string {
   if (!backgroundColor) return fallback;
   
   const key = backgroundColor as keyof typeof contrastTextClasses;
@@ -221,10 +221,10 @@ export function getContrastTextClass(backgroundColor: string | undefined | null,
 /**
  * Get contrast-appropriate subtext color for a background color
  * @param backgroundColor - The background color
- * @param fallback - Fallback class (default: "text-light-forest-green")
+ * @param fallback - Fallback class (default: "text-brand-accent")
  * @returns Tailwind CSS text class
  */
-export function getContrastSubtextClass(backgroundColor: string | undefined | null, fallback: string = "text-light-forest-green"): string {
+export function getContrastSubtextClass(backgroundColor: string | undefined | null, fallback: string = "text-brand-accent"): string {
   if (!backgroundColor) return fallback;
   
   const key = backgroundColor as keyof typeof contrastSubtextClasses;
@@ -234,10 +234,10 @@ export function getContrastSubtextClass(backgroundColor: string | undefined | nu
 /**
  * Get contrast-appropriate icon color for a background color
  * @param backgroundColor - The background color
- * @param fallback - Fallback class (default: "text-dark-forest-green")
+ * @param fallback - Fallback class (default: "text-brand-primary")
  * @returns Tailwind CSS text class for icons
  */
-export function getContrastIconClass(backgroundColor: string | undefined | null, fallback: string = "text-dark-forest-green"): string {
+export function getContrastIconClass(backgroundColor: string | undefined | null, fallback: string = "text-brand-primary"): string {
   if (!backgroundColor) return fallback;
   
   const key = backgroundColor as keyof typeof contrastIconClasses;
@@ -247,10 +247,10 @@ export function getContrastIconClass(backgroundColor: string | undefined | null,
 /**
  * Get form field styling for a background color
  * @param backgroundColor - The background color
- * @param fallback - Fallback class (default: "bg-pure-white border-charcoal-gray/20 text-charcoal-gray")
+ * @param fallback - Fallback class (default: "bg-surface-pure border-neutral-dark/20 text-neutral-dark")
  * @returns Tailwind CSS classes for form fields
  */
-export function getContrastFormFieldClass(backgroundColor: string | undefined | null, fallback: string = "bg-pure-white border-charcoal-gray/20 text-charcoal-gray"): string {
+export function getContrastFormFieldClass(backgroundColor: string | undefined | null, fallback: string = "bg-surface-pure border-neutral-dark/20 text-neutral-dark"): string {
   if (!backgroundColor) return fallback;
   
   const key = backgroundColor as keyof typeof contrastFormFieldClasses;
@@ -265,7 +265,7 @@ export function getContrastFormFieldClass(backgroundColor: string | undefined | 
 export function isDarkBackground(backgroundColor: string | undefined | null): boolean {
   if (!backgroundColor) return false;
   
-  const darkColors = ["dark-forest-green", "medium-forest-green", "charcoal-gray", "dark"];
+  const darkColors = ["brand-primary", "brand-secondary", "neutral-dark", "dark"];
   return darkColors.includes(backgroundColor);
 }
 
@@ -295,20 +295,20 @@ export function getCTAVariantAndClasses(
   // Priority 2: Smart fallback based on background color
   if (backgroundColor) {
     switch (backgroundColor) {
-      case "pure-white":
+      case "surface-pure":
         return {
           variant: "outline" as const,
-          className: "w-full !border-dark-forest-green !text-dark-forest-green hover:!bg-dark-forest-green hover:!text-white",
+          className: "w-full !border-brand-primary !text-brand-primary hover:!bg-brand-primary hover:!text-white",
         };
-      case "warm-cream":
-      case "light-forest-green":
+      case "surface-soft":
+      case "brand-accent":
         return {
           variant: "primary" as const,
           className: "w-full",
         };
-      case "charcoal-gray":
-      case "dark-forest-green":
-      case "medium-forest-green":
+      case "neutral-dark":
+      case "brand-primary":
+      case "brand-secondary":
         return {
           variant: "outline-dark" as const,
           className: "w-full",
