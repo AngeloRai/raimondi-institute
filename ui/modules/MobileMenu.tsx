@@ -52,7 +52,7 @@ export default function MobileMenu({
       {/* Mobile Menu Button */}
       <CTA
         variant="icon"
-        className="transform transition-all duration-200 hover:scale-110 hover:bg-dark-forest-green/5"
+        className="transform transition-all duration-200 hover:scale-110 hover:bg-brand-primary/5"
         onClick={toggleMobileMenu}
       >
         {isMobileMenuOpen ? <X /> : <Menu />}
@@ -63,7 +63,7 @@ export default function MobileMenu({
         <>
           {/* Enhanced Backdrop with smooth animation */}
           <div
-            className="fixed top-0 left-0 right-0 bottom-0 bg-dark-forest-green/20 backdrop-blur-md z-40 md:hidden
+            className="fixed top-0 left-0 right-0 bottom-0 bg-brand-primary/20 backdrop-blur-md z-40 md:hidden
                        animate-in fade-in duration-300"
             style={{ top: "calc(88px)" }} // Approximate navbar height
             onClick={closeMobileMenu}
@@ -71,8 +71,8 @@ export default function MobileMenu({
 
           {/* Enhanced Mobile Menu */}
           <div
-            className="fixed top-[88px] left-0 right-0 bg-warm-cream/95 backdrop-blur-md 
-                         border-t border-dark-forest-green/10 shadow-xl z-50 md:hidden
+            className="fixed top-[88px] left-0 right-0 bg-surface-soft/95 backdrop-blur-md 
+                         border-t border-brand-primary/10 shadow-xl z-50 md:hidden
                          animate-in slide-in-from-top-4 duration-300"
           >
             <div className="px-6 py-6 space-y-1">
@@ -80,17 +80,17 @@ export default function MobileMenu({
                 <Link
                   key={index}
                   href={item.href}
-                  className="block px-4 py-4 text-lg font-sans text-dark-forest-green 
-                           hover:text-medium-forest-green hover:bg-dark-forest-green/5 
+                  className="block px-4 py-4 text-lg font-body text-brand-primary 
+                           hover:text-brand-secondary hover:bg-brand-primary/5 
                            rounded-xl transition-all duration-200 transform hover:translate-x-1
-                           border border-transparent hover:border-dark-forest-green/10"
+                           border border-transparent hover:border-brand-primary/10"
                   onClick={closeMobileMenu}
                 >
                   {item.label}
                 </Link>
               ))}
               {cta && (
-                <div className="pt-4 border-t border-dark-forest-green/10 mt-4">
+                <div className="pt-4 border-t border-brand-primary/10 mt-4">
                   <CTA
                     {...cta.fields}
                     variant={

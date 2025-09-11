@@ -72,18 +72,18 @@ export default async function Navbar(props: NavbarProps) {
 
   // Get background color class and text colors
   const isDark = isDarkBackground(backgroundColor);
-  const textColorClass = getContrastTextClass(backgroundColor, "text-dark-forest-green");
-  const hoverTextClass = isDark ? "hover:text-white/80" : "hover:text-medium-forest-green";
-  const borderColor = isDark ? "border-white/20" : "border-dark-forest-green/15";
+  const textColorClass = getContrastTextClass(backgroundColor, "text-brand-primary");
+  const hoverTextClass = isDark ? "hover:text-white/80" : "hover:text-brand-secondary";
+  const borderColor = isDark ? "border-white/20" : "border-brand-primary/15";
   
   // Add opacity to the background color
-  const navbarBgClass = backgroundColor === "warm-cream" ? "bg-warm-cream/90" :
-                        backgroundColor === "pure-white" ? "bg-pure-white/90" :
-                        backgroundColor === "dark-forest-green" ? "bg-dark-forest-green/90" :
-                        backgroundColor === "medium-forest-green" ? "bg-medium-forest-green/90" :
-                        backgroundColor === "light-forest-green" ? "bg-light-forest-green/90" :
-                        backgroundColor === "charcoal-gray" ? "bg-charcoal-gray/90" :
-                        "bg-warm-cream/90";
+  const navbarBgClass = backgroundColor === "surface-soft" ? "bg-surface-soft/90" :
+                        backgroundColor === "surface-pure" ? "bg-surface-pure/90" :
+                        backgroundColor === "brand-primary" ? "bg-brand-primary/90" :
+                        backgroundColor === "brand-secondary" ? "bg-brand-secondary/90" :
+                        backgroundColor === "brand-accent" ? "bg-brand-accent/90" :
+                        backgroundColor === "neutral-dark" ? "bg-neutral-dark/90" :
+                        "bg-surface-soft/90";
 
   return (
     <nav
@@ -111,13 +111,13 @@ export default async function Navbar(props: NavbarProps) {
                 className={`relative py-3 px-4 whitespace-nowrap
                          transition-all duration-200 ease-out
                          ${textColorClass} ${hoverTextClass}
-                         group text-lg font-semibold`}
+                         group text-lg font-body-bold`}
               >
                 <span className="relative z-10 block">{item.label}</span>
                 {/* Elegant underline */}
                 <span
                   className={`absolute left-0 right-0 bottom-0 h-[2px]
-                           ${isDark ? 'bg-white/60' : 'bg-medium-forest-green'}
+                           ${isDark ? 'bg-white/60' : 'bg-brand-secondary'}
                            origin-center
                            transition-transform duration-200 ease-out
                            group-hover:scale-x-100 scale-x-0`}
