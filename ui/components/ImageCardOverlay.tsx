@@ -49,7 +49,7 @@ export default function ImageCardOverlay({ description }: ImageCardOverlayProps)
       {/* Desktop non-touch: Hover overlay */}
       {!isTouchDevice && (
         <div className="absolute inset-0 items-center justify-center p-6 opacity-0 translate-y-4 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 hidden sm:flex">
-          <p className="text-white text-center text-sm leading-relaxed font-medium">
+          <p className="text-white text-center text-sm leading-relaxed font-body">
             {description}
           </p>
         </div>
@@ -67,14 +67,14 @@ export default function ImageCardOverlay({ description }: ImageCardOverlayProps)
             aria-label={isExpanded ? "Hide description" : "Show description"}
           >
             <ChevronIcon
-              className={`w-5 h-5 text-dark-forest-green transition-transform duration-200 
+              className={`w-5 h-5 text-brand-primary transition-transform duration-200 
                          ${isExpanded ? "rotate-180" : ""}`}
             />
           </button>
 
           {/* Touch device overlay with background */}
           <div
-            className={`absolute inset-0 bg-dark-forest-green/80 transition-all duration-300
+            className={`absolute inset-0 bg-brand-primary/80 transition-all duration-300
                         ${
                           isExpanded
                             ? "opacity-100"
@@ -92,7 +92,7 @@ export default function ImageCardOverlay({ description }: ImageCardOverlayProps)
                             : "opacity-0 translate-y-4 pointer-events-none"
                         }`}
           >
-            <p className="text-white text-center text-sm leading-relaxed font-medium">
+            <p className="text-white text-center text-sm leading-relaxed font-body">
               {description}
             </p>
           </div>

@@ -34,7 +34,7 @@ export default function LocaleSelector({
 
   const baseStyles = variant === 'footer' 
     ? "bg-transparent text-white/70 border border-white/20 hover:border-white/40 focus:border-white/60"
-    : "bg-white text-dark-forest-green border border-dark-forest-green/20";
+    : "bg-white text-brand-primary border border-brand-primary/20";
 
   return (
     <form ref={formRef} className={`inline-block ${className}`}>
@@ -47,11 +47,11 @@ export default function LocaleSelector({
         defaultValue={currentLocale}
         onChange={handleLocaleChange}
         className={`
-          px-3 py-2 rounded-lg text-sm font-medium
+          px-3 py-2 rounded-lg text-sm font-body
           transition-all duration-200 cursor-pointer
           focus:outline-none focus:ring-2 focus:ring-offset-2
           ${baseStyles}
-          ${variant === 'footer' ? 'focus:ring-white/50' : 'focus:ring-medium-forest-green'}
+          ${variant === 'footer' ? 'focus:ring-white/50' : 'focus:ring-brand-secondary'}
         `}
         aria-label="Select language"
       >
