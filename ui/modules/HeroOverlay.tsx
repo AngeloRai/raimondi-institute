@@ -55,7 +55,7 @@ export default function HeroOverlay({
       <div className="relative z-10 max-w-7xl mx-auto w-full h-full flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-24">
         <div className="w-full flex flex-col items-center text-center space-y-4 sm:space-y-6 lg:space-y-8">
           {heading && (
-            <h1 className={`font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.05] text-white ${headingTextClass} drop-shadow-lg`}>
+            <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.05] text-white drop-shadow-lg">
               {heading}
             </h1>
           )}
@@ -90,7 +90,7 @@ export default function HeroOverlay({
 
           {copy && (
             <div className={`mt-3 sm:mt-4 lg:mt-6`}>
-              <RichText content={copy} className={copyTextClass} />
+              <RichText content={copy} className="text-white/90 font-accent italic" />
             </div>
           )}
 
