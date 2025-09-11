@@ -27,10 +27,10 @@ function Hero({
   const imageAlt = image?.fields?.title || heading || "Hero image";
 
   // Define color classes for all variations
-  const backgroundColorClass = getBrandBgClass(backgroundColor, "bg-warm-cream");
-  const headingTextClass = getContrastTextClass(backgroundColor, 'text-charcoal-gray')
-  const subheadingTextClass = getContrastSubtextClass(backgroundColor, 'text-gray-600')
-  const copyTextClass = getContrastSubtextClass(backgroundColor, 'text-gray-600')
+  const backgroundColorClass = getBrandBgClass(backgroundColor, "bg-surface-soft");
+  const headingTextClass = getContrastTextClass(backgroundColor, 'text-neutral-dark')
+  const subheadingTextClass = `font-body ${getContrastSubtextClass(backgroundColor, 'text-gray-600')}`
+  const copyTextClass = `font-accent italic font-light ${getContrastSubtextClass(backgroundColor, 'text-gray-600')}`
 
   // Common props for all variations
   const commonProps = {

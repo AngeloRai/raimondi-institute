@@ -43,7 +43,7 @@ export default function HeroSplit({
       <div className="relative z-10 max-w-7xl mx-auto w-full h-full flex items-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-24">
         <div className="lg:hidden w-full flex flex-col items-center text-center space-y-4 sm:space-y-6">
           {heading && (
-            <h1 className={`font-display text-3xl sm:text-4xl md:text-5xl tracking-tight leading-[1.02] ${headingTextClass} font-bold`}>
+            <h1 className={`font-heading text-3xl sm:text-4xl md:text-5xl tracking-tight leading-[1.02] ${headingTextClass}`}>
               {heading}
             </h1>
           )}
@@ -116,7 +116,7 @@ export default function HeroSplit({
         <div className="hidden lg:grid lg:grid-cols-2 gap-16 items-center w-full min-h-[600px]">
           <div className="space-y-8">
             {heading && (
-              <h1 className={`font-display text-6xl xl:text-7xl tracking-tight leading-[1.02] ${headingTextClass} font-bold`}>
+              <h1 className={`font-heading text-6xl xl:text-7xl tracking-tight leading-[1.02] ${headingTextClass}`}>
                 {heading}
               </h1>
             )}

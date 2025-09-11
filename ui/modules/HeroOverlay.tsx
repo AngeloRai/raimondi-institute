@@ -10,6 +10,10 @@ interface HeroOverlayProps extends HeroProps {
   heightClasses: Record<string, string>;
   imageUrl: string | undefined;
   imageAlt: string;
+  backgroundColorClass: string;
+  headingTextClass: string;
+  subheadingTextClass: string;
+  copyTextClass: string;
 }
 
 export default function HeroOverlay({
@@ -23,7 +27,11 @@ export default function HeroOverlay({
   socialShare,
   heightClasses,
   imageUrl,
-  imageAlt
+  imageAlt,
+  backgroundColorClass,
+  headingTextClass,
+  subheadingTextClass,
+  copyTextClass
 }: HeroOverlayProps) {
   const links = socialShare?.fields?.links;
 
@@ -47,13 +55,13 @@ export default function HeroOverlay({
       <div className="relative z-10 max-w-7xl mx-auto w-full h-full flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-24">
         <div className="w-full flex flex-col items-center text-center space-y-4 sm:space-y-6 lg:space-y-8">
           {heading && (
-            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.05] text-white font-bold drop-shadow-lg">
+            <h1 className={`font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.05] text-white ${headingTextClass} drop-shadow-lg`}>
               {heading}
             </h1>
           )}
 
           {subheading && (
-            <div className="text-base sm:text-xl lg:text-2xl xl:text-3xl max-w-4xl mx-auto leading-relaxed">
+            <div className={`text-base sm:text-xl lg:text-2xl xl:text-3xl max-w-4xl mx-auto leading-relaxed ${subheadingTextClass}`}>
               <RichText
                 content={subheading as Document}
                 className="[&_p]:text-white/90 [&_h1]:text-white [&_h2]:text-white [&_h3]:text-white [&_h4]:text-white [&_h5]:text-white [&_h6]:text-white [&_li]:text-white/90"
@@ -81,8 +89,8 @@ export default function HeroOverlay({
           )}
 
           {copy && (
-            <div className="mt-3 sm:mt-4 lg:mt-6">
-              <RichText content={copy} className="[&_p]:text-white/80" />
+            <div className={`mt-3 sm:mt-4 lg:mt-6`}>
+              <RichText content={copy} className={copyTextClass} />
             </div>
           )}
 

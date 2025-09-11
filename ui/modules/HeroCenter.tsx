@@ -42,7 +42,7 @@ export default function HeroCenter({
         <div className="w-full flex flex-col items-center text-center space-y-4 sm:space-y-6 lg:space-y-10">
           <div className="space-y-3 sm:space-y-4 lg:space-y-6 max-w-5xl">
             {heading && (
-              <h1 className={`font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.05] ${headingTextClass} font-bold`}>
+              <h1 className={`font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.05] ${headingTextClass} font-bold`}>
                 {heading}
               </h1>
             )}
@@ -62,7 +62,7 @@ export default function HeroCenter({
           </div>
 
           {imageUrl && (
-            <div className="relative w-full max-w-4xl mt-4 sm:mt-6 lg:mt-8">
+            <div className="relative w-full max-w-4xl mt-2 sm:mt-3 lg:mt-4">
               <div className="relative aspect-[16/10] sm:aspect-[16/10] overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-xl lg:shadow-2xl">
                 <Image
                   src={imageUrl}
