@@ -7,7 +7,7 @@ export interface TypeModuleImageTextFields {
     subheading?: EntryFieldTypes.RichText;
     image?: EntryFieldTypes.AssetLink;
     imagePosition?: EntryFieldTypes.Symbol<"left" | "overlay" | "right">;
-    backgroundColor?: EntryFieldTypes.Symbol;
+    backgroundColor?: EntryFieldTypes.Symbol<"brand-accent" | "brand-primary" | "brand-secondary" | "neutral-dark" | "surface-pure" | "surface-soft">;
     primaryCta?: EntryFieldTypes.EntryLink<TypeCtaSkeleton>;
     secondaryCta?: EntryFieldTypes.EntryLink<TypeCtaSkeleton>;
 }

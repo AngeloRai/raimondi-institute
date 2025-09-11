@@ -13,7 +13,7 @@ export interface TypeModuleHeroFields {
     primaryCta?: EntryFieldTypes.EntryLink<TypeCtaSkeleton>;
     secondaryCta?: EntryFieldTypes.EntryLink<TypeCtaSkeleton>;
     copy?: EntryFieldTypes.RichText;
-    backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
+    backgroundColor?: EntryFieldTypes.Symbol<"brand-accent" | "brand-primary" | "brand-secondary" | "neutral-dark" | "surface-pure" | "surface-soft">;
 }
 
 export type TypeModuleHeroSkeleton = EntrySkeletonType<TypeModuleHeroFields, "moduleHero">;

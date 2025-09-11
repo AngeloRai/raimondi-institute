@@ -7,7 +7,7 @@ export interface TypeNavbarFields {
     logo?: EntryFieldTypes.AssetLink;
     navigationLinks?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeLinkSkeleton>>;
     cta?: EntryFieldTypes.EntryLink<TypeCtaSkeleton>;
-    backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
+    backgroundColor?: EntryFieldTypes.Symbol<"brand-accent" | "brand-primary" | "brand-secondary" | "neutral-dark" | "surface-pure" | "surface-soft">;
 }
 
 export type TypeNavbarSkeleton = EntrySkeletonType<TypeNavbarFields, "navbar">;

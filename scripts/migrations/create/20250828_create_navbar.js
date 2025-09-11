@@ -68,12 +68,12 @@ module.exports = function (migration) {
     .validations([
       {
         in: [
-          "charcoal-gray",
-          "dark-forest-green",
-          "light-forest-green",
-          "medium-forest-green",
-          "pure-white",
-          "warm-cream",
+          "neutral-dark",
+          "brand-primary",
+          "brand-accent",
+          "brand-secondary",
+          "surface-pure",
+          "surface-soft",
         ],
       },
     ]);

@@ -4,12 +4,12 @@
 */
 
 const brandColors = [
-  "charcoal-gray",
-  "dark-forest-green",
-  "light-forest-green",
-  "medium-forest-green",
-  "pure-white",
-  "warm-cream",
+  "neutral-dark",
+  "brand-primary",
+  "brand-accent",
+  "brand-secondary",
+  "surface-pure",
+  "surface-soft",
 ];
 
 module.exports = function (migration) {

@@ -85,16 +85,16 @@ module.exports = function (migration) {
     .validations([
       {
         in: [
-          "pure-white",
-          "warm-cream",
-          "light-forest-green",
-          "medium-forest-green",
-          "dark-forest-green",
-          "charcoal-gray",
+          "surface-pure",
+          "surface-soft",
+          "brand-accent",
+          "brand-secondary",
+          "brand-primary",
+          "neutral-dark",
         ],
       },
     ])
-    .defaultValue({ "en-US": "pure-white" })
+    .defaultValue({ "en-US": "surface-pure" })
     .disabled(false)
     .omitted(false);
 

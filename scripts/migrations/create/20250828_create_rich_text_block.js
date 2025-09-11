@@ -53,12 +53,12 @@ module.exports = function (migration) {
     .validations([
       {
         in: [
-          "charcoal-gray",
-          "dark-forest-green",
-          "light-forest-green", // Fixed typo from TypeScript definition
-          "medium-forest-green",
-          "pure-white",
-          "warm-cream",
+          "neutral-dark",
+          "brand-primary",
+          "brand-accent", // Fixed typo from TypeScript definition
+          "brand-secondary",
+          "surface-pure",
+          "surface-soft",
         ],
       },
     ]);

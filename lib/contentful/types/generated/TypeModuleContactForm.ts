@@ -12,7 +12,7 @@ export interface TypeModuleContactFormFields {
     phones: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
     schedule: EntryFieldTypes.Text;
     copy?: EntryFieldTypes.Text;
-    backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
+    backgroundColor?: EntryFieldTypes.Symbol<"brand-accent" | "brand-primary" | "brand-secondary" | "neutral-dark" | "surface-pure" | "surface-soft">;
     redirectUrl?: EntryFieldTypes.Symbol;
 }
 

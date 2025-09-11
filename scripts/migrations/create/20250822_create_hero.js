@@ -86,7 +86,7 @@ module.exports = function (migration) {
     .required(false)
     .validations([
       {
-        in: ["pure-white", "warm-cream", "light-forest-green", "medium-forest-green", "dark-forest-green", "charcoal-gray"]
+        in: ["surface-pure", "surface-soft", "brand-accent", "brand-secondary", "brand-primary", "neutral-dark"]
       }
     ])
     .disabled(false)

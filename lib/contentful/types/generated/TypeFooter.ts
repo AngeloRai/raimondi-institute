@@ -10,7 +10,7 @@ export interface TypeFooterFields {
     links?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeComponentLinksSkeleton>>;
     copyrightMessage?: EntryFieldTypes.Symbol;
     copyrightLinks?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeLinkSkeleton>>;
-    backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
+    backgroundColor?: EntryFieldTypes.Symbol<"brand-accent" | "brand-primary" | "brand-secondary" | "neutral-dark" | "surface-pure" | "surface-soft">;
 }
 
 export type TypeFooterSkeleton = EntrySkeletonType<TypeFooterFields, "footer">;

@@ -71,8 +71,8 @@ module.exports = function (migration) {
     .type("Symbol")
     .localized(false)
     .required(false)
-    .validations([{ in: ["pure-white", "warm-cream", "light-forest-green", "medium-forest-green", "dark-forest-green", "charcoal-gray"] }])
-    .defaultValue({ "en-US": "pure-white" })
+    .validations([{ in: ["surface-pure", "surface-soft", "brand-accent", "brand-secondary", "brand-primary", "neutral-dark"] }])
+    .defaultValue({ "en-US": "surface-pure" })
     .disabled(false)
     .omitted(false);
 

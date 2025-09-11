@@ -6,7 +6,7 @@ export interface TypeModuleImageCarouselFields {
     heading?: EntryFieldTypes.Symbol;
     subheading?: EntryFieldTypes.Text;
     images: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
-    backgroundColor?: EntryFieldTypes.Symbol<"charcoal-gray" | "dark-forest-green" | "light-forest-green" | "medium-forest-green" | "pure-white" | "warm-cream">;
+    backgroundColor?: EntryFieldTypes.Symbol<"brand-accent" | "brand-primary" | "brand-secondary" | "neutral-dark" | "surface-pure" | "surface-soft">;
     autoplay?: EntryFieldTypes.Boolean;
     autoplayInterval?: EntryFieldTypes.Integer;
     navigation?: EntryFieldTypes.Symbol<"arrows" | "both" | "dots" | "none">;
