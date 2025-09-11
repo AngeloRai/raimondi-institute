@@ -65,7 +65,7 @@ export default async function Footer(props: FooterProps) {
   return (
     <footer
       id="footer"
-      className="w-full pt-16 pb-8 px-4 sm:px-6 lg:px-8 bg-charcoal-gray"
+      className="w-full pt-16 pb-8 px-4 sm:px-6 lg:px-8 bg-neutral-dark"
     >
       <div className="max-w-7xl mx-auto">
         {/* Main Footer Content */}
@@ -75,7 +75,7 @@ export default async function Footer(props: FooterProps) {
             <LogoComponent />
 
             {slogan && (
-              <div className="pt-6 text-sm leading-relaxed max-w-xs text-white/70">
+              <div className="pt-6 text-sm leading-relaxed max-w-xs font-body text-white/70">
                 {slogan}
               </div>
             )}
@@ -98,7 +98,7 @@ export default async function Footer(props: FooterProps) {
             return (
               <div key={index} className="space-y-4">
                 {section.fields.title && (
-                  <h3 className="tracking-wide text-white font-semibold">
+                  <h3 className="tracking-wide text-white font-body-bold">
                     {section.fields.title}
                   </h3>
                 )}
@@ -110,7 +110,7 @@ export default async function Footer(props: FooterProps) {
                       <li key={linkIndex}>
                         <Link
                           href={link.fields.url || "#"}
-                          className="text-sm transition-colors duration-200 hover:opacity-70 text-white/70"
+                          className="text-sm transition-colors duration-200 hover:opacity-70 font-body text-white/70"
                         >
                           {link.fields.label || ""}
                         </Link>
@@ -126,7 +126,7 @@ export default async function Footer(props: FooterProps) {
         {/* Bottom Border */}
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-sm text-white/50">
+            <p className="text-sm font-body text-white/50">
               {copyrightMessage || "© 2025 All rights reserved."}
             </p>
 
@@ -143,7 +143,7 @@ export default async function Footer(props: FooterProps) {
                     <Link
                       key={index}
                       href={link.fields.url || "#"}
-                      className="text-sm transition-colors duration-200 hover:opacity-70 text-white/50"
+                      className="text-sm transition-colors duration-200 hover:opacity-70 font-body text-white/50"
                     >
                       {link.fields.label || ""}
                     </Link>

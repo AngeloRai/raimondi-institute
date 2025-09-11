@@ -79,7 +79,7 @@ export default function ImageCarousel({
   const getBackgroundStyle = () => {
     if (!backgroundColor) {
       // Default gradient
-      return "bg-gradient-to-br from-charcoal-gray to-dark-forest-green";
+      return "bg-gradient-to-br from-neutral-dark to-brand-primary";
     }
     // Use the brand color system for consistent styling
     return getBrandBgClass(backgroundColor, "");
@@ -99,7 +99,7 @@ export default function ImageCarousel({
         {(heading || subheading) && (
           <div className="text-center mb-12">
             {heading && (
-              <h2 className={`font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 font-bold ${getTextColorClass()}`}>
+              <h2 className={`font-heading text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 font-body-bold ${getTextColorClass()}`}>
                 {heading}
               </h2>
             )}
@@ -158,7 +158,7 @@ export default function ImageCarousel({
                     
                     {/* Content Below Image */}
                     <div className="px-4 pt-3 pb-4 sm:px-6 sm:pt-4 sm:pb-6 lg:px-8 lg:pt-5 lg:pb-8 text-white">
-                      <h3 className="text-xl sm:text-2xl lg:text-3xl mb-2 font-semibold leading-tight">
+                      <h3 className="text-xl sm:text-2xl lg:text-3xl mb-2 font-body-bold leading-tight">
                         {image.title}
                       </h3>
                       {image.description && (

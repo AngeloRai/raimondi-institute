@@ -18,9 +18,9 @@ export default function Grid({
   heading,
   subheading,
   items = [],
-  backgroundColor = 'pure-white',
+  backgroundColor = 'surface-pure',
 }: ComponentGridProps) {
-  const bgClass = getBrandBgClass(backgroundColor, 'bg-pure-white')
+  const bgClass = getBrandBgClass(backgroundColor, 'bg-surface-pure')
 
 
   // Use all items together instead of separating by type
@@ -80,13 +80,13 @@ export default function Grid({
         {(heading || subheading) && (
           <div className="text-center mb-12">
             {heading && (
-              <h2 className={`font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 font-bold ${getContrastTextClass(backgroundColor)}`}>
+              <h2 className={`font-heading text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 font-body-bold ${getContrastTextClass(backgroundColor)}`}>
                 {heading}
               </h2>
             )}
             {subheading && (
               <p 
-                className={`text-lg sm:text-xl max-w-2xl mx-auto ${getContrastSubtextClass(backgroundColor)}`}
+                className={`font-body text-lg sm:text-xl max-w-2xl mx-auto ${getContrastSubtextClass(backgroundColor)}`}
               >
                 {subheading}
               </p>
@@ -105,7 +105,7 @@ export default function Grid({
                 subheading: fields.subheading || '',
                 icon: (fields.icon || 'music') as IconName,
                 cta: fields.cta,
-                backgroundColor: fields.backgroundColor || 'pure-white'
+                backgroundColor: fields.backgroundColor || 'surface-pure'
               }
               
               return (
@@ -124,7 +124,7 @@ export default function Grid({
                 description: fields.description || '',
                 image: fields.image,
                 cta: fields.cta,
-                backgroundColor: fields.backgroundColor || 'pure-white'
+                backgroundColor: fields.backgroundColor || 'surface-pure'
               }
               
               return (
@@ -142,7 +142,7 @@ export default function Grid({
                 role: fields.role,
                 testimonial: fields.testimonial || '',
                 showRating: fields.showRating,
-                backgroundColor: fields.backgroundColor || 'pure-white'
+                backgroundColor: fields.backgroundColor || 'surface-pure'
               }
               
               return (
