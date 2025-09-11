@@ -31,7 +31,7 @@ export function RichText({ content, className = "" }: RichTextProps) {
 
   const options: Options = {
     renderMark: {
-      [MARKS.BOLD]: (text) => <strong className="font-bold">{text}</strong>,
+      [MARKS.BOLD]: (text) => <strong className="font-body-bold">{text}</strong>,
       [MARKS.ITALIC]: (text) => <em className="italic">{text}</em>,
       [MARKS.UNDERLINE]: (text) => <span className="underline">{text}</span>,
     },
@@ -39,32 +39,32 @@ export function RichText({ content, className = "" }: RichTextProps) {
     renderNode: {
       // Headings with consistent styling from your design system
       [BLOCKS.HEADING_1]: (node, children) => (
-        <h1 className="font-display text-4xl lg:text-5xl xl:text-6xl font-bold text-charcoal-gray mb-6 mt-8">
+        <h1 className="font-heading text-4xl lg:text-5xl xl:text-6xl font-body-bold text-neutral-dark mb-6 mt-8">
           {children}
         </h1>
       ),
       [BLOCKS.HEADING_2]: (node, children) => (
-        <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal-gray mb-4 mt-8">
+        <h2 className="font-heading text-3xl lg:text-4xl font-body-bold text-neutral-dark mb-4 mt-8">
           {children}
         </h2>
       ),
       [BLOCKS.HEADING_3]: (node, children) => (
-        <h3 className="font-display text-2xl lg:text-3xl font-bold text-dark-forest-green mb-4 mt-6">
+        <h3 className="font-heading text-2xl lg:text-3xl font-body-bold text-brand-primary mb-4 mt-6">
           {children}
         </h3>
       ),
       [BLOCKS.HEADING_4]: (node, children) => (
-        <h4 className="font-display text-xl lg:text-2xl font-bold text-dark-forest-green mb-3 mt-6">
+        <h4 className="font-heading text-xl lg:text-2xl font-body-bold text-brand-primary mb-3 mt-6">
           {children}
         </h4>
       ),
       [BLOCKS.HEADING_5]: (node, children) => (
-        <h5 className="font-display text-lg lg:text-xl font-bold text-dark-forest-green mb-3 mt-4">
+        <h5 className="font-heading text-lg lg:text-xl font-body-bold text-brand-primary mb-3 mt-4">
           {children}
         </h5>
       ),
       [BLOCKS.HEADING_6]: (node, children) => (
-        <h6 className="font-display text-base lg:text-lg font-bold text-dark-forest-green mb-2 mt-4">
+        <h6 className="font-heading text-base lg:text-lg font-body-bold text-brand-primary mb-2 mt-4">
           {children}
         </h6>
       ),
@@ -81,8 +81,18 @@ export function RichText({ content, className = "" }: RichTextProps) {
           return <br className="my-2" />;
         }
 
+        // Use custom className if provided, otherwise use default styling
+        const paragraphClasses = className 
+          ? `text-base lg:text-lg mb-4 leading-relaxed ${className}`
+          : "text-base lg:text-lg mb-4 leading-relaxed";
+
+        // Add font-body to paragraphs if no custom class is provided
+        const finalParagraphClasses = className 
+          ? paragraphClasses
+          : `text-base lg:text-lg mb-4 leading-relaxed font-body`;
+
         return (
-          <p className="text-base lg:text-lg text-charcoal-gray mb-4 leading-relaxed">
+          <p className={finalParagraphClasses}>
             {children}
           </p>
         );
@@ -90,22 +100,22 @@ export function RichText({ content, className = "" }: RichTextProps) {
 
       // Lists
       [BLOCKS.UL_LIST]: (node, children) => (
-        <ul className="list-disc pl-6 mb-4 space-y-2 text-charcoal-gray">
+        <ul className="list-disc pl-6 mb-4 space-y-2">
           {children}
         </ul>
       ),
       [BLOCKS.OL_LIST]: (node, children) => (
-        <ol className="list-decimal pl-6 mb-4 space-y-2 text-charcoal-gray">
+        <ol className="list-decimal pl-6 mb-4 space-y-2">
           {children}
         </ol>
       ),
       [BLOCKS.LIST_ITEM]: (node, children) => (
-        <li className="text-base lg:text-lg leading-relaxed">{children}</li>
+        <li className="text-base lg:text-lg leading-relaxed font-body">{children}</li>
       ),
 
       // Blockquote
       [BLOCKS.QUOTE]: (node, children) => (
-        <blockquote className="border-l-4 border-dark-forest-green pl-4 my-6 italic text-lg text-charcoal-gray">
+        <blockquote className="border-l-4 border-brand-primary pl-4 my-6 italic text-lg">
           {children}
         </blockquote>
       ),
@@ -124,7 +134,7 @@ export function RichText({ content, className = "" }: RichTextProps) {
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-dark-forest-green underline hover:text-medium-forest-green transition-colors"
+              className="text-brand-primary underline hover:text-brand-secondary transition-colors"
             >
               {children}
             </a>
@@ -134,7 +144,7 @@ export function RichText({ content, className = "" }: RichTextProps) {
         return (
           <Link
             href={url}
-            className="text-dark-forest-green underline hover:text-medium-forest-green transition-colors"
+            className="text-brand-primary underline hover:text-brand-secondary transition-colors"
           >
             {children}
           </Link>
@@ -178,7 +188,7 @@ export function RichText({ content, className = "" }: RichTextProps) {
             href={absUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-dark-forest-green underline hover:text-medium-forest-green my-4"
+            className="inline-flex items-center gap-2 text-brand-primary underline hover:text-brand-secondary my-4"
           >
             <svg
               className="w-5 h-5"
@@ -207,7 +217,7 @@ export function RichText({ content, className = "" }: RichTextProps) {
         return (
           <Link
             href={`/${slug}`}
-            className="text-dark-forest-green underline hover:text-medium-forest-green transition-colors"
+            className="text-brand-primary underline hover:text-brand-secondary transition-colors"
           >
             {children}
           </Link>
