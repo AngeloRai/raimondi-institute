@@ -10,48 +10,48 @@ export default function GEGPage() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <div className="bg-dark-forest-green text-white py-12 px-6">
+      <div className="bg-brand-primary text-white py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <h1 className="font-display text-5xl mb-4">Graphic Example Guide (GEG)</h1>
+          <h1 className="font-heading text-5xl mb-4">Graphic Example Guide (GEG)</h1>
           <p className="text-xl">Complete design system reference for authors and developers</p>
         </div>
       </div>
 
       {/* Typography Section */}
-      <section className="py-16 px-6 bg-pure-white">
+      <section className="py-16 px-6 bg-surface-pure">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-4xl mb-8 text-charcoal-gray">Typography</h2>
+          <h2 className="font-heading text-4xl mb-8 text-neutral-dark">Typography</h2>
           
           {/* Font Families */}
           <div className="mb-12">
-            <h3 className="font-sans-bold text-2xl mb-6 text-dark-forest-green">Font Families</h3>
+            <h3 className="font-body-bold text-2xl mb-6 text-brand-primary">Font Families</h3>
             <div className="space-y-4">
               <div className="p-4 border rounded-lg">
-                <p className="text-sm text-gray-600 mb-2">font-display (Visby Medium)</p>
-                <p className="font-display text-3xl">The quick brown fox jumps over the lazy dog</p>
+                <p className="text-sm text-gray-600 mb-2">font-heading (Caliburn Bold)</p>
+                <p className="font-heading text-3xl">The quick brown fox jumps over the lazy dog</p>
               </div>
               <div className="p-4 border rounded-lg">
-                <p className="text-sm text-gray-600 mb-2">font-sans (Visby Medium)</p>
-                <p className="font-sans text-xl">The quick brown fox jumps over the lazy dog</p>
+                <p className="text-sm text-gray-600 mb-2">font-body (Visby Medium)</p>
+                <p className="font-body text-xl">The quick brown fox jumps over the lazy dog</p>
               </div>
               <div className="p-4 border rounded-lg">
-                <p className="text-sm text-gray-600 mb-2">font-sans-bold (Caliburn Bold)</p>
-                <p className="font-sans-bold text-xl">The quick brown fox jumps over the lazy dog</p>
+                <p className="text-sm text-gray-600 mb-2">font-body-bold (Visby Bold)</p>
+                <p className="font-body-bold text-xl">The quick brown fox jumps over the lazy dog</p>
               </div>
               <div className="p-4 border rounded-lg">
-                <p className="text-sm text-gray-600 mb-2">font-sans-light (Visby Light)</p>
-                <p className="font-sans-light text-xl">The quick brown fox jumps over the lazy dog</p>
+                <p className="text-sm text-gray-600 mb-2">font-body-light (Visby Light)</p>
+                <p className="font-body-light text-xl">The quick brown fox jumps over the lazy dog</p>
               </div>
               <div className="p-4 border rounded-lg">
-                <p className="text-sm text-gray-600 mb-2">font-serif (Freight Neo)</p>
-                <p className="font-serif text-xl">The quick brown fox jumps over the lazy dog</p>
+                <p className="text-sm text-gray-600 mb-2">font-accent (Freight Neo)</p>
+                <p className="font-accent text-xl">The quick brown fox jumps over the lazy dog</p>
               </div>
             </div>
           </div>
 
           {/* Font Sizes */}
           <div className="mb-12">
-            <h3 className="font-sans-bold text-2xl mb-6 text-dark-forest-green">Font Sizes</h3>
+            <h3 className="font-body-bold text-2xl mb-6 text-brand-primary">Font Sizes</h3>
             <div className="space-y-3">
               <div className="flex items-baseline gap-4">
                 <span className="text-sm text-gray-600 w-20">text-xs</span>
@@ -99,89 +99,89 @@ export default function GEGPage() {
       </section>
 
       {/* Brand Colors Section */}
-      <section className="py-16 px-6 bg-warm-cream">
+      <section className="py-16 px-6 bg-surface-soft">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-4xl mb-8 text-charcoal-gray">Brand Colors</h2>
+          <h2 className="font-heading text-4xl mb-8 text-neutral-dark">Brand Colors</h2>
           
           {/* Color Palette */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            <div className="bg-dark-forest-green p-8 rounded-lg">
-              <p className="text-white font-sans-bold">Dark Forest Green</p>
+            <div className="bg-brand-primary p-8 rounded-lg">
+              <p className="text-white font-body-bold">Brand Primary</p>
               <p className="text-white/80 text-sm">#09351E</p>
-              <p className="text-white/60 text-xs mt-2">dark-forest-green</p>
+              <p className="text-white/60 text-xs mt-2">brand-primary</p>
             </div>
-            <div className="bg-medium-forest-green p-8 rounded-lg">
-              <p className="text-white font-sans-bold">Medium Forest Green</p>
+            <div className="bg-brand-secondary p-8 rounded-lg">
+              <p className="text-white font-body-bold">Brand Secondary</p>
               <p className="text-white/80 text-sm">#3A5D4B</p>
-              <p className="text-white/60 text-xs mt-2">medium-forest-green</p>
+              <p className="text-white/60 text-xs mt-2">brand-secondary</p>
             </div>
-            <div className="bg-light-forest-green p-8 rounded-lg">
-              <p className="text-charcoal-gray font-sans-bold">Light Forest Green</p>
-              <p className="text-charcoal-gray/70 text-sm">#6B8678</p>
-              <p className="text-charcoal-gray/60 text-xs mt-2">light-forest-green</p>
+            <div className="bg-brand-accent p-8 rounded-lg">
+              <p className="text-neutral-dark font-body-bold">Brand Accent</p>
+              <p className="text-neutral-dark/70 text-sm">#6B8678</p>
+              <p className="text-neutral-dark/60 text-xs mt-2">brand-accent</p>
             </div>
-            <div className="bg-charcoal-gray p-8 rounded-lg">
-              <p className="text-white font-sans-bold">Charcoal Gray</p>
+            <div className="bg-neutral-dark p-8 rounded-lg">
+              <p className="text-white font-body-bold">Neutral Dark</p>
               <p className="text-white/80 text-sm">#1A1A1A</p>
-              <p className="text-white/60 text-xs mt-2">charcoal-gray</p>
+              <p className="text-white/60 text-xs mt-2">neutral-dark</p>
             </div>
-            <div className="bg-warm-cream p-8 rounded-lg border border-gray-200">
-              <p className="text-charcoal-gray font-sans-bold">Warm Cream</p>
-              <p className="text-charcoal-gray/70 text-sm">#FAECE3</p>
-              <p className="text-charcoal-gray/60 text-xs mt-2">warm-cream</p>
+            <div className="bg-surface-soft p-8 rounded-lg border border-gray-200">
+              <p className="text-neutral-dark font-body-bold">Surface Soft</p>
+              <p className="text-neutral-dark/70 text-sm">#FAECE3</p>
+              <p className="text-neutral-dark/60 text-xs mt-2">surface-soft</p>
             </div>
-            <div className="bg-pure-white p-8 rounded-lg border border-gray-200">
-              <p className="text-charcoal-gray font-sans-bold">Pure White</p>
-              <p className="text-charcoal-gray/70 text-sm">#FFFFFF</p>
-              <p className="text-charcoal-gray/60 text-xs mt-2">pure-white</p>
+            <div className="bg-surface-pure p-8 rounded-lg border border-gray-200">
+              <p className="text-neutral-dark font-body-bold">Surface Pure</p>
+              <p className="text-neutral-dark/70 text-sm">#FFFFFF</p>
+              <p className="text-neutral-dark/60 text-xs mt-2">surface-pure</p>
             </div>
           </div>
 
           {/* Background Examples with Text */}
-          <h3 className="font-sans-bold text-2xl mb-6 text-dark-forest-green">Text on Backgrounds</h3>
+          <h3 className="font-body-bold text-2xl mb-6 text-brand-primary">Text on Backgrounds</h3>
           <div className="space-y-4">
-            <div className="bg-dark-forest-green p-6 rounded-lg">
-              <h4 className="font-display text-2xl text-white mb-2">Heading on Dark Forest Green</h4>
+            <div className="bg-brand-primary p-6 rounded-lg">
+              <h4 className="font-heading text-2xl text-white mb-2">Heading on Brand Primary</h4>
               <p className="text-white">Body text on dark forest green background</p>
               <p className="text-white/80">Subtext with opacity on dark forest green</p>
             </div>
-            <div className="bg-medium-forest-green p-6 rounded-lg">
-              <h4 className="font-display text-2xl text-white mb-2">Heading on Medium Forest Green</h4>
+            <div className="bg-brand-secondary p-6 rounded-lg">
+              <h4 className="font-heading text-2xl text-white mb-2">Heading on Brand Secondary</h4>
               <p className="text-white">Body text on medium forest green background</p>
               <p className="text-white/80">Subtext with opacity on medium forest green</p>
             </div>
-            <div className="bg-light-forest-green p-6 rounded-lg">
-              <h4 className="font-display text-2xl text-charcoal-gray mb-2">Heading on Light Forest Green</h4>
-              <p className="text-charcoal-gray">Body text on light forest green background</p>
-              <p className="text-charcoal-gray/70">Subtext with opacity on light forest green</p>
+            <div className="bg-brand-accent p-6 rounded-lg">
+              <h4 className="font-heading text-2xl text-neutral-dark mb-2">Heading on Brand Accent</h4>
+              <p className="text-neutral-dark">Body text on light forest green background</p>
+              <p className="text-neutral-dark/70">Subtext with opacity on light forest green</p>
             </div>
-            <div className="bg-charcoal-gray p-6 rounded-lg">
-              <h4 className="font-display text-2xl text-white mb-2">Heading on Charcoal Gray</h4>
+            <div className="bg-neutral-dark p-6 rounded-lg">
+              <h4 className="font-heading text-2xl text-white mb-2">Heading on Neutral Dark</h4>
               <p className="text-white">Body text on charcoal gray background</p>
               <p className="text-white/80">Subtext with opacity on charcoal gray</p>
             </div>
-            <div className="bg-warm-cream p-6 rounded-lg">
-              <h4 className="font-display text-2xl text-charcoal-gray mb-2">Heading on Warm Cream</h4>
-              <p className="text-charcoal-gray">Body text on warm cream background</p>
-              <p className="text-light-forest-green">Subtext on warm cream</p>
+            <div className="bg-surface-soft p-6 rounded-lg">
+              <h4 className="font-heading text-2xl text-neutral-dark mb-2">Heading on Surface Soft</h4>
+              <p className="text-neutral-dark">Body text on warm cream background</p>
+              <p className="text-brand-accent">Subtext on warm cream</p>
             </div>
-            <div className="bg-pure-white p-6 rounded-lg border">
-              <h4 className="font-display text-2xl text-charcoal-gray mb-2">Heading on Pure White</h4>
-              <p className="text-charcoal-gray">Body text on pure white background</p>
-              <p className="text-light-forest-green">Subtext on pure white</p>
+            <div className="bg-surface-pure p-6 rounded-lg border">
+              <h4 className="font-heading text-2xl text-neutral-dark mb-2">Heading on Surface Pure</h4>
+              <p className="text-neutral-dark">Body text on pure white background</p>
+              <p className="text-brand-accent">Subtext on pure white</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Components Section */}
-      <section className="py-16 px-6 bg-pure-white">
+      <section className="py-16 px-6 bg-surface-pure">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-4xl mb-8 text-charcoal-gray">Components</h2>
+          <h2 className="font-heading text-4xl mb-8 text-neutral-dark">Components</h2>
           
           {/* CTA Buttons */}
           <div className="mb-12">
-            <h3 className="font-sans-bold text-2xl mb-6 text-dark-forest-green">CTA Buttons</h3>
+            <h3 className="font-body-bold text-2xl mb-6 text-brand-primary">CTA Buttons</h3>
             <div className="space-y-8">
               {/* Primary Variants */}
               <div>
@@ -205,14 +205,14 @@ export default function GEGPage() {
               <div>
                 <p className="text-sm text-gray-600 mb-4">CTAs on Different Backgrounds</p>
                 <div className="space-y-4">
-                  <div className="bg-dark-forest-green p-6 rounded-lg">
+                  <div className="bg-brand-primary p-6 rounded-lg">
                     <CTA label="CTA on Dark Forest" url="#" variant="outline" />
                   </div>
-                  <div className="bg-medium-forest-green p-6 rounded-lg">
+                  <div className="bg-brand-secondary p-6 rounded-lg">
                     <CTA label="CTA on Medium Forest" url="#" variant="outline" />
                   </div>
-                  <div className="bg-warm-cream p-6 rounded-lg">
-                    <CTA label="CTA on Warm Cream" url="#" variant="primary" />
+                  <div className="bg-surface-soft p-6 rounded-lg">
+                    <CTA label="CTA on Surface Soft" url="#" variant="primary" />
                   </div>
                 </div>
               </div>
@@ -221,7 +221,7 @@ export default function GEGPage() {
 
           {/* Grid Component Showcase */}
           <div className="mb-12">
-            <h3 className="font-sans-bold text-2xl mb-6 text-dark-forest-green">Grid Module Variations</h3>
+            <h3 className="font-body-bold text-2xl mb-6 text-brand-primary">Grid Module Variations</h3>
             
             {/* Grid with Cards */}
             <div className="mb-8">
@@ -229,7 +229,7 @@ export default function GEGPage() {
               <div style={{marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)'}}>
                 <Grid
                   heading="Our Services"
-                  backgroundColor="pure-white"
+                  backgroundColor="surface-pure"
                   items={[
                     {
                       sys: { contentType: { sys: { id: "componentCard" } }, id: "card1" },
@@ -269,7 +269,7 @@ export default function GEGPage() {
               <div style={{marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)'}}>
                 <Grid
                   heading="Featured Programs"
-                  backgroundColor="warm-cream"
+                  backgroundColor="surface-soft"
                   items={[
                     {
                       sys: { contentType: { sys: { id: "componentImageCard" } }, id: "imagecard1" },
@@ -327,7 +327,7 @@ export default function GEGPage() {
               <div style={{marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)'}}>
                 <Grid
                   heading="What Our Students Say"
-                  backgroundColor="light-forest-green"
+                  backgroundColor="brand-accent"
                   items={[
                     {
                       sys: { contentType: { sys: { id: "componentTestimonial" } }, id: "testimonial1" },
@@ -359,7 +359,7 @@ export default function GEGPage() {
             </div>
             
             <div className="bg-white p-6 rounded-lg border mt-8">
-              <h4 className="font-sans-bold text-lg mb-3 text-dark-forest-green">Grid Module Features</h4>
+              <h4 className="font-body-bold text-lg mb-3 text-brand-primary">Grid Module Features</h4>
               <ul className="text-sm text-gray-600 space-y-2">
                 <li>• <strong>Auto-Detection:</strong> Automatically detects and displays Cards, Image Cards, or Testimonials</li>
                 <li>• <strong>Responsive Columns:</strong> 1-4 columns that adapt to screen size</li>
@@ -374,10 +374,10 @@ export default function GEGPage() {
       </section>
 
       {/* Modules Section */}
-      <section className="bg-light-forest-green">
+      <section className="bg-brand-accent">
         <div className="py-16 px-6">
           <div className="max-w-7xl mx-auto">
-            <h2 className="font-display text-4xl mb-8 text-charcoal-gray">Modules</h2>
+            <h2 className="font-heading text-4xl mb-8 text-neutral-dark">Modules</h2>
           </div>
         </div>
         
@@ -388,15 +388,15 @@ export default function GEGPage() {
           <div className="mb-16">
             <div className="px-6 mb-8">
               <div className="max-w-7xl mx-auto">
-                <h3 className="font-sans-bold text-2xl mb-6 text-charcoal-gray">Hero Module Variations</h3>
+                <h3 className="font-body-bold text-2xl mb-6 text-neutral-dark">Hero Module Variations</h3>
               </div>
             </div>
             <div className="space-y-8">
-              {/* Hero with Dark Forest Green Background - Center Layout */}
+              {/* Hero with Brand Primary Background - Center Layout */}
               <div>
                 <div className="px-6 mb-4">
                   <div className="max-w-7xl mx-auto">
-                    <p className="text-sm text-gray-600">Dark Forest Green Background - Center Layout</p>
+                    <p className="text-sm text-gray-600">Brand Primary Background - Center Layout</p>
                   </div>
                 </div>
                 <div>
@@ -430,7 +430,7 @@ export default function GEGPage() {
                         }]
                       }]
                     } as any}
-                    backgroundColor="dark-forest-green"
+                    backgroundColor="brand-primary"
                     image={{
                       fields: {
                         file: {
@@ -499,7 +499,7 @@ export default function GEGPage() {
                         }]
                       }]
                     } as any}
-                    backgroundColor="dark-forest-green"
+                    backgroundColor="brand-primary"
                     image={{
                       fields: {
                         file: {
@@ -522,9 +522,9 @@ export default function GEGPage() {
                 </div>
               </div>
 
-              {/* Hero with Medium Forest Green Background */}
+              {/* Hero with Brand Secondary Background */}
               <div>
-                <p className="text-sm text-gray-600 mb-4">Medium Forest Green Background</p>
+                <p className="text-sm text-gray-600 mb-4">Brand Secondary Background</p>
                 <div>
                   <Hero
                     heading="Build Your Skills"
@@ -556,7 +556,7 @@ export default function GEGPage() {
                         }]
                       }]
                     } as any}
-                    backgroundColor="medium-forest-green"
+                    backgroundColor="brand-secondary"
                     image={{
                       fields: {
                         file: {
@@ -579,9 +579,9 @@ export default function GEGPage() {
                 </div>
               </div>
 
-              {/* Hero with Light Forest Green Background */}
+              {/* Hero with Brand Accent Background */}
               <div>
-                <p className="text-sm text-gray-600 mb-4">Light Forest Green Background</p>
+                <p className="text-sm text-gray-600 mb-4">Brand Accent Background</p>
                 <div>
                   <Hero
                     heading="Discover Excellence"
@@ -613,7 +613,7 @@ export default function GEGPage() {
                         }]
                       }]
                     } as any}
-                    backgroundColor="light-forest-green"
+                    backgroundColor="brand-accent"
                     image={{
                       fields: {
                         file: {
@@ -636,9 +636,9 @@ export default function GEGPage() {
                 </div>
               </div>
 
-              {/* Hero with Charcoal Gray Background and Image Overlay */}
+              {/* Hero with Neutral Dark Background and Image Overlay */}
               <div>
-                <p className="text-sm text-gray-600 mb-4">Charcoal Gray with Image Overlay</p>
+                <p className="text-sm text-gray-600 mb-4">Neutral Dark with Image Overlay</p>
                 <div>
                   <Hero
                     heading="Professional Excellence"
@@ -670,7 +670,7 @@ export default function GEGPage() {
                         }]
                       }]
                     } as any}
-                    backgroundColor="charcoal-gray"
+                    backgroundColor="neutral-dark"
                     image={{
                       fields: {
                         file: {
@@ -693,9 +693,9 @@ export default function GEGPage() {
                 </div>
               </div>
 
-              {/* Hero with Warm Cream Background */}
+              {/* Hero with Surface Soft Background */}
               <div>
-                <p className="text-sm text-gray-600 mb-4">Warm Cream Background</p>
+                <p className="text-sm text-gray-600 mb-4">Surface Soft Background</p>
                 <div>
                   <Hero
                     heading="Warm & Welcoming"
@@ -727,7 +727,7 @@ export default function GEGPage() {
                         }]
                       }]
                     } as any}
-                    backgroundColor="warm-cream"
+                    backgroundColor="surface-soft"
                     image={{
                       fields: {
                         file: {
@@ -750,9 +750,9 @@ export default function GEGPage() {
                 </div>
               </div>
 
-              {/* Hero with Pure White Background */}
+              {/* Hero with Surface Pure Background */}
               <div>
-                <p className="text-sm text-gray-600 mb-4">Pure White Background</p>
+                <p className="text-sm text-gray-600 mb-4">Surface Pure Background</p>
                 <div>
                   <Hero
                     heading="Clean & Modern"
@@ -784,7 +784,7 @@ export default function GEGPage() {
                         }]
                       }]
                     } as any}
-                    backgroundColor="pure-white"
+                    backgroundColor="surface-pure"
                     image={{
                       fields: {
                         file: {
@@ -807,7 +807,7 @@ export default function GEGPage() {
                 </div>
               </div>
 
-              {/* Hero with Split Layout - Dark Forest Green Background */}
+              {/* Hero with Split Layout - Brand Primary Background */}
               <div>
                 <p className="text-sm text-gray-600 mb-4">Split Layout - Content Left, Image Right</p>
                 <div>
@@ -858,7 +858,7 @@ export default function GEGPage() {
                       }
                     } as any}
                     imagePosition="split"
-                    backgroundColor="dark-forest-green"
+                    backgroundColor="brand-primary"
                     primaryCta={{
                       fields: {
                         text: "Explore Lessons",
@@ -882,7 +882,7 @@ export default function GEGPage() {
             </div>
             
             <div className="bg-white p-6 rounded-lg border mt-8">
-              <h4 className="font-sans-bold text-lg mb-3 text-dark-forest-green">Hero Module Features</h4>
+              <h4 className="font-body-bold text-lg mb-3 text-brand-primary">Hero Module Features</h4>
               <ul className="text-sm text-gray-600 space-y-2">
                 <li>• <strong>Background Colors:</strong> All 6 brand colors supported</li>
                 <li>• <strong>Image Positions:</strong> Overlay (with dark overlay), Center (stacked), or Split (content left, image right)</li>
@@ -896,7 +896,7 @@ export default function GEGPage() {
 
           {/* ImageText Component Showcase */}
           <div className="mb-16">
-            <h3 className="font-sans-bold text-2xl mb-6 text-charcoal-gray">ImageText Module Variations</h3>
+            <h3 className="font-body-bold text-2xl mb-6 text-neutral-dark">ImageText Module Variations</h3>
             <div className="space-y-8">
               {/* ImageText with Image Left */}
               <div>
@@ -931,7 +931,7 @@ export default function GEGPage() {
                       }
                     } as any}
                     imagePosition="left"
-                    backgroundColor="pure-white"
+                    backgroundColor="surface-pure"
                     primaryCta={{
                       fields: {
                         label: "Learn More",
@@ -977,7 +977,7 @@ export default function GEGPage() {
                       }
                     } as any}
                     imagePosition="right"
-                    backgroundColor="warm-cream"
+                    backgroundColor="surface-soft"
                     primaryCta={{
                       fields: {
                         label: "Get Started",
@@ -1023,7 +1023,7 @@ export default function GEGPage() {
                       }
                     } as any}
                     imagePosition="overlay"
-                    backgroundColor="charcoal-gray"
+                    backgroundColor="neutral-dark"
                     primaryCta={{
                       fields: {
                         label: "Explore Programs",
@@ -1038,7 +1038,7 @@ export default function GEGPage() {
             </div>
             
             <div className="bg-white p-6 rounded-lg border mt-8">
-              <h4 className="font-sans-bold text-lg mb-3 text-dark-forest-green">ImageText Module Features</h4>
+              <h4 className="font-body-bold text-lg mb-3 text-brand-primary">ImageText Module Features</h4>
               <ul className="text-sm text-gray-600 space-y-2">
                 <li>• <strong>Image Positions:</strong> Left, Right, or Overlay</li>
                 <li>• <strong>Background Colors:</strong> All 6 brand colors supported</li>
@@ -1052,7 +1052,7 @@ export default function GEGPage() {
 
           {/* ImageCarousel Module Showcase */}
           <div className="mb-16">
-            <h3 className="font-sans-bold text-2xl mb-6 text-charcoal-gray">ImageCarousel Module</h3>
+            <h3 className="font-body-bold text-2xl mb-6 text-neutral-dark">ImageCarousel Module</h3>
             <div className="space-y-8">
               {/* Basic ImageCarousel */}
               <div>
@@ -1089,14 +1089,14 @@ export default function GEGPage() {
                         }
                       }
                     ] as any}
-                    backgroundColor="pure-white"
+                    backgroundColor="surface-pure"
                   />
                 </div>
               </div>
 
               {/* ImageCarousel with Dark Background */}
               <div>
-                <p className="text-sm text-gray-600 mb-4">Carousel with Dark Forest Green Background</p>
+                <p className="text-sm text-gray-600 mb-4">Carousel with Brand Primary Background</p>
                 <div>
                   <ImageCarousel
                     heading="Featured Moments"
@@ -1120,14 +1120,14 @@ export default function GEGPage() {
                         }
                       }
                     ] as any}
-                    backgroundColor="dark-forest-green"
+                    backgroundColor="brand-primary"
                   />
                 </div>
               </div>
             </div>
             
             <div className="bg-white p-6 rounded-lg border mt-8">
-              <h4 className="font-sans-bold text-lg mb-3 text-dark-forest-green">ImageCarousel Module Features</h4>
+              <h4 className="font-body-bold text-lg mb-3 text-brand-primary">ImageCarousel Module Features</h4>
               <ul className="text-sm text-gray-600 space-y-2">
                 <li>• <strong>Multiple Images:</strong> Display 2-10 images in a slideshow format</li>
                 <li>• <strong>Navigation:</strong> Previous/Next buttons and dot indicators</li>
@@ -1143,10 +1143,10 @@ export default function GEGPage() {
 
           {/* Module Structure Reference */}
           <div className="mb-16">
-            <h3 className="font-sans-bold text-2xl mb-6 text-charcoal-gray">Available Modules</h3>
+            <h3 className="font-body-bold text-2xl mb-6 text-neutral-dark">Available Modules</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white p-6 rounded-lg border">
-                <h4 className="font-sans-bold text-lg mb-3 text-dark-forest-green">Hero Module</h4>
+                <h4 className="font-body-bold text-lg mb-3 text-brand-primary">Hero Module</h4>
                 <p className="text-sm text-gray-600 mb-3">Full-width banner with heading, subheading, and CTA</p>
                 <ul className="text-xs text-gray-500 space-y-1">
                   <li>• Supports all brand colors</li>
@@ -1157,7 +1157,7 @@ export default function GEGPage() {
               </div>
               
               <div className="bg-white p-6 rounded-lg border">
-                <h4 className="font-sans-bold text-lg mb-3 text-dark-forest-green">Grid Module</h4>
+                <h4 className="font-body-bold text-lg mb-3 text-brand-primary">Grid Module</h4>
                 <p className="text-sm text-gray-600 mb-3">Flexible grid layout for cards, testimonials, or image cards</p>
                 <ul className="text-xs text-gray-500 space-y-1">
                   <li>• Auto-detects content type</li>
@@ -1168,7 +1168,7 @@ export default function GEGPage() {
               </div>
               
               <div className="bg-white p-6 rounded-lg border">
-                <h4 className="font-sans-bold text-lg mb-3 text-dark-forest-green">ImageText Module</h4>
+                <h4 className="font-body-bold text-lg mb-3 text-brand-primary">ImageText Module</h4>
                 <p className="text-sm text-gray-600 mb-3">Split layout with image and rich text content</p>
                 <ul className="text-xs text-gray-500 space-y-1">
                   <li>• Left/right image positioning</li>
@@ -1179,7 +1179,7 @@ export default function GEGPage() {
               </div>
               
               <div className="bg-white p-6 rounded-lg border">
-                <h4 className="font-sans-bold text-lg mb-3 text-dark-forest-green">ImageCarousel Module</h4>
+                <h4 className="font-body-bold text-lg mb-3 text-brand-primary">ImageCarousel Module</h4>
                 <p className="text-sm text-gray-600 mb-3">Image slideshow with navigation controls</p>
                 <ul className="text-xs text-gray-500 space-y-1">
                   <li>• Swipe/touch navigation</li>
@@ -1190,7 +1190,7 @@ export default function GEGPage() {
               </div>
 
               <div className="bg-white p-6 rounded-lg border">
-                <h4 className="font-sans-bold text-lg mb-3 text-dark-forest-green">ContactForm Module</h4>
+                <h4 className="font-body-bold text-lg mb-3 text-brand-primary">ContactForm Module</h4>
                 <p className="text-sm text-gray-600 mb-3">Formspree-powered contact form with validation</p>
                 <ul className="text-xs text-gray-500 space-y-1">
                   <li>• Multi-language support</li>
@@ -1201,7 +1201,7 @@ export default function GEGPage() {
               </div>
 
               <div className="bg-white p-6 rounded-lg border">
-                <h4 className="font-sans-bold text-lg mb-3 text-dark-forest-green">Navbar & Footer</h4>
+                <h4 className="font-body-bold text-lg mb-3 text-brand-primary">Navbar & Footer</h4>
                 <p className="text-sm text-gray-600 mb-3">Global navigation and footer components</p>
                 <ul className="text-xs text-gray-500 space-y-1">
                   <li>• Mobile-responsive menu</li>
@@ -1215,10 +1215,10 @@ export default function GEGPage() {
 
           {/* Module Usage Examples */}
           <div className="mb-16">
-            <h3 className="font-sans-bold text-2xl mb-6 text-charcoal-gray">Module Usage Patterns</h3>
+            <h3 className="font-body-bold text-2xl mb-6 text-neutral-dark">Module Usage Patterns</h3>
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg border">
-                <h4 className="font-sans-bold text-lg mb-3 text-medium-forest-green">Typical Page Structure</h4>
+                <h4 className="font-body-bold text-lg mb-3 text-brand-secondary">Typical Page Structure</h4>
                 <ol className="text-sm text-gray-600 space-y-2">
                   <li>1. Hero Module - Page introduction with CTA</li>
                   <li>2. ImageText Module - Key messaging with visual</li>
@@ -1229,7 +1229,7 @@ export default function GEGPage() {
               </div>
 
               <div className="bg-white p-6 rounded-lg border">
-                <h4 className="font-sans-bold text-lg mb-3 text-medium-forest-green">Background Color Strategy</h4>
+                <h4 className="font-body-bold text-lg mb-3 text-brand-secondary">Background Color Strategy</h4>
                 <ul className="text-sm text-gray-600 space-y-2">
                   <li>• Alternate between light and dark sections for visual rhythm</li>
                   <li>• Use dark backgrounds for hero sections and important CTAs</li>
@@ -1243,52 +1243,52 @@ export default function GEGPage() {
       </section>
 
       {/* Spacing & Layout Section */}
-      <section className="py-16 px-6 bg-light-forest-green">
+      <section className="py-16 px-6 bg-brand-accent">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-4xl mb-8 text-charcoal-gray">Spacing & Layout</h2>
+          <h2 className="font-heading text-4xl mb-8 text-neutral-dark">Spacing & Layout</h2>
           
           {/* Spacing Scale */}
           <div className="mb-12">
-            <h3 className="font-sans-bold text-2xl mb-6 text-charcoal-gray">Spacing Scale</h3>
+            <h3 className="font-body-bold text-2xl mb-6 text-neutral-dark">Spacing Scale</h3>
             <div className="space-y-3 bg-white p-6 rounded-lg">
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 w-20">spacing-xs</span>
-                <div className="bg-dark-forest-green h-4" style={{ width: '4px' }}></div>
+                <div className="bg-brand-primary h-4" style={{ width: '4px' }}></div>
                 <span className="text-xs text-gray-500">4px</span>
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 w-20">spacing-sm</span>
-                <div className="bg-dark-forest-green h-4" style={{ width: '8px' }}></div>
+                <div className="bg-brand-primary h-4" style={{ width: '8px' }}></div>
                 <span className="text-xs text-gray-500">8px</span>
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 w-20">spacing-md</span>
-                <div className="bg-dark-forest-green h-4" style={{ width: '16px' }}></div>
+                <div className="bg-brand-primary h-4" style={{ width: '16px' }}></div>
                 <span className="text-xs text-gray-500">16px</span>
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 w-20">spacing-lg</span>
-                <div className="bg-dark-forest-green h-4" style={{ width: '24px' }}></div>
+                <div className="bg-brand-primary h-4" style={{ width: '24px' }}></div>
                 <span className="text-xs text-gray-500">24px</span>
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 w-20">spacing-xl</span>
-                <div className="bg-dark-forest-green h-4" style={{ width: '32px' }}></div>
+                <div className="bg-brand-primary h-4" style={{ width: '32px' }}></div>
                 <span className="text-xs text-gray-500">32px</span>
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 w-20">spacing-2xl</span>
-                <div className="bg-dark-forest-green h-4" style={{ width: '48px' }}></div>
+                <div className="bg-brand-primary h-4" style={{ width: '48px' }}></div>
                 <span className="text-xs text-gray-500">48px</span>
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 w-20">spacing-3xl</span>
-                <div className="bg-dark-forest-green h-4" style={{ width: '64px' }}></div>
+                <div className="bg-brand-primary h-4" style={{ width: '64px' }}></div>
                 <span className="text-xs text-gray-500">64px</span>
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 w-20">spacing-4xl</span>
-                <div className="bg-dark-forest-green h-4" style={{ width: '96px' }}></div>
+                <div className="bg-brand-primary h-4" style={{ width: '96px' }}></div>
                 <span className="text-xs text-gray-500">96px</span>
               </div>
             </div>
@@ -1296,35 +1296,35 @@ export default function GEGPage() {
 
           {/* Border Radius */}
           <div className="mb-12">
-            <h3 className="font-sans-bold text-2xl mb-6 text-charcoal-gray">Border Radius</h3>
+            <h3 className="font-body-bold text-2xl mb-6 text-neutral-dark">Border Radius</h3>
             <div className="flex flex-wrap gap-6 bg-white p-6 rounded-lg">
               <div className="text-center">
-                <div className="w-24 h-24 bg-dark-forest-green rounded-none mb-2"></div>
+                <div className="w-24 h-24 bg-brand-primary rounded-none mb-2"></div>
                 <p className="text-sm">rounded-none</p>
                 <p className="text-xs text-gray-500">0px</p>
               </div>
               <div className="text-center">
-                <div className="w-24 h-24 bg-dark-forest-green rounded-sm mb-2"></div>
+                <div className="w-24 h-24 bg-brand-primary rounded-sm mb-2"></div>
                 <p className="text-sm">rounded-sm</p>
                 <p className="text-xs text-gray-500">2px</p>
               </div>
               <div className="text-center">
-                <div className="w-24 h-24 bg-dark-forest-green rounded-md mb-2"></div>
+                <div className="w-24 h-24 bg-brand-primary rounded-md mb-2"></div>
                 <p className="text-sm">rounded-md</p>
                 <p className="text-xs text-gray-500">4px</p>
               </div>
               <div className="text-center">
-                <div className="w-24 h-24 bg-dark-forest-green rounded-lg mb-2"></div>
+                <div className="w-24 h-24 bg-brand-primary rounded-lg mb-2"></div>
                 <p className="text-sm">rounded-lg</p>
                 <p className="text-xs text-gray-500">8px</p>
               </div>
               <div className="text-center">
-                <div className="w-24 h-24 bg-dark-forest-green rounded-xl mb-2"></div>
+                <div className="w-24 h-24 bg-brand-primary rounded-xl mb-2"></div>
                 <p className="text-sm">rounded-xl</p>
                 <p className="text-xs text-gray-500">12px</p>
               </div>
               <div className="text-center">
-                <div className="w-24 h-24 bg-dark-forest-green rounded-full mb-2"></div>
+                <div className="w-24 h-24 bg-brand-primary rounded-full mb-2"></div>
                 <p className="text-sm">rounded-full</p>
                 <p className="text-xs text-gray-500">9999px</p>
               </div>
@@ -1333,7 +1333,7 @@ export default function GEGPage() {
 
           {/* Shadows */}
           <div>
-            <h3 className="font-sans-bold text-2xl mb-6 text-charcoal-gray">Shadows</h3>
+            <h3 className="font-body-bold text-2xl mb-6 text-neutral-dark">Shadows</h3>
             <div className="flex flex-wrap gap-6 bg-white p-6 rounded-lg">
               <div className="text-center">
                 <div className="w-32 h-32 bg-white shadow-sm rounded-lg mb-2"></div>
@@ -1357,9 +1357,9 @@ export default function GEGPage() {
       </section>
 
       {/* Grid Layouts Section */}
-      <section className="py-16 px-6 bg-warm-cream">
+      <section className="py-16 px-6 bg-surface-soft">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-4xl mb-8 text-charcoal-gray">Grid Layouts</h2>
+          <h2 className="font-heading text-4xl mb-8 text-neutral-dark">Grid Layouts</h2>
           
           <div className="space-y-8">
             <div>
@@ -1393,13 +1393,13 @@ export default function GEGPage() {
       </section>
 
       {/* Usage Guidelines */}
-      <section className="py-16 px-6 bg-charcoal-gray">
+      <section className="py-16 px-6 bg-neutral-dark">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-4xl mb-8 text-white">Usage Guidelines</h2>
+          <h2 className="font-heading text-4xl mb-8 text-white">Usage Guidelines</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white/10 p-6 rounded-lg">
-              <h3 className="font-sans-bold text-xl mb-4 text-white">Typography Usage</h3>
+              <h3 className="font-body-bold text-xl mb-4 text-white">Typography Usage</h3>
               <ul className="space-y-2 text-white/80">
                 <li>• Display font for main headings</li>
                 <li>• Sans for body text and UI elements</li>
@@ -1410,19 +1410,19 @@ export default function GEGPage() {
             </div>
 
             <div className="bg-white/10 p-6 rounded-lg">
-              <h3 className="font-sans-bold text-xl mb-4 text-white">Color Usage</h3>
+              <h3 className="font-body-bold text-xl mb-4 text-white">Color Usage</h3>
               <ul className="space-y-2 text-white/80">
-                <li>• Dark Forest Green for primary actions</li>
-                <li>• Medium Forest Green for secondary elements</li>
-                <li>• Light Forest Green for subtle backgrounds</li>
-                <li>• Charcoal Gray for text and strong contrast</li>
-                <li>• Warm Cream for soft backgrounds</li>
-                <li>• Pure White for clean sections</li>
+                <li>• Brand Primary for primary actions</li>
+                <li>• Brand Secondary for secondary elements</li>
+                <li>• Brand Accent for subtle backgrounds</li>
+                <li>• Neutral Dark for text and strong contrast</li>
+                <li>• Surface Soft for soft backgrounds</li>
+                <li>• Surface Pure for clean sections</li>
               </ul>
             </div>
 
             <div className="bg-white/10 p-6 rounded-lg">
-              <h3 className="font-sans-bold text-xl mb-4 text-white">Component Guidelines</h3>
+              <h3 className="font-body-bold text-xl mb-4 text-white">Component Guidelines</h3>
               <ul className="space-y-2 text-white/80">
                 <li>• Cards adapt to background colors</li>
                 <li>• CTAs change style based on context</li>
@@ -1432,7 +1432,7 @@ export default function GEGPage() {
             </div>
 
             <div className="bg-white/10 p-6 rounded-lg">
-              <h3 className="font-sans-bold text-xl mb-4 text-white">Accessibility</h3>
+              <h3 className="font-body-bold text-xl mb-4 text-white">Accessibility</h3>
               <ul className="space-y-2 text-white/80">
                 <li>• Maintain proper color contrast ratios</li>
                 <li>• Use semantic HTML elements</li>
