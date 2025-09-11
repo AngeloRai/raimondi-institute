@@ -18,7 +18,7 @@ export default function ImageText({
   primaryCta,
   secondaryCta,
 }: ComponentImageTextProps) {
-  const bgClass = getBrandBgClass(backgroundColor, "bg-pure-white");
+  const bgClass = getBrandBgClass(backgroundColor, "bg-surface-pure");
 
 
   if (imagePosition === "overlay") {
@@ -49,12 +49,12 @@ export default function ImageText({
         <div className="relative z-10 py-20 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="max-w-2xl">
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight font-bold leading-[1.1] text-white">
+              <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl tracking-tight font-body-bold leading-[1.1] text-white">
                 {heading}
               </h2>
               
               <div className="mt-6 text-base sm:text-lg leading-relaxed">
-                {subheading && <RichText content={subheading} className="[&_p]:text-white/90 [&_h1]:text-white [&_h2]:text-white [&_h3]:text-white [&_h4]:text-white [&_h5]:text-white [&_h6]:text-white [&_li]:text-white/90 [&_blockquote]:text-white/80" />}
+                {subheading && <RichText content={subheading} className="font-body [&_p]:text-white/90 [&_h1]:text-white [&_h2]:text-white [&_h3]:text-white [&_h4]:text-white [&_h5]:text-white [&_h6]:text-white [&_li]:text-white/90 [&_blockquote]:text-white/80" />}
               </div>
               
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -62,14 +62,14 @@ export default function ImageText({
                   <CTA 
                     {...primaryCta.fields}
                     variant={getCTAVariantAndClasses(primaryCta, backgroundColor, "primary").variant}
-                    className="!bg-white !text-charcoal-gray !border-white hover:!bg-white/90"
+                    className="!bg-white !text-neutral-dark !border-white hover:!bg-white/90"
                   />
                 )}
                 {secondaryCta && (
                   <CTA 
                     {...secondaryCta.fields}
                     variant={getCTAVariantAndClasses(secondaryCta, backgroundColor, "outline").variant}
-                    className="!bg-dark-forest-green !text-white !border-dark-forest-green hover:!bg-dark-forest-green/90"
+                    className="!bg-brand-primary !text-white !border-brand-primary hover:!bg-brand-primary/90"
                   />
                 )}
               </div>
@@ -94,7 +94,7 @@ export default function ImageText({
             }`}
           >
             <h2
-              className={`font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight font-bold leading-[1.1] ${getContrastTextClass(backgroundColor)}`}
+              className={`font-heading text-4xl sm:text-5xl lg:text-6xl tracking-tight font-body-bold leading-[1.1] ${getContrastTextClass(backgroundColor)}`}
             >
               {heading}
             </h2>
@@ -105,8 +105,8 @@ export default function ImageText({
                   content={subheading}
                   className={
                     isDarkBackground(backgroundColor) 
-                      ? "[&_p]:text-white/90 [&_h1]:text-white [&_h2]:text-white [&_h3]:text-white [&_h4]:text-white [&_h5]:text-white [&_h6]:text-white [&_li]:text-white/90 [&_blockquote]:text-white/80 [&_a]:text-white" 
-                      : "[&_p]:text-gray-600 [&_li]:text-gray-600 [&_blockquote]:text-gray-700"
+                      ? "font-body [&_p]:text-white/90 [&_h1]:text-white [&_h2]:text-white [&_h3]:text-white [&_h4]:text-white [&_h5]:text-white [&_h6]:text-white [&_li]:text-white/90 [&_blockquote]:text-white/80 [&_a]:text-white" 
+                      : "font-body [&_p]:text-gray-600 [&_li]:text-gray-600 [&_blockquote]:text-gray-700"
                   } 
                 />
               )}
@@ -119,7 +119,7 @@ export default function ImageText({
                   variant={getCTAVariantAndClasses(primaryCta, backgroundColor, "primary").variant}
                   className={
                     isDarkBackground(backgroundColor) 
-                      ? "!bg-white !text-charcoal-gray !border-white hover:!bg-white/90"
+                      ? "!bg-white !text-neutral-dark !border-white hover:!bg-white/90"
                       : ""
                   }
                 />
@@ -130,7 +130,7 @@ export default function ImageText({
                   variant={getCTAVariantAndClasses(secondaryCta, backgroundColor, "outline").variant}
                   className={
                     isDarkBackground(backgroundColor) 
-                      ? "!bg-dark-forest-green !text-white !border-dark-forest-green hover:!bg-dark-forest-green/90"
+                      ? "!bg-brand-primary !text-white !border-brand-primary hover:!bg-brand-primary/90"
                       : ""
                   }
                 />
