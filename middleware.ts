@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { geolocation } from '@vercel/functions';
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES, LOCALE_COOKIE_NAME, COUNTRY_TO_LOCALE, type SupportedLocale } from './lib/locale-types';
 
 export function middleware(request: NextRequest) {
@@ -12,7 +13,8 @@ export function middleware(request: NextRequest) {
 
   // If no valid cookie locale, detect from headers
   const acceptLanguage = request.headers.get('accept-language');
-  const country = request.headers.get('x-vercel-ip-country');
+  // Next.js 15+ recommended approach for better type safety
+  const { country } = geolocation(request);
   
   let detectedLocale = DEFAULT_LOCALE;
   
