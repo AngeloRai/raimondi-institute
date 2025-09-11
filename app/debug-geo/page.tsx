@@ -15,6 +15,12 @@ export default async function DebugGeoPage() {
     'accept-language': headersList.get('accept-language'),
     'user-agent': headersList.get('user-agent'),
   };
+  
+  const middlewareHeaders = {
+    'x-middleware-locale': headersList.get('x-middleware-locale'),
+    'x-middleware-source': headersList.get('x-middleware-source'),
+    'x-middleware-country': headersList.get('x-middleware-country'),
+  };
 
   const localeCookie = cookieStore.get(LOCALE_COOKIE_NAME);
 
@@ -50,6 +56,33 @@ export default async function DebugGeoPage() {
           ) : (
             <p className="text-orange-600 bg-orange-100 p-4 rounded">
               ⚠️ No geolocation headers detected. This is normal in local development.
+            </p>
+          )}
+        </section>
+
+        {/* Middleware Debug Headers */}
+        <section className="bg-surface-soft p-6 rounded-lg">
+          <h2 className="text-xl font-semibold mb-4 text-brand-primary">
+            🔧 Middleware Debug Info
+          </h2>
+          {Object.keys(middlewareHeaders).some(key => middlewareHeaders[key as keyof typeof middlewareHeaders] !== null) ? (
+            <div className="space-y-2">
+              {Object.entries(middlewareHeaders).map(([key, value]) => (
+                value && (
+                  <div key={key} className="flex flex-col sm:flex-row gap-2">
+                    <span className="font-semibold text-brand-secondary min-w-64">
+                      {key}:
+                    </span>
+                    <span className="text-neutral-dark bg-white px-2 py-1 rounded">
+                      {String(value)}
+                    </span>
+                  </div>
+                )
+              ))}
+            </div>
+          ) : (
+            <p className="text-orange-600 bg-orange-100 p-4 rounded">
+              ⚠️ No middleware debug headers detected. Middleware may not be running.
             </p>
           )}
         </section>

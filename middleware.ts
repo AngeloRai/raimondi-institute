@@ -8,7 +8,10 @@ export function middleware(request: NextRequest) {
   
   if (cookieLocale && cookieLocale in SUPPORTED_LOCALES) {
     // Valid locale in cookie, continue with request
-    return NextResponse.next();
+    const response = NextResponse.next();
+    response.headers.set('x-middleware-locale', cookieLocale);
+    response.headers.set('x-middleware-source', 'cookie');
+    return response;
   }
 
   // If no valid cookie locale, detect from headers
@@ -17,10 +20,12 @@ export function middleware(request: NextRequest) {
   const { country } = geolocation(request);
   
   let detectedLocale = DEFAULT_LOCALE;
+  let localeSource = 'default';
   
   // Try to detect from country first
   if (country && COUNTRY_TO_LOCALE[country]) {
     detectedLocale = COUNTRY_TO_LOCALE[country] as SupportedLocale;
+    localeSource = `geo-${country}`;
   } else if (acceptLanguage) {
     // Fallback to accept-language header
     const preferredLocales = acceptLanguage
@@ -30,6 +35,7 @@ export function middleware(request: NextRequest) {
     for (const locale of preferredLocales) {
       if (locale in SUPPORTED_LOCALES) {
         detectedLocale = locale as SupportedLocale;
+        localeSource = 'accept-language';
         break;
       }
       // Check for partial matches (e.g., 'en' matches 'en-US')
@@ -38,6 +44,7 @@ export function middleware(request: NextRequest) {
       );
       if (match) {
         detectedLocale = match as SupportedLocale;
+        localeSource = 'accept-language-partial';
         break;
       }
     }
@@ -49,8 +56,14 @@ export function middleware(request: NextRequest) {
     maxAge: 365 * 24 * 60 * 60, // 1 year
     httpOnly: false, // Allow client-side access for locale switching
     sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production'
+    secure: process.env.NODE_ENV === 'production',
+    path: '/' // Explicitly set path to root
   });
+  
+  // Add debug headers
+  response.headers.set('x-middleware-locale', detectedLocale);
+  response.headers.set('x-middleware-source', localeSource);
+  response.headers.set('x-middleware-country', country || 'none');
 
   return response;
 }
