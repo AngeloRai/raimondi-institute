@@ -11,7 +11,7 @@ export default function Testimonial({
   role,
   testimonial,
   showRating,
-  backgroundColor = 'pure-white'
+  backgroundColor = 'surface-pure'
 }: ComponentTestimonialProps) {
 
 
@@ -38,10 +38,10 @@ export default function Testimonial({
 
   return (
     <div
-      className={`group p-6 sm:p-8 rounded-2xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl ${getBrandBgClass(backgroundColor, 'bg-pure-white')} ${
+      className={`group p-6 sm:p-8 rounded-2xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl ${getBrandBgClass(backgroundColor, 'bg-surface-pure')} ${
         isDarkBackground(backgroundColor) 
           ? 'border-white/10 shadow-lg' 
-          : 'border-dark-forest-green/10 shadow-md hover:border-dark-forest-green/20'
+          : 'border-brand-primary/10 shadow-md hover:border-brand-primary/20'
       }`}
     >
       {/* Rating */}
@@ -54,7 +54,7 @@ export default function Testimonial({
       {/* Testimonial Content */}
       <div className="space-y-6">
         <blockquote>
-          <p className={`font-serif text-lg leading-relaxed italic ${getContrastTextClass(backgroundColor)}`}>
+          <p className={`font-accent text-lg leading-relaxed italic ${getContrastTextClass(backgroundColor)}`}>
             <q>{testimonial}</q>
           </p>
         </blockquote>
@@ -63,10 +63,10 @@ export default function Testimonial({
         <div className="flex items-center space-x-4">
           {/* Avatar */}
           <div 
-            className={"w-12 h-12 rounded-full flex items-center justify-center bg-dark-forest-green"}
+            className={"w-12 h-12 rounded-full flex items-center justify-center bg-brand-primary"}
           >
               <span 
-                className="text-lg text-white font-semibold"
+                className="text-lg text-white font-body-bold"
               >
                 {name.split(' ').map(n => n[0]).join('')}
               </span>
@@ -74,7 +74,7 @@ export default function Testimonial({
 
           {/* Name and Role */}
           <div>
-            <h4 className={`tracking-tight font-semibold ${getContrastTextClass(backgroundColor)}`}>
+            <h4 className={`tracking-tight font-body-bold ${getContrastTextClass(backgroundColor)}`}>
               {name}  
             </h4>
             {(role) && (

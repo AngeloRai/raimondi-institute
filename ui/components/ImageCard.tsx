@@ -17,7 +17,7 @@ export default function ImageCard({
   image,
   heading,
   cta,
-  backgroundColor = "pure-white",
+  backgroundColor = "surface-pure",
   description,
   className = "",
 }: ComponentImageCardProps) {
@@ -35,10 +35,10 @@ export default function ImageCard({
     <div
       className={`group relative overflow-hidden rounded-xl shadow-sm 
                   transition-all duration-300 hover:shadow-xl hover:-translate-y-1 
-                  ${getBrandBgClass(backgroundColor, "bg-pure-white")} ${className}`}
+                  ${getBrandBgClass(backgroundColor, "bg-surface-pure")} ${className}`}
     >
       {/* Image Container */}
-      <div className="relative aspect-[4/3] overflow-hidden bg-warm-cream/20">
+      <div className="relative aspect-[4/3] overflow-hidden bg-surface-soft/20">
         {hasContentfulImage && imageUrl ? (
           <Image
             src={imageUrl}
@@ -65,7 +65,7 @@ export default function ImageCard({
         )}
 
         {/* Overlay that appears on hover */}
-        <div className="absolute inset-0 bg-dark-forest-green/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="absolute inset-0 bg-brand-primary/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
         {/* Interactive overlay component for all devices */}
         <ImageCardOverlay description={description} />
@@ -73,10 +73,10 @@ export default function ImageCard({
 
       {/* Content */}
       <div
-        className={`p-6 space-y-4 ${getBrandBgClass(backgroundColor, "bg-pure-white")}`}
+        className={`p-6 space-y-4 ${getBrandBgClass(backgroundColor, "bg-surface-pure")}`}
       >
         <h3
-          className={`font-bold text-xl leading-tight ${getContrastTextClass(backgroundColor)}`}
+          className={`font-body-bold text-xl leading-tight ${getContrastTextClass(backgroundColor)}`}
         >
           {heading}
         </h3>

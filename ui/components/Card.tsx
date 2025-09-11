@@ -9,13 +9,13 @@ interface ComponentCardProps extends CardProps {
 }
 
 export default function Card({
-  backgroundColor = 'pure-white',
+  backgroundColor = 'surface-pure',
   icon,
   heading,
   subheading,
   cta
 }: ComponentCardProps) {
-  const bgClass = getBrandBgClass(backgroundColor, 'bg-pure-white')
+  const bgClass = getBrandBgClass(backgroundColor, 'bg-surface-pure')
 
 
   return (
@@ -23,7 +23,7 @@ export default function Card({
       className={`group p-6 sm:p-8 rounded-2xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl flex flex-col h-full ${bgClass} ${
         isDarkBackground(backgroundColor) 
           ? 'border-white/10 shadow-lg' 
-          : 'border-dark-forest-green/10 shadow-md hover:border-dark-forest-green/20'
+          : 'border-brand-primary/10 shadow-md hover:border-brand-primary/20'
       }`}
     >
       {/* Icon */}
@@ -34,11 +34,11 @@ export default function Card({
       {/* Content */}
       <div className="flex flex-col h-full">
         <div className="space-y-4 flex-grow">
-          <h3 className={`text-xl sm:text-2xl tracking-tight font-semibold ${getContrastTextClass(backgroundColor)}`}>
+          <h3 className={`text-xl sm:text-2xl tracking-tight font-body-bold ${getContrastTextClass(backgroundColor)}`}>
             {heading}
           </h3>
           
-          <p className={`leading-relaxed ${getContrastSubtextClass(backgroundColor)}`}>
+          <p className={`leading-relaxed font-body ${getContrastSubtextClass(backgroundColor)}`}>
             {subheading}
           </p>
         </div>
