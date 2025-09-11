@@ -42,23 +42,16 @@
   --sidebar-ring: oklch(0.708 0 0);
 
   /* Custom Brand Design Tokens - Semantic Names */
-  --color-dark-forest-green: #09351E;
-  --color-medium-forest-green: #3A5D4B;
-  --color-light-forest-green: #6B8678;
-  --color-charcoal-gray: #1A1A1A;
-  --color-warm-cream: #FAECE3;
-  --color-pure-white: #FFFFFF;
+  --color-brand-primary: #09351E;
+  --color-brand-secondary: #3A5D4B;
+  --color-brand-accent: #6B8678;
+  --color-neutral-dark: #1A1A1A;
+  --color-surface-soft: #FAECE3;
+  --color-surface-pure: #FFFFFF;
   
   /* Semantic Colors */
-  --color-text-primary: #1A1A1A;
-  --color-text-inverse: #FFFFFF;
-  
-  /* Font Family Tokens */
-  --font-display: var(--font-caliburn-bold);
-  --font-serif: var(--font-freight-neo);
-  --font-sans-bold: var(--font-visby-bold);
-  --font-sans: var(--font-visby-medium);
-  --font-sans-light: var(--font-visby-light);
+  --color-text-primary: var(--color-neutral-dark);
+  --color-text-inverse: var(--color-surface-pure);
   
   /* Spacing Tokens */
   --spacing-xs: 4px;
@@ -173,20 +166,61 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Custom Brand Colors for Tailwind */
-  --color-dark-forest-green: var(--color-dark-forest-green);
-  --color-medium-forest-green: var(--color-medium-forest-green);
-  --color-light-forest-green: var(--color-light-forest-green);
-  --color-charcoal-gray: var(--color-charcoal-gray);
-  --color-warm-cream: var(--color-warm-cream);
-  --color-pure-white: var(--color-pure-white);
+  /* Custom Brand Colors for Tailwind - Semantic Names */
+  --color-brand-primary: var(--color-brand-primary);
+  --color-brand-secondary: var(--color-brand-secondary);
+  --color-brand-accent: var(--color-brand-accent);
+  --color-neutral-dark: var(--color-neutral-dark);
+  --color-surface-soft: var(--color-surface-soft);
+  --color-surface-pure: var(--color-surface-pure);
   --color-text-primary: var(--color-text-primary);
   --color-text-inverse: var(--color-text-inverse);
-  --font-display: var(--font-caliburn-bold);
-  --font-serif: var(--font-freight-neo);
-  --font-sans-bold: var(--font-visby-bold);
-  --font-sans: var(--font-visby-medium);
-  --font-sans-light: var(--font-visby-light);
+
+  /* Semantic Font Families - Maps to Next.js localFont CSS variables */
+  --font-heading: var(--font-heading);
+  --font-accent: var(--font-accent);
+  --font-body: var(--font-body);
+  --font-body-bold: var(--font-body-bold);
+  --font-body-light: var(--font-body-light);
+
+  /* Custom Semantic Spacing - Use unique names to avoid conflicts with Tailwind defaults */
+  --spacing-custom-xs: var(--spacing-xs);
+  --spacing-custom-sm: var(--spacing-sm);
+  --spacing-custom-md: var(--spacing-md);
+  --spacing-custom-lg: var(--spacing-lg);
+  --spacing-custom-xl: var(--spacing-xl);
+  --spacing-custom-2xl: var(--spacing-2xl);
+  --spacing-custom-3xl: var(--spacing-3xl);
+  --spacing-custom-4xl: var(--spacing-4xl);
+
+  /* Custom Semantic Font Sizes - Use unique names to avoid conflicts */
+  --fontSize-custom-xs: var(--text-xs);
+  --fontSize-custom-sm: var(--text-sm);
+  --fontSize-custom-base: var(--text-base);
+  --fontSize-custom-lg: var(--text-lg);
+  --fontSize-custom-xl: var(--text-xl);
+  --fontSize-custom-2xl: var(--text-2xl);
+  --fontSize-custom-3xl: var(--text-3xl);
+  --fontSize-custom-4xl: var(--text-4xl);
+  --fontSize-custom-5xl: var(--text-5xl);
+  --fontSize-custom-6xl: var(--text-6xl);
+
+  /* Custom Border Radius - Use unique names to avoid conflicts */
+  --radius-custom-none: var(--radius-none);
+  --radius-custom-sm: var(--radius-sm);
+  --radius-custom-md: var(--radius-md);
+  --radius-custom-lg: var(--radius-lg);
+  --radius-custom-xl: var(--radius-xl);
+  --radius-custom-full: var(--radius-full);
+
+  /* Custom Box Shadow - Use unique names to avoid conflicts */
+  --shadow-custom-sm: var(--shadow-sm);
+  --shadow-custom-md: var(--shadow-md);
+  --shadow-custom-lg: var(--shadow-lg);
+
+  /* Custom Font Weight - Use unique names to avoid conflicts */
+  --fontWeight-custom-normal: var(--font-weight-normal);
+  --fontWeight-custom-medium: var(--font-weight-medium);
 }
 
 @layer base {

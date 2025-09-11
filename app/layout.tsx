@@ -9,7 +9,7 @@ import { getLocale } from "@/lib/locale";
 // Display font for headers and titles
 const caliburnBold = localFont({
   src: "../public/fonts/Caliburn-Bold.otf",
-  variable: "--font-caliburn-bold",
+  variable: "--font-heading",
   display: "swap",
   weight: "700",
 });
@@ -17,7 +17,7 @@ const caliburnBold = localFont({
 // Serif font for testimonials and elegant content
 const freightNeo = localFont({
   src: "../public/fonts/FreightNeo Pro-Medium.ttf",
-  variable: "--font-freight-neo",
+  variable: "--font-accent",
   display: "swap",
   weight: "500",
 });
@@ -25,21 +25,21 @@ const freightNeo = localFont({
 // Sans-serif fonts for UI and body text
 const visbyCFBold = localFont({
   src: "../public/fonts/VisbyCF-Bold.otf",
-  variable: "--font-visby-bold",
+  variable: "--font-body-bold",
   display: "swap",
   weight: "700",
 });
 
 const visbyCFMedium = localFont({
   src: "../public/fonts/VisbyCF-Medium.otf",
-  variable: "--font-visby-medium",
+  variable: "--font-body",
   display: "swap",
   weight: "500",
 });
 
 const visbyCFLight = localFont({
   src: "../public/fonts/VisbyCF-Light.otf",
-  variable: "--font-visby-light",
+  variable: "--font-body-light",
   display: "swap",
   weight: "300",
 });
