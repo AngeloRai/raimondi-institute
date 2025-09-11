@@ -26,11 +26,12 @@ function Hero({
   const imageUrl = image?.fields?.file?.url;
   const imageAlt = image?.fields?.title || heading || "Hero image";
 
-  // Define color classes for all variations
-  const backgroundColorClass = getBrandBgClass(backgroundColor, "bg-surface-soft");
-  const headingTextClass = getContrastTextClass(backgroundColor, 'text-neutral-dark')
-  const subheadingTextClass = `font-body ${getContrastSubtextClass(backgroundColor, 'text-gray-600')}`
-  const copyTextClass = `font-accent italic font-light ${getContrastSubtextClass(backgroundColor, 'text-gray-600')}`
+  const classes = {
+    background: getBrandBgClass(backgroundColor, "bg-surface-soft"),
+    heading: getContrastTextClass(backgroundColor, 'text-neutral-dark'),
+    subheading: `font-body ${getContrastSubtextClass(backgroundColor, 'text-gray-600')}`,
+    copy: `font-accent italic font-light ${getContrastSubtextClass(backgroundColor, 'text-gray-600')}`
+  };
 
   // Common props for all variations
   const commonProps = {
@@ -45,10 +46,10 @@ function Hero({
     heightClasses,
     imageUrl,
     imageAlt,
-    backgroundColorClass,
-    headingTextClass,
-    subheadingTextClass,
-    copyTextClass
+    backgroundColorClass: classes.background,
+    headingTextClass: classes.heading,
+    subheadingTextClass: classes.subheading,
+    copyTextClass: classes.copy
   };
 
   // Split variation - content left, image right
