@@ -272,7 +272,7 @@ export default function GEGPage() {
                   backgroundColor="surface-soft"
                   items={[
                     {
-                      sys: { contentType: { sys: { id: "componentImageCard" } }, id: "imagecard1" },
+                      sys: { contentType: { sys: { id: "componentImageCard" } }, id: "image-card-1" },
                       fields: {
                         heading: "Advanced Certification",
                         description: "Complete our comprehensive certification program and earn recognition for your expertise in piano performance and pedagogy.",
@@ -287,7 +287,7 @@ export default function GEGPage() {
                       }
                     },
                     {
-                      sys: { contentType: { sys: { id: "componentImageCard" } }, id: "imagecard2" },
+                      sys: { contentType: { sys: { id: "componentImageCard" } }, id: "image-card-2" },
                       fields: {
                         heading: "Master Classes",
                         description: "Attend exclusive master classes with world-renowned pianists and learn advanced techniques from the best in the industry.",
@@ -302,7 +302,7 @@ export default function GEGPage() {
                       }
                     },
                     {
-                      sys: { contentType: { sys: { id: "componentImageCard" } }, id: "imagecard3" },
+                      sys: { contentType: { sys: { id: "componentImageCard" } }, id: "image-card-3" },
                       fields: {
                         heading: "Youth Programs",
                         description: "Specialized programs designed for young musicians to develop their skills in a supportive and encouraging environment.",
