@@ -38,15 +38,15 @@ export default async function ContactForm({
   return (
     <section 
       id={id}
-      className={`w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 ${getBrandBgClass(backgroundColor, 'bg-pure-white')}`}
+      className={`w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 ${getBrandBgClass(backgroundColor, 'bg-surface-pure')}`}
     >
       <div className="max-w-4xl mx-auto">
         {/* Section Heading */}
         <div className="text-center mb-12">
-          <h2 className={`text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 font-semibold ${getContrastTextClass(backgroundColor)}`}>
+          <h2 className={`font-heading text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-4 font-body-bold ${getContrastTextClass(backgroundColor)}`}>
             {title}
           </h2>
-          <p className={`text-lg sm:text-xl max-w-2xl mx-auto ${getContrastSubtextClass(backgroundColor)}`}>
+          <p className={`font-body text-lg sm:text-xl max-w-2xl mx-auto ${getContrastSubtextClass(backgroundColor)}`}>
             {subtitle}
           </p>
         </div>
@@ -66,7 +66,7 @@ export default async function ContactForm({
           <div className="space-y-8">
             {/* Business Info Heading */}
             <div>
-              <h3 className={`text-2xl sm:text-3xl mb-6 font-semibold ${getContrastTextClass(backgroundColor)}`}>
+              <h3 className={`font-heading text-2xl sm:text-3xl mb-6 font-body-bold ${getContrastTextClass(backgroundColor)}`}>
                 {businessHeading}
               </h3>
 
@@ -75,7 +75,7 @@ export default async function ContactForm({
                 {businessAddresses.map((address, index) => (
                   <div key={index} className="flex items-start space-x-3">
                     <div 
-                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green flex-shrink-0"
+                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-brand-primary flex-shrink-0"
                     >
                       <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -99,7 +99,7 @@ export default async function ContactForm({
                 {businessPhones && businessPhones.length > 0 && (
                   <div className="flex items-start space-x-3">
                     <div 
-                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green flex-shrink-0"
+                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-brand-primary flex-shrink-0"
                     >
                       <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -126,7 +126,7 @@ export default async function ContactForm({
                 {businessSchedule && (
                   <div className="flex items-start space-x-3">
                     <div 
-                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-dark-forest-green flex-shrink-0"
+                      className="w-6 h-6 mt-0.5 rounded-full flex items-center justify-center bg-brand-primary flex-shrink-0"
                     >
                       <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -148,7 +148,7 @@ export default async function ContactForm({
             </div>
 
             {additionalCopy && (
-              <div className={`p-6 rounded-2xl ${isDarkBackground(backgroundColor) ? 'bg-white/5' : 'bg-warm-cream'}`}>
+              <div className={`p-6 rounded-2xl ${isDarkBackground(backgroundColor) ? 'bg-white/5' : 'bg-surface-soft'}`}>
                 <p className={`text-sm leading-relaxed ${getContrastSubtextClass(backgroundColor)}`}>
                   {additionalCopy}
                 </p>

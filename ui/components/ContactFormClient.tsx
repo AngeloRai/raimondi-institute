@@ -62,7 +62,7 @@ export default function ContactFormClient({
   if (!formId) {
     return (
       <div className="text-center p-6 bg-red-50 border border-red-200 rounded-lg">
-        <p className="text-red-600 font-medium">
+        <p className="text-red-600 font-body">
           Form configuration error - missing form ID
         </p>
       </div>
@@ -79,7 +79,7 @@ export default function ContactFormClient({
             </svg>
           </div>
         </div>
-        <h3 className="text-lg font-semibold text-green-800 mb-2">
+        <h3 className="text-lg font-body-bold text-green-800 mb-2">
           {t('Thank You!')}
         </h3>
         <p className="text-green-600">

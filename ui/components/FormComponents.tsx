@@ -13,7 +13,7 @@ export function Label({ children, htmlFor, className = '', ...props }: React.Lab
   return (
     <label 
       htmlFor={htmlFor} 
-      className={`block text-sm font-medium mb-1 ${className}`}
+      className={`block text-sm font-body-bold mb-1 ${className}`}
       {...props}
     >
       {children}
