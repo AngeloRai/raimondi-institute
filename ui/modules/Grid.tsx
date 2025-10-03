@@ -5,7 +5,6 @@ import ImageCard from '../components/ImageCard'
 import Testimonial from '../components/Testimonial'
 import type { GridProps } from '@/lib/contentful/types/fields'
 import { isTypeComponentCard, isTypeComponentImageCard, isTypeComponentTestimonial } from '@/lib/contentful/types/generated'
-import type { IconName } from '../icons/IconRenderer'
 import { getBrandBgClass, getContrastTextClass, getContrastSubtextClass } from '@/lib/utils/brandColors'
 
 interface ComponentGridProps extends GridProps {
@@ -103,7 +102,7 @@ export default function Grid({
               const cardProps = {
                 heading: fields.heading || '',
                 subheading: fields.subheading || '',
-                icon: (fields.icon || 'music') as IconName,
+                icon: fields.icon || 'music',
                 cta: fields.cta,
                 backgroundColor: fields.backgroundColor || 'surface-pure'
               }

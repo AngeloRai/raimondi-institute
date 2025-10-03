@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CTAProps } from "@/lib/contentful/types/fields";
-import IconRenderer, { IconName } from "../icons/IconRenderer";
+import LucideIcon from "./LucideIcon";
 
 interface CTAComponentProps extends CTAProps {
   children?: React.ReactNode;
@@ -48,12 +48,12 @@ export default function CTA({
   const renderContent = () => {
     if (icon && !label && !children) {
       // Icon only
-      return <IconRenderer name={icon as IconName} className="w-5 h-5" />;
+      return <LucideIcon name={icon} className="w-5 h-5" />;
     } else if (icon && (label || children)) {
       // Icon + text
       return (
         <>
-          <IconRenderer name={icon as IconName} className="w-5 h-5" />
+          <LucideIcon name={icon} className="w-5 h-5" />
           {children || label}
         </>
       );
