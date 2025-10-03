@@ -18,7 +18,6 @@ export default function LucideIcon({ name, ...props }: LucideIconProps) {
 
   // Check if icon exists in dynamicIconImports
   if (!(normalizedName in dynamicIconImports)) {
-    console.warn(`Lucide icon "${name}" (normalized: "${normalizedName}") not found. Falling back to default.`);
     // Return a default icon or null
     const Circle = dynamic(dynamicIconImports['circle']);
     return <Circle {...props} />;
