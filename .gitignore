@@ -49,3 +49,7 @@ next-env.d.ts
 
 # generated data
 /lib/preload/layout-data.ts
+/lib/locale-types.ts
+
+# docs
+/docs
