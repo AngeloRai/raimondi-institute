@@ -24,11 +24,10 @@ const explicit = process.argv[2] || env.MIGRATION_FILE;
 const files = explicit
   ? [explicit]
   : [
-    //   "scripts/migrations/20250822_update_cta.js",
-      "scripts/migrations/20250822_create_cta.js",
-      "scripts/migrations/20250824_create_card.js",
-      "scripts/migrations/20250824_create_testimonial.js",
-      "scripts/migrations/20250824_add_heading_subheading.js",
+      "scripts/migrations/create/create_cta.js",
+      "scripts/migrations/create/create_card.js",
+      "scripts/migrations/create/create_testimonial.js",
+      "scripts/migrations/update/add_heading_subheading.js",
     ];
 
 let lastStatus = 1;

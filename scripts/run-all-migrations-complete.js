@@ -8,8 +8,8 @@ const migrationGroups = [
   {
     name: "1. Base Types (Level 0) - No dependencies",
     migrations: [
-      "create/20250825_create_link.js",
-      "create/20250822_create_seo.js",
+      "create/create_link.js",
+      "create/create_seo.js",
     ],
   },
   {
@@ -22,8 +22,8 @@ const migrationGroups = [
   {
     name: "3. Simple Components (Level 1) - Depend on base types",
     migrations: [
-      "create/20250822_create_cta.js",
-      "create/20250828_create_component_video_asset.js",
+      "create/create_cta.js",
+      "create/create_component_video_asset.js",
     ],
   },
   {
@@ -36,10 +36,10 @@ const migrationGroups = [
   {
     name: "5. Component Collections (Level 2) - Depend on CTA/Link",
     migrations: [
-      "create/20250828_create_component_links.js",
-      "create/20250824_create_card.js",
-      "create/20250826_create_component_image_card.js",
-      "create/20250824_create_testimonial.js",
+      "create/create_component_links.js",
+      "create/create_card.js",
+      "create/create_component_image_card.js",
+      "create/create_testimonial.js",
     ],
   },
   {
@@ -54,12 +54,12 @@ const migrationGroups = [
   {
     name: "7. Modules (Level 3) - Depend on components",
     migrations: [
-      "create/20250826_create_module_contact_form.js",
-      "create/20250828_create_rich_text_block.js",
-      "create/20250822_create_module_image_text.js",
-      "create/20250825_create_module_image_carousel.js",
-      "create/20250824_create_module_grid.js",
-      "create/20250822_create_hero.js",
+      "create/create_module_contact_form.js",
+      "create/create_rich_text_block.js",
+      "create/create_module_image_text.js",
+      "create/create_module_image_carousel.js",
+      "create/create_module_grid.js",
+      "create/create_hero.js",
     ],
   },
   {
@@ -76,8 +76,8 @@ const migrationGroups = [
   {
     name: "9. Layout Components (Level 4) - Depend on components",
     migrations: [
-      "create/20250828_create_navbar.js",
-      "create/20250828_create_footer.js",
+      "create/create_navbar.js",
+      "create/create_footer.js",
     ],
   },
   {
@@ -90,7 +90,7 @@ const migrationGroups = [
   {
     name: "11. Layout Wrapper (Level 5) - Depends on navbar/footer",
     migrations: [
-      "create/20250828_create_layout.js",
+      "create/create_layout.js",
     ],
   },
   {
@@ -102,7 +102,7 @@ const migrationGroups = [
   {
     name: "13. Pages (Level 6) - Depend on all modules and components",
     migrations: [
-      "create/20250822_create_page_cms.js",
+      "create/create_page_cms.js",
     ],
   },
   {

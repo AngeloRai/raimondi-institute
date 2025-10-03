@@ -8,11 +8,11 @@ const migrationGroups = [
   {
     name: "1. Base Components - Create",
     migrations: [
-      "create/20250822_create_cta.js",
-      "create/20250822_create_seo.js", 
-      "create/20250825_create_link.js",
-      "create/20250828_create_component_links.js",
-      "create/20250828_create_component_video_asset.js",
+      "create/create_cta.js",
+      "create/create_seo.js",
+      "create/create_link.js",
+      "create/create_component_links.js",
+      "create/create_component_video_asset.js",
     ],
   },
   {
@@ -28,9 +28,9 @@ const migrationGroups = [
   {
     name: "3. Content Components - Create",
     migrations: [
-      "create/20250824_create_card.js",
-      "create/20250826_create_component_image_card.js", 
-      "create/20250824_create_testimonial.js",
+      "create/create_card.js",
+      "create/create_component_image_card.js",
+      "create/create_testimonial.js",
     ],
   },
   {
@@ -44,9 +44,9 @@ const migrationGroups = [
   {
     name: "5. Layout Components - Create",
     migrations: [
-      "create/20250828_create_navbar.js",
-      "create/20250828_create_footer.js",
-      "create/20250828_create_layout.js",
+      "create/create_navbar.js",
+      "create/create_footer.js",
+      "create/create_layout.js",
     ],
   },
   {
@@ -60,12 +60,12 @@ const migrationGroups = [
   {
     name: "7. Modules - Create",
     migrations: [
-      "create/20250822_create_hero.js",
-      "create/20250822_create_module_image_text.js",
-      "create/20250824_create_module_grid.js",
-      "create/20250825_create_module_image_carousel.js",
-      "create/20250826_create_module_contact_form.js",
-      "create/20250828_create_rich_text_block.js",
+      "create/create_hero.js",
+      "create/create_module_image_text.js",
+      "create/create_module_grid.js",
+      "create/create_module_image_carousel.js",
+      "create/create_module_contact_form.js",
+      "create/create_rich_text_block.js",
     ],
   },
   {
@@ -82,7 +82,7 @@ const migrationGroups = [
   {
     name: "9. Pages - Create",
     migrations: [
-      "create/20250822_create_page_cms.js",
+      "create/create_page_cms.js",
     ],
   },
   {
