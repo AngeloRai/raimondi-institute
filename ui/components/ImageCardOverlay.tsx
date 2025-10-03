@@ -20,23 +20,24 @@ const ChevronIcon = ({ className }: { className?: string }) => (
 
 export default function ImageCardOverlay({ description }: ImageCardOverlayProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(true); // Default to true for mobile-first
 
   useEffect(() => {
-    // Check if device has touch capability
+    // Check if device has touch capability or is small screen
     const checkTouchDevice = () => {
       const hasTouch = (
         'ontouchstart' in window ||
         navigator.maxTouchPoints > 0 ||
         // @ts-expect-error - msMaxTouchPoints for older browsers
         navigator.msMaxTouchPoints > 0 ||
-        window.matchMedia('(pointer: coarse)').matches
+        window.matchMedia('(pointer: coarse)').matches ||
+        window.matchMedia('(max-width: 640px)').matches // sm breakpoint
       );
       setIsTouchDevice(hasTouch);
     };
 
     checkTouchDevice();
-    
+
     // Also check on resize/orientation change in case device capabilities change
     window.addEventListener('resize', checkTouchDevice);
     return () => window.removeEventListener('resize', checkTouchDevice);
@@ -48,7 +49,7 @@ export default function ImageCardOverlay({ description }: ImageCardOverlayProps)
     <>
       {/* Desktop non-touch: Hover overlay */}
       {!isTouchDevice && (
-        <div className="absolute inset-0 items-center justify-center p-6 opacity-0 translate-y-4 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 hidden sm:flex">
+        <div className="absolute inset-0 items-center justify-center p-6 opacity-0 translate-y-4 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 flex">
           <p className="text-white text-center text-sm leading-relaxed font-body">
             {description}
           </p>
@@ -56,7 +57,7 @@ export default function ImageCardOverlay({ description }: ImageCardOverlayProps)
       )}
 
       {/* Touch devices and small screens: Toggle button and expandable overlay */}
-      {isTouchDevice  && (
+      {isTouchDevice && (
         <>
           {/* Toggle button */}
           <button
