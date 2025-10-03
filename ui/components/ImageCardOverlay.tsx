@@ -56,7 +56,7 @@ export default function ImageCardOverlay({ description }: ImageCardOverlayProps)
       )}
 
       {/* Touch devices and small screens: Toggle button and expandable overlay */}
-      {(isTouchDevice || typeof window === 'undefined') && (
+      {isTouchDevice  && (
         <>
           {/* Toggle button */}
           <button
