@@ -1,11 +1,4 @@
 import React from 'react'
-import MusicIcon from './MusicIcon'
-import CraftsmanIcon from './CraftsmanIcon'
-import ServiceIcon from './ServiceIcon'
-import HeartIcon from './HeartIcon'
-import PianoIcon from './PianoIcon'
-import GrandPianoIcon from './GrandPianoIcon'
-import PlayingPianoIcon from './PlayingPianoIcon'
 import ChevronLeft from './ChevronLeft'
 import ChevronRight from './ChevronRight'
 import Instagram from './Instagram'
@@ -17,13 +10,6 @@ import X from './X'
 
 // Icon mapping
 const iconMap = {
-  music: MusicIcon,
-  craftsman: CraftsmanIcon,
-  service: ServiceIcon,
-  heart: HeartIcon,
-  piano: PianoIcon,
-  grandPiano: GrandPianoIcon,
-  playingPiano: PlayingPianoIcon,
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
   instagram: Instagram,
