@@ -58,11 +58,7 @@ module.exports = function (migration) {
     .type("Symbol")
     .localized(false)
     .required(true)
-    .validations([
-      { 
-        in: ["music", "craftsman", "service", "heart", "piano", "grandPiano", "playingPiano"] 
-      }
-    ])
+    .validations([])
     .defaultValue({ "en-US": "music" })
     .disabled(false)
     .omitted(false);
@@ -109,8 +105,8 @@ module.exports = function (migration) {
     helpText: "Card subheading/description text (max 500 characters)"
   });
 
-  card.changeFieldControl("icon", "builtin", "dropdown", {
-    helpText: "Select the icon to display in the card"
+  card.changeFieldControl("icon", "builtin", "singleLine", {
+    helpText: "Enter a Lucide icon name (e.g., 'Music', 'Heart', 'Piano'). Browse available icons at https://lucide.dev/icons/"
   });
 
   card.changeFieldControl("backgroundColor", "builtin", "dropdown", {

@@ -61,22 +61,7 @@ module.exports = function (migration) {
     .type("Symbol")
     .localized(false)
     .required(false)
-    .validations([
-      {
-        in: [
-          "music",
-          "craftsman",
-          "service",
-          "heart",
-          "piano",
-          "grandPiano",
-          "playingPiano",
-          "instagram",
-          "facebook",
-          "youtube",
-        ],
-      },
-    ])
+    .validations([])
     .disabled(false)
     .omitted(false);
 
@@ -113,7 +98,7 @@ module.exports = function (migration) {
     .disabled(false)
     .omitted(false);
 
-  cta.changeFieldControl("icon", "builtin", "dropdown", {
-    helpText: "playingPiano",
+  cta.changeFieldControl("icon", "builtin", "singleLine", {
+    helpText: "Enter a Lucide icon name (e.g., 'Music', 'Heart', 'Piano'). Browse available icons at https://lucide.dev/icons/",
   });
 };

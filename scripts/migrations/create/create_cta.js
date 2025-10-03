@@ -61,22 +61,7 @@ module.exports = function (migration) {
     .type("Symbol")
     .localized(false)
     .required(false)
-    .validations([
-      {
-        in: [
-          "music",
-          "craftsman",
-          "service",
-          "heart",
-          "piano",
-          "grandPiano",
-          "playingPiano",
-          "instagram",
-          "facebook",
-          "youtube",
-        ],
-      },
-    ])
+    .validations([])
     .disabled(false)
     .omitted(false);
 
@@ -113,8 +98,8 @@ module.exports = function (migration) {
     .disabled(false)
     .omitted(false);
 
-  cta.changeFieldControl("icon", "builtin", "dropdown", {
+  cta.changeFieldControl("icon", "builtin", "singleLine", {
     helpText:
-      "Optional icon for icon variant. Icon will only be displayed if the variant is set to 'icon'.",
+      "Enter a Lucide icon name (e.g., 'Music', 'Heart', 'Piano'). Browse available icons at https://lucide.dev/icons/",
   });
 };
