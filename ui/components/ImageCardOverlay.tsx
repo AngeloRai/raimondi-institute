@@ -18,62 +18,102 @@ const ChevronIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export default function ImageCardOverlay({ description }: ImageCardOverlayProps) {
+export default function ImageCardOverlay({
+  description,
+}: ImageCardOverlayProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(true); // Default to true for mobile-first
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
-    // Check if device has touch capability or is small screen
+    // Check if device has touch capability
     const checkTouchDevice = () => {
-      const hasTouch = (
-        'ontouchstart' in window ||
+      const hasTouch =
+        "ontouchstart" in window ||
         navigator.maxTouchPoints > 0 ||
         // @ts-expect-error - msMaxTouchPoints for older browsers
         navigator.msMaxTouchPoints > 0 ||
-        window.matchMedia('(pointer: coarse)').matches ||
-        window.matchMedia('(max-width: 640px)').matches // sm breakpoint
-      );
+        window.matchMedia("(pointer: coarse)").matches;
       setIsTouchDevice(hasTouch);
     };
 
     checkTouchDevice();
 
     // Also check on resize/orientation change in case device capabilities change
-    window.addEventListener('resize', checkTouchDevice);
-    return () => window.removeEventListener('resize', checkTouchDevice);
+    window.addEventListener("resize", checkTouchDevice);
+    return () => window.removeEventListener("resize", checkTouchDevice);
   }, []);
 
   if (!description) return null;
 
   return (
     <>
-      {/* Desktop non-touch: Hover overlay */}
-      {!isTouchDevice && (
-        <div className="absolute inset-0 items-center justify-center p-6 opacity-0 translate-y-4 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 flex">
+      {/* Desktop hover overlay - hidden on small screens, shown with hover */}
+      <div className="absolute inset-0 items-center justify-center p-6 opacity-0 translate-y-4 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 hidden sm:flex">
+        <p className="text-white text-center text-sm leading-relaxed font-body">
+          {description}
+        </p>
+      </div>
+
+      {/* Mobile/small screen: Always show button on mobile, or show on touch devices */}
+      <div className="sm:hidden">
+        {/* Toggle button - always visible on mobile */}
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="absolute bottom-2 right-2 z-10 bg-white/90 backdrop-blur-sm
+                     rounded-full p-2 shadow-lg transition-transform duration-200
+                     hover:scale-110 active:scale-95"
+          aria-label={isExpanded ? "Hide description" : "Show description"}
+        >
+          <ChevronIcon
+            className={`w-5 h-5 text-brand-primary transition-transform duration-200
+                       ${isExpanded ? "rotate-180" : ""}`}
+          />
+        </button>
+
+        {/* Overlay with background */}
+        <div
+          className={`absolute inset-0 bg-brand-primary/80 transition-all duration-300
+                      ${
+                        isExpanded
+                          ? "opacity-100"
+                          : "opacity-0 pointer-events-none"
+                      }`}
+        />
+
+        {/* Text overlay */}
+        <div
+          className={`absolute inset-0 flex items-center justify-center p-6
+                      transition-all duration-300 ease-out
+                      ${
+                        isExpanded
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-4 pointer-events-none"
+                      }`}
+        >
           <p className="text-white text-center text-sm leading-relaxed font-body">
             {description}
           </p>
         </div>
-      )}
+      </div>
 
-      {/* Touch devices and small screens: Toggle button and expandable overlay */}
+      {/* Touch devices on larger screens */}
       {isTouchDevice && (
-        <>
+        <div className="hidden sm:block">
           {/* Toggle button */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="absolute bottom-2 right-2 z-10 bg-white/90 backdrop-blur-sm 
+            className="absolute bottom-2 right-2 z-10 bg-white/90 backdrop-blur-sm
                        rounded-full p-2 shadow-lg transition-transform duration-200
                        hover:scale-110 active:scale-95"
             aria-label={isExpanded ? "Hide description" : "Show description"}
           >
             <ChevronIcon
-              className={`w-5 h-5 text-brand-primary transition-transform duration-200 
+              className={`w-5 h-5 text-brand-primary transition-transform duration-200
                          ${isExpanded ? "rotate-180" : ""}`}
             />
           </button>
 
-          {/* Touch device overlay with background */}
+          {/* Overlay with background */}
           <div
             className={`absolute inset-0 bg-brand-primary/80 transition-all duration-300
                         ${
@@ -82,10 +122,10 @@ export default function ImageCardOverlay({ description }: ImageCardOverlayProps)
                             : "opacity-0 pointer-events-none"
                         }`}
           />
-          
-          {/* Touch device text overlay */}
+
+          {/* Text overlay */}
           <div
-            className={`absolute inset-0 flex items-center justify-center p-6 
+            className={`absolute inset-0 flex items-center justify-center p-6
                         transition-all duration-300 ease-out
                         ${
                           isExpanded
@@ -97,7 +137,7 @@ export default function ImageCardOverlay({ description }: ImageCardOverlayProps)
               {description}
             </p>
           </div>
-        </>
+        </div>
       )}
     </>
   );
