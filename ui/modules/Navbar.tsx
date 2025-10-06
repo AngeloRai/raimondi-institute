@@ -14,20 +14,17 @@ import type { Entry } from "contentful";
 
 
 export default async function Navbar(props: NavbarProps) {
-  // Get current locale and fetch appropriate preloaded data
   const locale = await getLocale();
   const localizedLayout = getPreloadedLayoutForLocale(locale);
   const navbarDefaults = localizedLayout?.navbar?.fields || {};
-  
-  
-  // Use provided props or fall back to locale-specific preloaded data
+
   const {
     logo = navbarDefaults?.logo,
     navigationLinks = navbarDefaults?.navigationLinks || [],
     cta = navbarDefaults?.cta,
     backgroundColor = navbarDefaults?.backgroundColor
   } = props;
-  // Pre-process data server-side
+
   const menuItems = navigationLinks
     ?.filter((link: Entry<TypeLinkSkeleton, DefaultChainModifiers, SupportedLocales> | undefined): link is NonNullable<typeof link> => Boolean(link?.fields))
     ?.map((link: Entry<TypeLinkSkeleton, DefaultChainModifiers, SupportedLocales>) => ({
@@ -35,7 +32,6 @@ export default async function Navbar(props: NavbarProps) {
       href: link.fields?.url || "#",
     })) || [];
 
-  // Process logo
   const logoUrl = logo?.fields?.file?.url ? `https:${logo.fields.file.url}` : null;
   const logoTitle = logo?.fields?.title || "Logo";
   const logoFileName = logo?.fields?.file?.fileName || "";
@@ -70,13 +66,11 @@ export default async function Navbar(props: NavbarProps) {
     );
   };
 
-  // Get background color class and text colors
   const isDark = isDarkBackground(backgroundColor);
   const textColorClass = getContrastTextClass(backgroundColor, "text-brand-primary");
   const hoverTextClass = isDark ? "hover:text-white/80" : "hover:text-brand-secondary";
   const borderColor = isDark ? "border-white/20" : "border-brand-primary/15";
-  
-  // Add opacity to the background color
+
   const navbarBgClass = backgroundColor === "surface-soft" ? "bg-surface-soft/90" :
                         backgroundColor === "surface-pure" ? "bg-surface-pure/90" :
                         backgroundColor === "brand-primary" ? "bg-brand-primary/90" :
@@ -114,7 +108,6 @@ export default async function Navbar(props: NavbarProps) {
                          group text-lg font-body-bold`}
               >
                 <span className="relative z-10 block">{item.label}</span>
-                {/* Elegant underline */}
                 <span
                   className={`absolute left-0 right-0 bottom-0 h-[2px]
                            ${isDark ? 'bg-white/60' : 'bg-brand-secondary'}
@@ -126,8 +119,6 @@ export default async function Navbar(props: NavbarProps) {
             ))}
           </div>
         </div>
-
-        {/* CTA Button - Enhanced positioning */}
         <div className="hidden sm:flex items-center justify-end">
           {cta && (
             <div className="transform transition-transform duration-200 hover:scale-105">
@@ -142,7 +133,6 @@ export default async function Navbar(props: NavbarProps) {
           )}
         </div>
 
-        {/* Mobile Menu - Client-side component */}
         <MobileMenu 
           menuItems={menuItems}
           cta={cta}
