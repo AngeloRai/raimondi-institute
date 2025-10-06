@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import CTA from "../components/CTA";
-import { getCTAVariantAndClasses } from "@/lib/utils/brandColors";
+import { getCTAVariantAndClasses, getContrastIconClass } from "@/lib/utils/brandColors";
 import Menu from "../icons/Menu";
 import X from "../icons/X";
 import { NavbarProps } from "@/lib/contentful/types/fields";
@@ -47,6 +47,8 @@ export default function MobileMenu({
     };
   }, [isMobileMenuOpen]);
 
+  const iconColorClass = getContrastIconClass(backgroundColor, "text-brand-primary");
+
   return (
     <div ref={navRef} className="md:hidden relative">
       {/* Mobile Menu Button */}
@@ -55,7 +57,7 @@ export default function MobileMenu({
         className="transform transition-all duration-200 hover:scale-110 hover:bg-brand-primary/5"
         onClick={toggleMobileMenu}
       >
-        {isMobileMenuOpen ? <X /> : <Menu />}
+        {isMobileMenuOpen ? <X className={`w-6 h-6 ${iconColorClass}`} /> : <Menu className={`w-6 h-6 ${iconColorClass}`} />}
       </CTA>
 
       {/* Mobile Menu Overlay */}
