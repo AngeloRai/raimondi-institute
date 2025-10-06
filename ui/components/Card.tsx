@@ -1,6 +1,6 @@
 import React from 'react'
 import CTA from './CTA'
-import LucideIcon from './LucideIcon'
+import IconRenderer from '../icons/IconRenderer'
 import type { CardProps } from '@/lib/contentful/types/fields'
 import { getBrandBgClass, getContrastTextClass, getContrastIconClass, getContrastSubtextClass, getCTAVariantAndClasses, isDarkBackground } from '@/lib/utils/brandColors'
 
@@ -28,7 +28,7 @@ export default function Card({
     >
       {/* Icon */}
       <div className={`mb-6 ${getContrastIconClass(backgroundColor)}`}>
-        <LucideIcon name={icon} />
+        <IconRenderer name={icon} />
       </div>
 
       {/* Content */}
