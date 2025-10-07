@@ -1,5 +1,3 @@
-'use client';
-
 import dynamic from 'next/dynamic';
 import { LucideProps } from 'lucide-react';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
@@ -19,11 +17,11 @@ export default function LucideIcon({ name, ...props }: LucideIconProps) {
   // Check if icon exists in dynamicIconImports
   if (!(normalizedName in dynamicIconImports)) {
     // Return a default icon or null
-    const Circle = dynamic(dynamicIconImports['circle']);
+    const Circle = dynamic(dynamicIconImports['circle'], { ssr: true });
     return <Circle {...props} />;
   }
 
-  const LucideIcon = dynamic(dynamicIconImports[normalizedName as keyof typeof dynamicIconImports]);
+  const LucideIcon = dynamic(dynamicIconImports[normalizedName as keyof typeof dynamicIconImports], { ssr: true });
 
   return <LucideIcon {...props} />;
 }

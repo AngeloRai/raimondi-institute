@@ -1,5 +1,3 @@
-'use client'
-
 import Card from '../components/Card'
 import ImageCard from '../components/ImageCard'
 import Testimonial from '../components/Testimonial'
@@ -96,7 +94,7 @@ export default function Grid({
         <div className={`grid gap-6 lg:gap-8 ${getGridCols(validItems.length, isTestimonialGrid, isImageCardGrid, isMixedGrid)}`}>
           {validItems.map((item, index) => {
             if (!item) return null;
-            
+
             if (isTypeComponentCard(item)) {
               const fields = item.fields
               const cardProps = {
@@ -106,7 +104,7 @@ export default function Grid({
                 cta: fields.cta,
                 backgroundColor: fields.backgroundColor || 'surface-pure'
               }
-              
+
               return (
                 <Card
                   key={item.sys.id}
@@ -115,7 +113,7 @@ export default function Grid({
                 />
               )
             }
-            
+
             if (isTypeComponentImageCard(item)) {
               const fields = item.fields
               const imageCardProps = {
